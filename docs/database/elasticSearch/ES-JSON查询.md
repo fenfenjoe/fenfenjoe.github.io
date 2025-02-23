@@ -110,16 +110,31 @@ GET /student/_search
 }
 ```
 
-8. ```select age,count(1) from student group by age;```
+8. ```select age,count(1) from student where name='Joe' and teacher='Mike' group by age;```
 
 ```json 
 GET /student/_search
 {
+  "query": {
+    "bool": {
+      "filter": [
+        { "term": { "name": "Joe" } },
+        { "term": { "teacher": "Mike" } }
+      ]
+    }
+  },
   "aggs": {
     "age": {
-      "terms": { "field": "age" },
+      "terms": {
+        "field": "age",
+        "size": 10
+      },
       "aggs": {
-        "count": { "value_count": { "field": "_index" } }
+        "count": {
+          "value_count": {
+            "field": "_index"
+          }
+        }
       }
     }
   }

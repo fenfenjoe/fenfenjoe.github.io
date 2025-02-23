@@ -1,5 +1,6 @@
 ---
 title: git操作宝典
+sidebar: 'auto'
 ---
 
 # git操作宝典

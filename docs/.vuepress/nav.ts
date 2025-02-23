@@ -30,6 +30,31 @@ export const navs =
                 ]
             },
             {
+                text: 'PYTHON',
+                children: [
+                    {
+                        text: 'python3',
+                        link: '/python/python3.md' //默认跳转到READMD.md
+                    },
+                     {
+                         text: 'python3(菜鸟教程)',
+                         link: '/python/python3(菜鸟教程).md'
+                     },
+                   {
+                       text: 'pandas',
+                       link: '/python/pandas.md'
+                   },
+                   {
+                      text: 'numpy',
+                      link: '/python/numpy.md'
+                   },
+                   {
+                      text: 'matplotlib',
+                      link: '/python/matplotlib.md'
+                   }
+                ]
+            },
+            {
                 text: '中间件',
                 children: [
                     {
@@ -93,7 +118,11 @@ export const navs =
                     {
                         text: '运维工具大全',
                         link: '/devops/运维工具大全.md'
-                    }
+                    },
+                     {
+                         text: 'git操作宝典',
+                         link: '/devops/git/git操作宝典.md'
+                     }
                  ]
              },
              {

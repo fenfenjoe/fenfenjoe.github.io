@@ -109,6 +109,68 @@ DELETE /my_index
 ```
 
 
+
+
+
+## ES的使用
+#### 安装ES服务器
+略
+#### 配置文件
+
+```sql
+# 以下是配置文件：
+/config
+    /elasticsearch.yml
+    /logging.yml
+ ```
+ ```yaml
+#elasticsearch.yml
+#该文件是ES服务器的主要配置文件
+#分为静态属性和动态属性。
+#静态属性：ES启动后便不可修改，如cluster.name、node.name
+#动态属性：ES启动后，可通过Restful或其他方式修改
+cluster.name: myescluster # 集群名字
+node.data: true # 当前节点是否数据结点（默认为true）
+node.master: true # 当前节点是否候选主结点（默认为true）
+node.ingest: false # 当前节点是否吸收节点（默认为false）
+discovery.zen.minimum_master_nodes: 1 # 当前集群
+```
+#### 登录
+http://localhost:9200，若是远程服务器则修改一下IP地址
+
+
+
+### ES集群
+ES集群通过结点组成。
+
+ElasticSearch集群中，共有五种结点类型：
+* 主结点（Master）
+* 候选主结点（Master-eligible）
+* 数据结点（Data）
+* 吸收结点（Ingest）
+* 部落结点（Tribe）
+
+**主结点**
+每个集群只有一个主结点，负责：
+* 管理集群（管理其他结点）
+* 集群级别的操作（如索引的创建或删除、跟踪其他结点的状态等）
+
+**候选主结点（相当于热备）**
+当集群中的主结点出现故障时，集群会从候选主结点中进行选举，一个候选主结点被选中后会成为新的主结点。
+只有候选主结点有投票权，其他结点没有投票权。
+
+**数据结点**  
+略
+
+### 其他数据库与ES交互
+
+**ES从其他数据源同步数据**：
+mysql、oracle（关系型数据库）： logstash-input-jdbc
+mongo： mongo-connector
+kafka、文件、日志：Logstash或Apache Flume
+
+
+
 ## 原理
 #### ES存储原理&索引
 
@@ -213,35 +275,6 @@ name字段的分词索引：
 
 
 
-
-## ES的使用
-#### 安装ES服务器
-略
-#### 配置文件
-
-```sql
-# 以下是配置文件：
-/config
-    /elasticsearch.yml
-    /logging.yml
- ```
- ```yaml
-#elasticsearch.yml
-#该文件是ES服务器的主要配置文件
-#分为静态属性和动态属性。
-#静态属性：ES启动后便不可修改，如cluster.name、node.name
-#动态属性：ES启动后，可通过Restful或其他方式修改
-cluster.name: myescluster # 集群名字
-node.data: true # 当前节点是否数据结点（默认为true）
-node.master: true # 当前节点是否候选主结点（默认为true）
-node.ingest: false # 当前节点是否吸收节点（默认为false）
-discovery.zen.minimum_master_nodes: 1 # 当前集群
-```
-#### 登录
-http://localhost:9200，若是远程服务器则修改一下IP地址
-
-
-
 #### 配置分词
 
 **什么是分词器？**
@@ -277,19 +310,19 @@ GET /index1/_search
 * title = there is a brown tree.
 * title = a white dog.
 
-> 如果我们想查两个词都有的数据，可以像下面这样请求：
->```bash
->GET /index1/_search
->{
->  "query":{
->    "match":{
->      "title":"BROWN DOG!"
->      "operator":"and" //默认情况下是or
->    }
->  }
->}
->
->```
+ 如果我们想查两个词都有的数据，可以像下面这样请求：
+```bash
+GET /index1/_search
+{
+  "query":{
+    "match":{
+      "title":"BROWN DOG!"
+      "operator":"and" //默认情况下是or
+    }
+  }
+}
+
+```
 
 
 
@@ -340,7 +373,7 @@ IK分词器有两种模式：ik_max_word和ik_smart模式。
 **ik_smart**：最粗粒度分词，会分成：[我，是，乒乓球，冠军]
 
 
-```bash
+```
 #测试分词（analyzer：standard、simple、whitespace、keyword、pattern...）
 curl -X POST 'localhost:9200/city/_analyze'
 
@@ -393,547 +426,3 @@ curl -X PUT 'localhost:9200/test'
 }
 
 ```
-
-
-
-#### ES RESTAPI：增删改查语法
-
-> ES提供RESTful API给用户做数据的增删改查。
-
-ES语句示例：
-
-curl -X [method] 'http://localhost:9200/[index]/[type]/[id]'
-
-* method：POST（增）、DELETE（删）、PUT（改）、GET（查）
-* index：索引，对应关系型数据库中“数据库”的概念
-* type：类型，对应关系型数据库中“表”的概念（逐渐弃用）
-
-* id：主键字段，可不填
-
-> 在每个type（表）中，存储的每一行数据又被称为”document（文档）“，是因为它存储的数据都是非结构化的
-
-**插入**
-
-```bash
-#创建一个city库、一个guangzhou表，并向guangzhou表中插入一条id为1234858的数据
-curl -X PUT 'localhost:9200/city/guangzhou/1234858'
-{
-  "name":"shenzhen",
-  "area": [
-			 "Nanshan",
-			 "Futian"
-			]
-}
-#返回结果
-{
- "index":"city",
- "type":"guangzhou",
- "id":"1234858",
- "version":1 #当前数据的版本，从1开始
- "result":"created" #初次创建的状态
- ...
-}
-#修改guangzhou表中id为1234858的数据（覆盖）
-curl -X PUT 'localhost:9200/city/guangzhou/1234858'
-{
-  "name":"shenzhen222", #修改了名字
-  "area": [
-			 "Nanshan",
-			 "Futian"
-			]
-}
-#返回结果
-{
- "index":"city",
- "type":"guangzhou",
- "id":"1234858",
- "version":2 #当前数据的版本
- "result":"updated" #数据被更新
- ...
-}
-#修改的另一种方式：（追加修改）,推荐用这种方式
-curl -X POST 'localhost:9200/city/guangzhou/1234858/_update'
-{
-  "doc":{
-    "name":"shenzhen333"
-  }
-}
-#创建一个test库，并定义其字段的类型
-curl -X PUT 'localhost:9200/test'
-{
-  "mapping":{
-    "properties":{
-      "name":{   #创建一个name字段
-        "type":"text" #定义其类型为text
-      },
-      "age":{
-        "type":"long" #定义其类型为long
-      }
-      "birthday":{
-        "type":"date" #定义其类型为date
-      }
-    }
-  }
-}
-```
-
-> ES的数据类型：
->
-> text：会被分词器解析，比如某条记录的 name（text字段）为“我是猪”，查 match:{name=“我”} 的时候也会返回这条记录
->
-> keyword：不能再被分词器解析，会被当作一个整体去查询
->
-> date
-
-**查询**
-
-```bash
-# 查询city库所有数据
-curl -X GET 'localhost:9200/city'
-# 也等同于以下语句
-curl -X POST 'localhost:9200/city/_search'
-{
- "query":{
-   "match_all":{}
- }
-}
-# 返回结果
-{
- "took": 5, #耗费时间
- "hits":{
-  "total":1, #命中的数据 总数
-  "hits":[
-    {
-        "_index": "city", #数据属于city库
-        "_type": "guangzhou", #数据属于guangzhou表
-        "_id": "1234858", #id值
-        "_score": 0.251234 #匹配度，匹配度越高，分值越高
-        "_source": {  #该文档的其他字段
-			"name": "Shenzhen",
-			"area": [
-			 "Nanshan",
-			 "Futian"
-			]
-        }
-    }
-  ]
- }
-}
-
-# 简单查询：根据id查询
-curl -X GET 'localhost:9200/city/guangzhou/1234585'
-
-# 简单查询：查询name字段为shenzhen的文档
-curl -X GET 'localhost:9200/city/_search?q=name:shenzhen'
-
-# 单查询条件&排序：查询city库中province='guangdong'的行，并且以city_name来排序
-curl -X POST 'localhost:9200/city/_search'
-{
- "query":{ #查询条件（相当于where）
-   "match":{ #match：先通过分词器解析，再查询
-     "province": "guangdong"
-   }
- },
- "sort":[ #排序（相当于order by）
-  {
-   "city_name":{
-     "order": "asc" #asc 升序；desc 降序；
-   }
-  }
- ]
-}
-
-# 多查询条件： 查询city表中province='guangdong',country="china"的行
-curl -X POST 'localhost:9200/city/_search'
-{
- "query":{
-   "bool":{ #bool：子查询
-     "must":[ #must = and ,还有should = or , must_not = !
-         {
-            "match":{ #match：先通过分词器解析，再查询（分词查询、模糊查询）
-               "province": "guangdong"
-             }
-         },
-         {
-            "term":{ #term：直接从倒排索引查询（精确查询）
-               "country": "china"
-             }
-         }
-     ]
-   }
- }
-}
-# 只查询需要的列：只查询city表中所有数据的province，city_name字段
-curl -X POST 'localhost:9200/city/_search'
-{
- "_source":["province","city_name"],
- "query":{
-   "match_all":{}
- }
-}
-# 分页查询：返回city表中的一页数据，设置一页最多为30条数据
-curl -X POST 'localhost:9200/city/_search'
-{
- "query":{
-   "match_all":{}
- },
- "size": 30, #每页30条
- "from": 0 #取第1页
-}
-# 范围查询：查询查询年龄大于等于10，小于等于20的数据
-curl -X POST 'localhost:9200/city/_search'
-{
-  "query":{
-    "match_all":{}
-  },
-  "filter":{
-    "range":{
-      "age":{ 
-        "gte":10, #大于等于：greater than and equal，gt：大于
-        "lte":20 #小于等于：less than and equal，lt：小于
-      }
-    }
-  }
-}
-# 范围查询另一种写法：查询查询年龄大于等于10，小于等于20，且名字为shenzhen的数据
-curl -X POST 'localhost:9200/city/_search'
-{
-  "query":{
-    "bool":{
-      "must":[
-        "range":{
-          "age":{ 
-            "gte":10, #大于等于：greater than and equal，gt：大于
-            "lte":20 #小于等于：less than and equal，lt：小于
-          }
-        },
-        "term":{
-          "name":{
-            "value":"shenzhen"
-          }
-        }
-      ]
-    }
-    
-  },
-  "filter":{
-    
-  }
-}
-# 聚合查询：类似于sql里的group by，常用于查询统计信息。
-# 我们这里返回city表中总共的city数量
-# 聚合还分为：指标聚合(avg,max,min,count,cardinality)、桶聚合(groupby)、矩阵聚合、管道聚合
-
-#select city_name as city_name_groupby from city group by city_name
-curl -X POST 'localhost:9200/city/_search'
-{
- "aggs":{
-   "city_name_groupby"：{ #需要自己定义一个聚合的名字
-     "terms" : { #聚合类型：groupby 
-       "field":"city_name.keyword"
-     }
-   }
- }
-}
-#返回参数
-{
- "aggregations":{
-   "city_name_groupby":{
-    "sum_other_doc_count" : 41,
-    "buckets": [
-      {
-       "key": "广州",
-       "doc_count":31
-      },
-      {
-       "key": "厦门",
-       "doc_count":10
-      }
-    ]
-   }
- }
-}
-
-#select city_name as city_name_groupby from city where personNum > 10000 group by city_name
-curl -X POST 'localhost:9200/city/_search'
-{
- "query":{
-   "range":{
-     "personNum":{
-       "lte":10000
-     }
-   }
- }
- "aggs":{
-   "city_name_groupby"：{ #需要自己定义一个聚合的名字
-     "terms" : { #聚合类型：groupby 
-       "field":"city_name.keyword"
-     }
-   }
- }
-}
-
-#select count(*) as city_id_count from city group by city_id
-curl -X POST 'localhost:9200/city/_search'
-{
- "aggs":{
-   "city_id_count"：{ #需要自己定义一个聚合的名字
-     "terms" : { #聚合类型：groupby and count 
-       "count":{
-         "field":"city_id.keyword"
-       }
-     }
-   }
- }
-}
-#返回参数
-{
- "aggregations":{
-   "city_id_count":{
-    "value": 10000
-   }
- }
-}
-
-#select max(personNum),min(personNum),avg(personNum) as personNum_sum from city group by city_id
-curl -X POST 'localhost:9200/city/_search'
-{
- "aggs":{
-   "city_id_groupby"：{ #需要自己定义一个聚合的名字
-     "terms" : { #聚合类型：groupby 
-       "field":"city_id.keyword"
-     },
-     "aggs":{
-       "personNum_sum":{
-         "stats":{
-           "field":"personNum"
-         }
-       }
-     }
-   }
- }
-}
-#返回参数
-{
- "aggregations":{
-   "city_id_groupby":{
-    "buckets":[
-      "key": "guangzhou",
-      "doc_count":41,
-      "personNum_sum":{
-        "count":41,
-        "avg":20,
-        "min":1,
-        "max":32,
-        "sum":1234
-      }
-    ]
-   }
- }
-}
-
-# 分词搜索：查询city库中，area中有nanshan或者futian的文档
-curl -X POST 'localhost:9200/city/_search'
-{
-  "query":{
-    "match":{
-      "area":"nanshan futian" #条件通过空格隔开,满足其一即可
-    }
-  }
-}
-# 查看表结构
-curl -X GET 'localhost:9200/city'
-# 返回结果
-# 略
-
-# 查看ES的基本情况（有哪些索引，索引有多少数据）
-curl -X GET 'localhost:9200/_cat/indices?v'
-```
-
-**删除**
-
-```bash
-#删除文档
-curl -X DELETE 'localhost:9200/city/guangzhou/12345858'
-#删除city库
-curl -X DELETE 'localhost:9200/city'
-```
-
-
-
-### ES集群
-ES集群通过结点组成。
-
-ElasticSearch集群中，共有五种结点类型：
-* 主结点（Master）
-* 候选主结点（Master-eligible）
-* 数据结点（Data）
-* 吸收结点（Ingest）
-* 部落结点（Tribe）
-
-**主结点**
-每个集群只有一个主结点，负责：
-* 管理集群（管理其他结点）
-* 集群级别的操作（如索引的创建或删除、跟踪其他结点的状态等）
-
-**候选主结点（相当于热备）**
-当集群中的主结点出现故障时，集群会从候选主结点中进行选举，一个候选主结点被选中后会成为新的主结点。
-只有候选主结点有投票权，其他结点没有投票权。
-
-**数据结点**  
-略
-
-### 其他数据库与ES交互
-
-**ES从其他数据源同步数据**：
-mysql、oracle（关系型数据库）： logstash-input-jdbc
-mongo： mongo-connector
-kafka、文件、日志：Logstash或Apache Flume
-
-### 在JAVA项目中集成ES
-
-#### 使用HTTP调用ES API
-
-```java
-public class ElasticsearchHttpClient {
-    public static void main(String[] args) {
-        // Elasticsearch 配置
-        String elasticsearchUrl = "http://localhost:9200";
-        String indexName = "your_index_name";
-
-        // 构建查询体
-        String queryBody = "{\"query\": {\"match_all\": {}}}";
-
-        // 创建 HttpClient
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            // 构建请求 URL
-            String requestUrl = elasticsearchUrl + "/" + indexName + "/_search";
-
-            // 创建 POST 请求
-            HttpPost httpPost = new HttpPost(requestUrl);
-
-            // 设置请求头部
-            httpPost.setHeader("Content-Type", "application/json");
-
-            // 设置请求体
-            httpPost.setEntity(new StringEntity(queryBody, ContentType.APPLICATION_JSON));
-
-            // 发送请求并获取响应
-            HttpResponse response = httpClient.execute(httpPost);
-
-            // 处理响应
-            HttpEntity entity = response.getEntity();
-            if (entity != null) {
-                String responseBody = EntityUtils.toString(entity);
-                System.out.println(responseBody);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-#### 使用ES官方JAVA库生成查询条件、发起查询请求
-
-添加依赖
-```xml
-<dependencies>
-    <dependency>
-        <groupId>org.elasticsearch.client</groupId>
-        <artifactId>elasticsearch-rest-high-level-client</artifactId>
-        <version>7.15.1</version>
-    </dependency>
-</dependencies>
-
-```
-
-示例代码：
-```java
-public class ElasticsearchJavaAPI {
-    public static void main(String[] args) {
-        // Elasticsearch 配置
-        String elasticsearchHost = "localhost";
-        int elasticsearchPort = 9200;
-        String indexName = "your_index_name";
-
-        // 创建 Elasticsearch 客户端
-        RestHighLevelClient client = new RestHighLevelClient(
-                RestClient.builder(elasticsearchHost, elasticsearchPort));
-
-        try {
-            // 构建查询请求
-            SearchRequest searchRequest = new SearchRequest(indexName);
-            SearchSourceBuilder sourceBuilder = new SearchSourceBuilder();
-            sourceBuilder.query(QueryBuilders.matchAllQuery());
-            searchRequest.source(sourceBuilder);
-
-            // 发送请求并获取响应
-            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
-
-            // 处理响应
-            System.out.println(searchResponse.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            // 关闭 Elasticsearch 客户端连接
-            try {
-                client.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-}
-```
-
-#### 使用Spring Boot Data集成ES
-
-添加依赖
-```xml
-<dependencies>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-    </dependency>
-</dependencies>
-```
-
-添加配置
-```yaml
-spring:
-  data:
-    elasticsearch:
-      cluster-name: your_cluster_name
-      cluster-nodes: your_cluster_nodes
-```
-
-实体类定义
-```java
-@Document(indexName = "books")
-public class Book {
-    @Id
-    private String id;
-    private String title;
-    private String author;
-
-    // 省略构造函数、getter 和 setter 方法
-}
-```
-
-方法1：定义Mapper，通过Mapper对索引进行操作
-```java
-public interface BookRepository extends ElasticsearchRepository<Book, String> {
-    // 可以定义自定义的查询方法
-}
-```
-
-方法2：使用ElasticSearchRestTemplate对索引进行操作
-
-略
-
-
-#### 使用Spring Boot Data封装查询条件
-
-略
-
