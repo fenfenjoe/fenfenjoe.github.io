@@ -70,3 +70,16 @@ select distinct name,age from person;
 select student_name,count(distinct subject) 
 from course group by student_name;
 ```
+
+
+## 多字段分组，并取最新那条
+
+```sql 
+SELECT t1.*
+FROM tableName t1
+INNER JOIN (
+  SELECT groupId, MAX(created_at) AS maxDate
+  FROM tableName
+  GROUP BY groupId
+) t2 ON t1.groupId = t2.groupId AND t1.created_at = t2.maxDate;
+```

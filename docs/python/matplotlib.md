@@ -8,6 +8,11 @@ sidebarDepth: 1
 
 是一个python画图工具包。
 
+## 参考
+
+【API文档】<https://matplotlib.org/stable/api/index.html>
+
+
 ## 画单个图、画折线图
 ```python
 import matplotlib

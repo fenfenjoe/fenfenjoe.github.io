@@ -7,6 +7,10 @@ sidebarDepth: 1
 
 # Pandas
 
+## 参考资料
+
+【API文档】<https://pandas.pydata.org/docs/index.html>  
+
 
 ## 【DataFrame】创建
 ```python
@@ -40,8 +44,11 @@ df['A']
 #获取第一列
 df.iloc[:,0]
 
-#获取某列，并转为list
+#将索引转变为列（新的索引变为0,1,2,...）
+df = df.reset_index(name='newColumnName')
 
+#将将索引转变为列（索引值不变，只是插入新的一列）
+df['newColumnName']=df.index
 
 #将已经存在的数据列做相加运算（并生成新的列）
 df['four']=df['one']+df['three']
@@ -100,36 +107,69 @@ df.drop(0)
 
 ## 【DataFrame】值操作
 ```python
-#值操作
-
 #获取某个单元格的值(index=0,列名为A的值)
 df.loc(0,'A')#返回一个series
 df.iloc(0,1)
 
-#修改dataframe某个值
-df.at['20130104','A'] = 0
-
-#修改dataframe某个值（2）
-df.iat[0,1] = 0
-
-
 #查看前5条数据
 df.head(5)
+df.iloc[0:5]
 
 #查看最后5条数据
 df.tail(5)
+df.iloc[-5:]
 
 #查找index=5的行
+df.loc(5)
 
-#赋值
-df.iat[0, 1] = 0  / df.iloc[0, 1] = 0
-df.at[dates[0], 'A'] = 0  /  df.loc[dates[0], 'A'] = 0
+#查找Index在某个范围的行
+df['20130104':'20130106']
+
+#返回某列
+df['name']
+
+#返回多列
+df[['name','age']]
+
+#【赋值】
+#对第0行、第1列的单元格赋值为0（单个元素修改优先用iat）
+df.iat[0, 1] = 0
+
+#修改第1-2行、第1-2列（多个元素修改用iloc）
+df.iloc[1:3, 1:3] = 0  
+
+#将index='2024-01-01'、列名为A对应的单元格赋值为0
+df.at['2024-01-01', 'A'] = 0
+
+#同上
+df.loc['2024-01-01', 'A'] = 0
+
+
 df['F'] = s1
 df2[df2 > 0] = -df2
 ```
 
+## 【Dataframe】查询
+``` 
+#查出display_name='万科'的行
+result = df[df['display_name']=='万科']
 
+#查出display_name包含'万科'的行（模糊搜索）
+result = df[df['display_name'].str.contains('万科')]
 
+#查出type列中的所有值（去重）
+df['type'].unique()
+```
+
+## 【Dataframe】合并
+``` 
+#根据索引合并2个df数据
+result = df1.join(df2)
+
+#根据字段name合并2个df数据
+result = pd.merge(df1,df2,on='name',how='inner')
+
+```
 
 ## 【Series】创建
 ```python

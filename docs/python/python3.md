@@ -163,6 +163,8 @@ mylist.sort(key=len) #按长度，升序排序
 
 digit = (0, 1, 'two') #定义
 tuple([0, 1, 'two']) #列表转元组
+
+
 ```
 
 ### 字典（等于 Map） 
@@ -177,6 +179,8 @@ empty_dict.values() #返回所有值的列表
 empty_dict.items() #返回键值对的列表，键值对由元组组成
 for k,v in empty_dict.items()
     print(k,v) #字典循环：取出键和值
+
+
 ```
 
 
@@ -372,12 +376,15 @@ pip list
 ### 导入库
 
 ```python
-# 示例1
+# 示例1：导入os类
 import os 
 os.getcwd()
 
-# 示例2
-from 
+# 示例2：从datetime模块导入time类
+from datetime import time
+
+# 示例3：导入datetime模块的所有类
+from datetime import *
 ```
 
 
