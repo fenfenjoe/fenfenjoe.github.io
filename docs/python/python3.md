@@ -173,13 +173,17 @@ tuple([0, 1, 'two']) #列表转元组
 empty_dict = {} #空字典
 empty_dict = {'dad':'homer', 'mom':'marge'} #定义
 empty_dict = dict('dad':'homer', 'mom':'marge') #定义
+
 'mom' in family #是否有该键
+
 empty_dict.keys() #返回所有键的列表
 empty_dict.values() #返回所有值的列表
 empty_dict.items() #返回键值对的列表，键值对由元组组成
+
 for k,v in empty_dict.items()
     print(k,v) #字典循环：取出键和值
-
+    
+empty_dict['dad'] #获取字典中键为dad的值
 
 ```
 
@@ -235,6 +239,10 @@ str[0:3] #取第1~4个字符串
 str[-1] #取最后1个字符串
 str * 2 #取str并重复1次
 str[2:] #取第3个以后所有字符
+
+print('Hello'+'Joe') #用+号拼接（适合都是字符串的情况）
+print('Hello',23) #用逗号拼接（适合并非都是字符串的情况）
+
 ```
 
 ### 作用域
@@ -499,27 +507,40 @@ f.close()
 ```python 
 import datetime
 
+# 创建日期
 now = datetime.date.today() #返回一个date对象，表示今天（不会具体到时分秒）
-
 now = datetime.date.fromtimestamp(timestamp) #返回时间戳对应的date对象
+now = date(2025,3,11) #生成2025-03-11
+nowtime = datetime(2025,3,11) #生成2025-03-11
 
-now.year #返回date对象的年、月、日
+# 取出年、月、日
+now.year 
 now.month
 now.day 
-
-datestr = now.isoformat() #返回格式如'YYYY-MM-DD’的字符串；
-
-datestr = now..strftime(fmt) #自定义格式化字符串。
-
-yesterday = datetime.date.today() - datetime.timedelta(days=1)  #日期计算
-
-
-nowtime = datetime.datetime.today() #返回一个datetime对象，表示今天（具体到时分秒）
-
 nowtime.year、month、day、hour、minute、second、microsecond、tzinfo #年、月、日、时、分、秒、毫秒、时区
-
 nowtime.date() #datetime转换为date
 nowtime.time() #datetime转换为time
+
+# 日期 与 字符串 格式转换
+date_str = "2025-03-11"
+parsed_date = datetime.strptime(date_str, "%Y-%m-%d")
+formatted_date = parsed_date.strftime("%Y-%m-%d")  # 输出：'2025-03-11'
+datestr = now.isoformat() #返回格式如'YYYY-MM-DD’的字符串；
+
+#日期计算
+yesterday = datetime.date.today() - datetime.timedelta(days=1)  
+lastyear = datetime.date.today() - datetime.timedelta(days=365)  
+yesterday = datetime.date.today() - timedelta(days=1)
+
+#日期比较
+if yesterday < today:
+  print(1)
+if yesterday.timestamp() < now.timestamp():
+  print(1)
+
+
+
+
 ```
 
 ### random模块：生成随机数
@@ -566,6 +587,14 @@ elif a==1:
 else :
     pass #若不需要操作，则使用pass关键字，不能空着
 
+# 示例2
+if a > 10 and a < 30:
+  print('It is between 10 and 30!')
+elif a<20:
+  print('It is less than 20')
+else:
+  print('I do not know!') 
+  
 #switch 条件语句
 status = 'haha'
 match status:

@@ -141,6 +141,15 @@ export const navs =
                          link: '/bigdata/Hive学习笔记.md'
                      },
                 ]
+             },
+             {
+                 text: '机器学习',
+                 children: [
+                     {
+                          text: '机器学习概览',
+                          link: '/machineLearning/README.md'
+                     }
+                 ]
              }
         ]
     },

@@ -14,11 +14,9 @@ sidebarDepth: 1
 
 ## 【DataFrame】创建
 ```python
-#创建一个DataFrame
+#创建一个索引为日期、有ABCD4行且已有数据的DataFrame
 data = np.random.randn(6,4)
-myindex = pd.date_range('20130101',periods=6)
-mycolumns = ['A','B','C','D']
-df = pd.DataFrame(data,index=myindex,columns=mycolumns)
+df = pd.DataFrame(data,index=pd.date_range('20130101',periods=6),columns=['A','B','C','D'])
 
 ###data可以是：
 data = np.random.randn(6,4) #ndarray
@@ -27,6 +25,11 @@ data = pd.Series([1,2,3,4,5,6],index=pd.date_range('20130102',periods=6)) #serie
 data = [{'a': 1, 'b': 2},{'a': 5, 'b': 10, 'c': 20}] #字典列表
 data = [1,2,3,4,5,6] #list
 data = [[1,'tom','20110101'],[2,'jack','20110102']] #二维数组
+
+
+# 创建空DataFrame，索引为日期类型
+df = pd.DataFrame(columns=['A','B','C','D'], index=pd.DatetimeIndex([]))
+
 ```
 
 
@@ -66,7 +69,8 @@ df.insert(1,column='score',value=[91,90,75])
 df.pop('two')
 del df['one']
 
-
+#修改列名
+df.rename(columns={'old_col1': 'new_col1'}, inplace=True)
 ```
 
 ## 【DataFrame】行操作
@@ -170,6 +174,32 @@ result = df1.join(df2)
 result = pd.merge(df1,df2,on='name',how='inner')
 
 ```
+
+## 【Dataframe】自带画图功能
+
+``` 
+# 以索引为X轴，所有列为Y轴画一个折线图
+df.plot()
+
+# 以索引为X轴，以price列为Y轴
+df.plot(x='日期',y='price')
+
+# kind:图表类型。有line(折线图，默认)、bar(柱状图)、scatter(散点图)等
+# title:图表标题
+# color:指定折线颜色
+# linestyle: '-'实线(默认)、'--'虚线
+# marker: 'o'圆形、's'方形
+# markersize: 标记大小
+# figsize: 图表尺寸（英寸）
+# subplots: True/False 每列数据单独绘制子图
+# layout: 配合subplots使用，指定子图排列方式（如(2,2)就是2行2列）
+# xlim/ylim: x轴/y轴显示范围，如(0,10)
+# logx/logy: x轴/y轴对数刻度
+df.plot(x='日期',y='price',kind='bar',title='',color:['blue','green'...],
+    linestyle='--',figsize=(12,6))
+
+```
+
 
 ## 【Series】创建
 ```python
