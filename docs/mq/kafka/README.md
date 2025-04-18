@@ -377,6 +377,124 @@ spring:
       acks: all
 ```
 
+Service类
+```java
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.stereotype.Service;
+import org.springframework.util.concurrent.ListenableFuture;
+import org.springframework.util.concurrent.ListenableFutureCallback;
+
+@Service
+public class KafkaProducerService {
+
+    private final KafkaTemplate<String, String> kafkaTemplate;
+
+    // 构造器注入KafkaTemplate
+    public KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    /**
+     * 同步发送消息（阻塞等待结果）
+     */
+    public void sendMessageSync(String topic, String key, String message) {
+        try {
+            // 发送消息并等待确认
+            SendResult<String, String> result = kafkaTemplate.send(topic, key, message).get();
+            System.out.println("发送成功 -> Topic: " + topic 
+                + ", Partition: " + result.getRecordMetadata().partition() 
+                + ", Offset: " + result.getRecordMetadata().offset());
+        } catch (Exception e) {
+            System.err.println("发送失败: " + e.getMessage());
+            // 可添加重试或补偿逻辑
+        }
+    }
+
+    /**
+     * 异步发送消息（非阻塞，回调处理）
+     */
+    public void sendMessageAsync(String topic, String key, String message) {
+        ListenableFuture<SendResult<String, String>> future = 
+            kafkaTemplate.send(topic, key, message);
+
+        future.addCallback(new ListenableFutureCallback<>() {
+            @Override
+            public void onSuccess(SendResult<String, String> result) {
+                System.out.println("发送成功 -> Topic: " + topic 
+                    + ", Partition: " + result.getRecordMetadata().partition());
+            }
+
+            @Override
+            public void onFailure(Throwable ex) {
+                System.err.println("发送失败: " + ex.getMessage());
+                // 可记录失败消息到数据库或重试队列
+            }
+        });
+    }
+}
+
+```
+
 #### kafka消费者
 
-略
+maven -- pom.xml
+```xml
+<dependency>
+    <groupId>org.springframework.kafka</groupId>
+    <artifactId>spring-kafka</artifactId>
+</dependency>
+```
+
+
+application.yml  
+```yaml
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092  # Kafka服务器地址
+    consumer:
+      group-id: my-consumer-group      # 消费者组ID
+      auto-offset-reset: earliest       # 从最早的消息开始消费（可选：latest/earliest）
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false         # 关闭自动提交偏移量（推荐手动提交）
+```
+
+
+消费监听类
+```java
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.support.Acknowledgment;
+import org.springframework.stereotype.Service;
+
+@Service
+public class KafkaConsumerService {
+
+    // 监听指定Topic，并发消费者线程数为3（根据分区数调整）
+    @KafkaListener(
+        topics = "your-topic-name",
+        concurrency = "3",
+        containerFactory = "kafkaListenerContainerFactory"
+    )
+    public void consume(String message, Acknowledgment ack) {
+        try {
+            // 1. 处理消息逻辑
+            System.out.println("Received message: " + message);
+            // 模拟业务处理（如数据库操作、计算等）
+            processMessage(message);
+
+            // 2. 手动提交偏移量（确保消息处理成功后再提交）
+            ack.acknowledge();
+        } catch (Exception e) {
+            // 3. 处理异常（如重试、记录日志等）
+            System.err.println("消费失败: " + e.getMessage());
+            // 可根据业务决定是否提交偏移量（如不提交则下次重试）
+        }
+    }
+
+    private void processMessage(String message) {
+        // 实际业务逻辑
+    }
+}
+
+```

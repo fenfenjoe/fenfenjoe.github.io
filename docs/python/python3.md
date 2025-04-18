@@ -154,6 +154,8 @@ del mylist #删除列表
 mylist.sort() #升序排序
 mylist.sort(reverse=True) #降序排序
 mylist.sort(key=len) #按长度，升序排序
+#获取对象所在下标
+mylist.index(obj)
 ```
 
 

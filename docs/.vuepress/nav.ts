@@ -232,6 +232,15 @@ export const navs =
               {
                    text: '装修攻略',
                    link: '/decorate/' //默认跳转到READMD.md
+              },
+              {
+                 text: '读书笔记',
+                 children:[
+                   {
+                      text: '《深度学习》',
+                      link: '/book/《深度学习》读书笔记.md'
+                   }
+                 ]
               }
         ]
     },
