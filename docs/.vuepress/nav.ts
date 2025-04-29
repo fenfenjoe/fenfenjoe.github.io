@@ -26,6 +26,10 @@ export const navs =
                    {
                       text: '模板引擎（FreeMarker）',
                       link: '/java/常用框架/freemarker.md'
+                   },
+                   {
+                      text: 'SpringSecurity',
+                      link: '/java/spring/springSecurity.md'
                    }
                 ]
             },
