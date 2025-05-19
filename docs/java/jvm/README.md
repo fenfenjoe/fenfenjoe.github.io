@@ -314,7 +314,7 @@ java -Dname=Joe -version
 * 非标准参数（-X）：默认JVM有实现，但其他JVM不一定实现，不一定向后兼容；
     * -Xmn
     * -Xmx
-    * -Xloggc:<filename>
+    * -Xloggc:filename
   > 可以通过在cmd中输入 “java -X” 查看有哪些非标准参数
 * 非Stable参数（-XX）
 

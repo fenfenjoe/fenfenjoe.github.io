@@ -43,21 +43,21 @@ spring:
 
 使用```MongoTemplate```类，就可以完成对MongoDB的增删改查。
 - 增
-  - insert(T object)：插入一个文档
-  - insertAll(Collection<T> objects)：插入多个文档
-  - save(T object)：保存或更新一个文档
+  - ```insert(T object)```：插入一个文档
+  - ```insertAll(Collection<T> objects)```：插入多个文档
+  - ```save(T object)```：保存或更新一个文档
 - 删
-  - remove(T object)：删除一个文档
-  - removeAll(Collection<T> objects)：删除多个文档
-  - remove(Query query)：删除符合条件的文档
+  - ```remove(T object)```：删除一个文档
+  - ```removeAll(Collection<T> objects)```：删除多个文档
+  - ```remove(Query query)```：删除符合条件的文档
 - 改
-  - save(T object)：保存或更新一个文档
-  - updateFirst(Query query, Update update)：更新第一个符合条件的文档
-  - updateMulti(Query query, Update update)：更新所有符合条件的文档
+  - ```save(T object)```：保存或更新一个文档
+  - ```updateFirst(Query query, Update update)```：更新第一个符合条件的文档
+  - ```updateMulti(Query query, Update update)```：更新所有符合条件的文档
 - 查
-  - findAll(Class<T> entityClass)：查询所有文档
-  - findOne(Query query, Class<T> entityClass)：查询第一个符合条件的文档
-  - find(Query query, Class<T> entityClass)：查询所有符合条件的文档
+  - ```findAll(Class<T> entityClass)```：查询所有文档
+  - ```findOne(Query query, Class<T> entityClass)```：查询第一个符合条件的文档
+  - ```find(Query query, Class<T> entityClass)```：查询所有符合条件的文档
 
 ### 查询详解
 
