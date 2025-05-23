@@ -83,3 +83,51 @@ INNER JOIN (
   GROUP BY groupId
 ) t2 ON t1.groupId = t2.groupId AND t1.created_at = t2.maxDate;
 ```
+
+## 取A表中的字段，插入到B表中
+```sql 
+INSERT INTO B(
+    vendor_code, 
+    organization_code, 
+    item_code, 
+    brand_place, 
+    brand_place_id, 
+    brand_belong_country
+)
+SELECT
+    s.vendor_code,
+    s.organization_code,
+    s.item_code,
+    s.BRAND_PLACE,
+    s.BRAND_PLACE_ID,
+    p.BRAND_BELONG_COUNTRY
+FROM 
+    A s
+WHERE s.DELETE_FLAG = 0
+    AND s.STATUS = 'ACTIVE';
+```
+
+## 取A表中的字段，更新到B表中
+
+```sql
+-- 1. 取 B 表 中的数据，并变成（organization_code, vendor_code, item_code）维度的数据
+-- 2. 按照（organization_code, vendor_code, item_code）维度，更新到 A 表
+UPDATE A rb
+JOIN (
+    SELECT 
+        organization_code,
+        vendor_code,
+        item_code,
+        GROUP_CONCAT(DISTINCT brand_place) AS brand_place,
+        GROUP_CONCAT(DISTINCT brand_place_id) AS brand_place_id
+    FROM 
+        B
+    GROUP BY 
+        organization_code, vendor_code, item_code
+) so ON rb.organization_code = so.organization_code
+    AND rb.vendor_code = so.vendor_code
+    AND rb.item_code = so.item_code
+SET 
+    rb.ATTRIBUTE9  = so.brand_place,
+    rb.ATTRIBUTE10 = so.brand_place_id
+```

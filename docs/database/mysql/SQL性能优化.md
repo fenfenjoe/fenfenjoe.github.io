@@ -147,7 +147,7 @@ select * from student where class_id = 3 and student_name = 'John';
 
 * Using index
 * Using where
-* Using index condition
+* Using index condition：索引条件下推（Index Condition Pushdown, ICP）
 * Using temporary: 使用了临时表（**需要优化**）
 * Using filesort: Server层需要做额外的排序操作（**需要优化**）
 * Select tables optimized away
