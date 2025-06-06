@@ -43,6 +43,7 @@ select_type表示对应行是简单还是复杂的查询
 * derived：包含在 from 子句中的子查询。MySQL会将结果存放在一个临时表中，也称为派生表(derived的英文含义)
 * union：在 union 中的第二个和随后的 select
 
+
 ### table
 
 table表示正在访问哪个表
@@ -151,3 +152,4 @@ select * from student where class_id = 3 and student_name = 'John';
 * Using temporary: 使用了临时表（**需要优化**）
 * Using filesort: Server层需要做额外的排序操作（**需要优化**）
 * Select tables optimized away
+* Rowid-ordered scan
