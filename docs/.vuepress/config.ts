@@ -7,8 +7,7 @@ import { navs } from './nav'
 //import { pluginBackToTop } from '@vuepress/plugin-back-to-top'
 //import { lastUpdated } from '@vuepress/last-updated'
 //import { pluginMediumZoom } from '@vuepress/plugin-medium-zoom'
-import { mdEnhancePlugin } from "vuepress-plugin-md-enhance"
-import { componentsPlugin } from "vuepress-plugin-components"
+//import { mdEnhancePlugin } from "vuepress-plugin-md-enhance"
 import { searchPlugin } from '@vuepress/plugin-search'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
@@ -32,20 +31,6 @@ export default defineUserConfig({
       ['link',{rel: 'stylesheet', href: '/css/index.css'}]  //自定义的样式
     ],
     plugins:[
-        mdEnhancePlugin({
-            //katex: true,  //数学公式
-            echarts: true,  //各种统计图
-            //figure: true, //图片显示标题
-            mermaid: true, //各种流程图
-            //alert: true, //GFM提示功能
-            //gfm: true, //github flavored Markdown
-            //hint: true,
-        }), //markdown功能增强插件
-        componentsPlugin({
-            components:[
-                "BiliBili",
-            ]
-        }),
         searchPlugin({}), //搜索引擎插件，会生成本地索引文件，若网站文章过多，建议切换成docSearch插件
         markdownMathPlugin({}), //数学公式
         markdownExtPlugin({}), //脚注、GFM等组件

@@ -166,25 +166,7 @@ export const navs =
             },
             {
                 text: '线性代数',
-                link: '/math/xsds/线性代数.md',
-                children: [
-                    {
-                        text: '行列式',
-                        link: '/math/xsds/行列式.md'
-                    },
-                    {
-                        text: '矩阵',
-                        link: '/math/xsds/矩阵.md'
-                    },
-                    {
-                        text: '向量',
-                        link: '/math/xsds/向量.md'
-                    },
-                    {
-                        text: '线性方程组',
-                        link: '/math/xsds/线性方程组.md'
-                    },
-                ]
+                link: '/math/xsds/'
             },
             {
                 text: '统计学',
