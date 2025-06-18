@@ -1,6 +1,6 @@
 ---
 title: 'spring security'
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 2
 ---
 

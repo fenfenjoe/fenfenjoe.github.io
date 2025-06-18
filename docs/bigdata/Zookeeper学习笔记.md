@@ -1,6 +1,6 @@
 ---
 title: Zookeeper学习笔记
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Zookeeper学习笔记

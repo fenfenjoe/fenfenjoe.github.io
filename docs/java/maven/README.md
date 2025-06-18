@@ -1,6 +1,6 @@
 ---
 title: 'Maven'
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 2
 ---
 

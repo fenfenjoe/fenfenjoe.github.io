@@ -1,6 +1,6 @@
 ---
 title: Hive学习笔记
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Hive学习笔记

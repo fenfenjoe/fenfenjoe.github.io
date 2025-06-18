@@ -1,6 +1,6 @@
 ---
 title: 菜鸟教程-python3
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 1
 ---
 

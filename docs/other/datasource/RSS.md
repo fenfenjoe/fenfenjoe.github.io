@@ -1,6 +1,6 @@
 ---
 title: 'RSS'
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 2
 ---
 

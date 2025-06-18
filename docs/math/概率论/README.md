@@ -1,6 +1,6 @@
 ---
 title: '概率论'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # 概率论与数理统计（probability theory and mathematical statistics）

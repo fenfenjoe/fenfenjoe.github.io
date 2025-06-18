@@ -1,6 +1,6 @@
 ---
 title: 'Windows命令速查宝典'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Windows命令速查宝典

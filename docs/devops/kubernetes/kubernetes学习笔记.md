@@ -1,6 +1,6 @@
 ---
 title: 'Kubernetes笔记'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Kubernetes笔记

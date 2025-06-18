@@ -1,6 +1,6 @@
 ---
 title: matplotlib
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 1
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: 'Docker'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # 应用容器：Docker

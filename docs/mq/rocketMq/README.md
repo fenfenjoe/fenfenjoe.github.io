@@ -1,6 +1,6 @@
 ---
 title: RocketMQ
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # RocketMQ

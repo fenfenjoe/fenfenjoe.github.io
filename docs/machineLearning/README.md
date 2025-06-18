@@ -1,6 +1,6 @@
 ---
 title: 机器学习
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 1
 ---
 

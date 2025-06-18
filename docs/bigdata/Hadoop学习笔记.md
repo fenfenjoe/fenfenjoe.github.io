@@ -1,6 +1,6 @@
 ---
 title: Hadoop学习笔记
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Hadoop学习笔记

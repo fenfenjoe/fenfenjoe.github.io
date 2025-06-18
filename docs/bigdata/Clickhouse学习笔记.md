@@ -1,6 +1,6 @@
 ---
 title: Clickhouse学习笔记
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Clickhouse学习笔记

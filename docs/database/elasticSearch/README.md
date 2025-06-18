@@ -1,6 +1,6 @@
 ---
 title: 'Elastic Search学习笔记'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Elastic Search学习笔记

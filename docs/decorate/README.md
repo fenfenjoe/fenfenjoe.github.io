@@ -1,6 +1,6 @@
 ---
 title: '装修那些事儿'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 

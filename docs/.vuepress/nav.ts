@@ -37,6 +37,10 @@ export const navs =
                 text: 'PYTHON',
                 children: [
                     {
+                        text: '概述',
+                        link: '/python/' //默认跳转到READMD.md
+                    },
+                    {
                         text: 'python3',
                         link: '/python/python3.md' //默认跳转到READMD.md
                     },
@@ -210,8 +214,8 @@ export const navs =
                   text: '健身',
                   children:[
                     {
-                         text: '拉伸',
-                         link: '/gym/拉伸.md' //默认跳转到READMD.md
+                         text: '笔记',
+                         link: '/gym/README.md' //默认跳转到READMD.md
                      }
                   ]
               },

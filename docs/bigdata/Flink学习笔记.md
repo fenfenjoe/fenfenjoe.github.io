@@ -1,6 +1,6 @@
 ---
 title: Flink学习笔记
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Flink学习笔记

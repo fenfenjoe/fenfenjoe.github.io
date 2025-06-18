@@ -1,6 +1,6 @@
 ---
 title: 'Freemarker'
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 2
 ---
 

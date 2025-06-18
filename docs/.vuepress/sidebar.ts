@@ -118,7 +118,8 @@ export const sidebar = {
                     {text:'门窗',link:'/decorate/门窗.md'}
                 ]
             }
-        ]
+        ],
+    '/gym/': 'heading'
 };
 
 // module.exports = sidebar; //CommonJS

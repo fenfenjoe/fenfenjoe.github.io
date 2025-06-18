@@ -1,6 +1,6 @@
 ---
 title: Python3
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 2
 ---
 
@@ -11,104 +11,6 @@ sidebarDepth: 2
 
 官方文档:[https://docs.python.org/zh-cn/3/index.html](https://docs.python.org/zh-cn/3/index.html)
 python内置函数：[https://docs.python.org/zh-cn/3/library/functions.html](https://docs.python.org/zh-cn/3/library/functions.html)
-
-## 环境搭建
-
-### 安装嵌入式python(embedable)
-
-> 建议直接安装anaconda或者miniconda。
-
-安装python
-安装pip
-查看pip已安装的模块
-python -m pip list
-
-
-
-### 安装miniconda
-略
-
-记得配置环境变量：
-* \miniconda3
-* \miniconda3\Library\bin
-* \miniconda3\Scripts
-
-
-> **conda、miniconda、anaconda的区别**:
-> - conda: 与pip类似，但它不仅能管理包，还能隔离和管理不同python版本的环境
-> - miniconda: Anaconda 的轻量级版本，只包含了 Python 和 Conda，以及它们的依赖项
-> - Anaconda: 一个非常流行的 Python 发行版，用于科学计算。它包含了 Vonda、Python 和超过 150 个科学软件包及其依赖项
-> - jupyter: 如果你安装了anaconda，jupyter notebook会作为其中的一部分被自动安装。
-
-### miniconda目录解析
-```
-\miniconda3
-|
-|_Lib                        ----内部模块
-| |
-| |_ site-packages           ----第三方模块
-|
-|_Scripts                    ----可执行文件目录
-| |
-| |_pip.exe                  ----用于安装第三方模块的程序
-|
-|_python.exe                 ----python解释器
-```
-
-
-### 使用miniconda
-
-
-#### 虚拟环境操作
-1. 创建虚拟环境
-```
-conda create -n Test1 python=3.7
-# -n是-name的缩写
-# 环境默认创建到安装目录的envs下
-```
-
-2. 查看已有虚拟环境
-```
-conda env list
-```
-
-3. 进入虚拟环境
-```
-activate Test1
-```
-
-4. 退出虚拟环境
-```
-deactivate
-```
-
-5. 删除虚拟环境
-```
-conda env remove -n Test1
-```
-
-#### 库操作
-1. 安装第三方库
-```
-conda install [库名]
-```
-
-2. 查看某个库的所有版本
-```
-conda search [库名]
-```
-
-3. 卸载某个库
-```
-conda remove [库名]
-```
-
-4. 列出当前虚拟环境已安装的库
-```
-conda list
-```
-
-> 找不到库名可以到这里搜索：<https://anaconda.org/>
 
 
 

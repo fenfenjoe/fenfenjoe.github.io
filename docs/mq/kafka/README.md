@@ -1,6 +1,6 @@
 ---
 title: Kafka
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Kafka

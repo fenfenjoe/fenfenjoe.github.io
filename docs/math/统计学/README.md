@@ -1,6 +1,6 @@
 ---
 title: '统计学'
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # 统计学(statistics)

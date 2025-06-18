@@ -1,6 +1,6 @@
 ---
 title: numpy
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 1
 ---
 

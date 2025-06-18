@@ -1,6 +1,6 @@
 ---
 title: Spark学习笔记
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Spark学习笔记

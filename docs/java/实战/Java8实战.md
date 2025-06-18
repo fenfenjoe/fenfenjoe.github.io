@@ -1,6 +1,6 @@
 ---
 title: 'JAVA8实战'
-sidebar: 'auto'
+sidebar: 'heading'
 sidebarDepth: 2
 ---
 
@@ -280,11 +280,6 @@ stream4.limit(10).forEach(System.out::println);
     * skip：忽略前n个元素
     * distinct：去重，通过元素的hashcode() 和 equals()进行
 
-```java
-//示例
-```
-
-
 
 * 映射（重要）
     * map：对流中的所有元素都执行某个操作，然后返回一个新流
@@ -450,6 +445,10 @@ Map<String,List<Employee>> map = list.stream().collect(Collectors.partitioningBy
 
 //员工名字数组转字符串，加分隔符
 String names = list.stream().map(Employee::getName).collect(Collector.joining(","));
+
+//分组后只要其中一个字段
+Map<String,List<String>> map = list.stream().collect(Collectors.groupingBy(Employee:getStatus),
+        Collectors.mapping(Employee::getName,Collectors.toList()));
 ```
 
 
