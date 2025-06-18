@@ -5,6 +5,11 @@ title: 概述
 
 # 搭建属于自己的博客
 
+> [!warning]
+> 本教程基于Vuepress1.0，比较落后。
+> 想搭建自己的博客，建议参考Vuepress2.0官方文档<https://v2.vuepress.vuejs.org/zh/>
+
+
 当前的博客是使用一个叫 **Vuepress** 的框架搭建的。  
 **Vuepress** 需要我们使用一种叫 **Markdown** 的格式去编写文章。  
 
