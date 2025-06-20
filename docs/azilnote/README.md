@@ -1,6 +1,6 @@
 ---
 title: 概述
-
+sidebarDepth: 0
 ---
 
 # 搭建属于自己的博客
