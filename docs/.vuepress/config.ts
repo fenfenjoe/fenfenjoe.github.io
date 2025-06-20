@@ -13,7 +13,7 @@ import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
 import { markdownImagePlugin } from '@vuepress/plugin-markdown-image'
-
+import { commentPlugin } from '@vuepress/plugin-comment'
 
 export default defineUserConfig({
     bundler: viteBundler(),
@@ -47,6 +47,11 @@ export default defineUserConfig({
               mark: true,
               // 启用图片大小
               size: true,
+            }),
+        commentPlugin({
+              provider: 'Waline', // Artalk | Giscus | Waline | Twikoo
+              serverUrl: 'https://azilnotewaline.vercel.app/', // 服务商配置
+              comment: true
             }),
     ]
 })
