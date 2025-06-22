@@ -50,7 +50,7 @@ export default defineUserConfig({
             }),
         commentPlugin({
               provider: 'Waline', // Artalk | Giscus | Waline | Twikoo
-              serverUrl: 'https://azilnotewaline.vercel.app/', // 服务商配置
+              serverUrl: 'https://azilnotewaline.vercel.app', // 服务商配置
               comment: true
             }),
     ]

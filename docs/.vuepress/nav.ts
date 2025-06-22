@@ -216,7 +216,11 @@ export const navs =
                     {
                          text: '笔记',
                          link: '/gym/README.md' //默认跳转到READMD.md
-                     }
+                     },
+                    {
+                         text: '训练计划',
+                         link: '/gym/训练日/'
+                     },
                   ]
               },
               {

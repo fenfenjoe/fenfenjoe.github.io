@@ -119,7 +119,18 @@ export const sidebar = {
                 ]
             }
         ],
-    '/gym/': 'heading'
+    '/gym/训练日/': [
+         {
+             text: '训练计划', //一级标题
+             collapsible: false, //是否可折叠
+             children: [
+                 {text:'上肢训练日',link:'/gym/训练日/README.md'},
+                 {text:'下肢训练日',link:'/gym/训练日/下肢核心训练日.md'},
+                 {text:'功能性训练日',link:'/gym/训练日/功能性训练日.md'},
+                 {text:'参考',link:'/gym/参考.md'}
+             ]
+         }
+     ],
 };
 
 // module.exports = sidebar; //CommonJS
