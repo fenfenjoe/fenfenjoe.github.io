@@ -69,4 +69,4 @@ Markdown非常的强大，可以自动排版，用户可以在Markdown中插入�
 
 
 
-<CommentService />
+<Comment/>

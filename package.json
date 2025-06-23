@@ -12,7 +12,6 @@
   "license": "ISC",
   "devDependencies": {
     "@vuepress/bundler-vite": "^2.0.0-rc.23",
-    "@vuepress/plugin-comment": "^2.0.0-rc.110",
     "@vuepress/plugin-markdown-ext": "^2.0.0-rc.108",
     "@vuepress/plugin-markdown-hint": "^2.0.0-rc.108",
     "@vuepress/plugin-markdown-image": "^2.0.0-rc.108",
@@ -24,5 +23,8 @@
     "sass-embedded": "^1.89.2",
     "vue": "^3.5.16",
     "vuepress": "^2.0.0-rc.23"
+  },
+  "dependencies": {
+    "vuepress-plugin-comment-plus": "^1.1.0"
   }
 }
