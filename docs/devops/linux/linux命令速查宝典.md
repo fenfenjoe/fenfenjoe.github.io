@@ -11,9 +11,14 @@ sidebar: 'heading'
 ```
 ps aux|grep ktin 
 //查看包含"ktin"字眼的进程的信息，其中第2列为PID
+//示例：| USER | PID | %CPU | %MEM | 虚拟内存大小 | 物理内存大小 | TTY | STAT | 进程启动时间 | 实际使用CPU的累计时间 | 启动进程的完整命令|
 
 ps -ef|grep srm-esb-*
 //查看以srm-esb-开头的进程的信息
+
+ps aux|grep -Ei 'srm|java'
+//E：正则表达式  i: 忽略大小写
+//上面命令是查出含有"srm"或者"java"的进程行信息
 ```
 ### 查看磁盘占用情况：【df】
 
@@ -130,7 +135,106 @@ i #进入编辑模式
 * Ctrl+B #上一页
 
 
+### 临时获取ROOT权限：【sudo】
+
+有一些命令，需要有ROOT权限（可以理解为管理员权限），才能执行。比如：
+
+1. **系统文件的增、删、改**
+```bash
+sudo cp myapp /usr/local/bin/ # 向系统级二进制目录写入文件
+
+sudo rm -rf /usr/lib/*.so # 删除系统关键库文件
+
+sudo chmod 777 /etc/passwd	# 修改系统关键配置文件权限
+
+sudo vim /etc/hosts	# 编辑全局主机名解析文件
+```
+
+2. **安装、卸载软件包**
+```bash
+sudo apt install nginx	# 安装/卸载软件包
+```
+
+3. **系统服务管理**
+```bash
+sudo systemctl start nginx	# 启动/停止系统服务
+
+sudo systemctl enable sshd	# 设置服务开机自启
+```
+
+4. **用户与权限管理**
+```bash
+sudo useradd alice	# 创建/删除用户
+sudo passwd root	# 修改 root 或其他用户密码
+sudo usermod -aG docker alice	# 将用户加入特权组（如 docker）
+```
+
+5. **网络管理**
+```bash
+sudo ifconfig eth0 192.168.1.2	# 修改网络接口 IP
+sudo ufw allow 8080	# 配置防火墙规则
+sudo iptables -L -v	# 查看 iptables 规则
+```
+
+
 ### 查看Linux版本：【hostnamectl】
+
+### 服务管理、系统控制：【systemctl】
+
+| 类别    | 	常用命令                        | 	作用                     |
+|-------|------------------------------|-------------------------|
+| 服务管理  | 	start/stop/restart/reload   | 	启动/停止/重启/重载服务          |
+| 自启控制  | 	enable/disable              | 	启用/禁用开机自启              |
+| 状态查看  | 	status/is-active/is-enabled | 	检查服务状态                 |
+| 系统控制  | 	reboot/poweroff/hibernate   | 	重启/关机/休眠               |
+| 日志查看  | 	journalctl -u 服务名           | 	查看服务日志（需配合 journalctl） |
+
+1. **服务管理**
+```bash
+# 启动服务
+sudo systemctl start nginx.service
+
+# 停止服务
+sudo systemctl stop nginx
+
+# 重启服务（中断服务）
+sudo systemctl restart nginx
+
+# 重载配置（不中断服务）
+sudo systemctl reload nginx
+
+# 查看服务状态（关键！）
+systemctl status nginx
+```
+
+2. **服务开机自启**
+
+```bash
+# 启用开机自启
+sudo systemctl enable nginx
+
+# 禁用开机自启
+sudo systemctl disable nginx
+
+# 检查是否启用
+systemctl is-enabled nginx  # 返回 "enabled" 或 "disabled"
+```
+
+3. **电源管理**
+
+```bash
+# 重启系统
+sudo systemctl reboot
+
+# 关闭系统
+sudo systemctl poweroff
+
+# 休眠（需配置）
+sudo systemctl hibernate
+
+# 挂起到内存（睡眠）
+sudo systemctl suspend
+```
 
 ### 全文检索：【grep】
 ```bash
@@ -141,6 +245,7 @@ grep -lr 'string' /etc/
 # -l: 找出含有该字符串的文件  
 # -r: 同时从子目录查找  
 # -i: 忽略大小写
+# -E: 正则表达式
 ```
 
 
@@ -154,11 +259,7 @@ echo 'hello world'
 ```bash
 source ./test.sh
 ```
-### 以管理员身份运行命令：【sudo】
-```bash
-# 以管理员身份浏览yum文件
-sudo vim /usr/bin/yum
-```
+
 ### 文件操作：【touch、rm等】
 ```bash
 touch <filename>   
@@ -246,6 +347,12 @@ yum update
 yum list [package-name] --showduplicates | sort -r
 #下载并安装
 yum install [package-name]
+#列出已安装的包
+yum list installed
+#查看是否安装了php
+yum list installed | grep php
+#检查可更新的包（不执行更新）	
+yum check-update
 ```
 ### 查看Linux的路由表：【route】
 ```bash
