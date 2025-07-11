@@ -19,6 +19,12 @@ ps -ef|grep srm-esb-*
 ps aux|grep -Ei 'srm|java'
 //E：正则表达式  i: 忽略大小写
 //上面命令是查出含有"srm"或者"java"的进程行信息
+
+ps aux --sort=-%cpu
+//按CPU占比排序
+
+ps aux --sort=-%mem | head -n 10
+//按内存占比排序，取前10条
 ```
 ### 查看磁盘占用情况：【df】
 
@@ -112,6 +118,21 @@ echo > /proc/PID/fd/[文件句柄]
 
 
 ### 文件上传、下载：【curl】
+
+```bash
+# 下载文件到本地，文件名用远程文件名
+curl -O https://example.com/file.zip
+# GET请求
+curl "https://api.example.com/users?name=John&age=30"
+# POST请求（FormData）
+curl -X POST -d "username=admin&password=secret" https://api.example.com/login
+# POST请求（Json）
+curl -X POST -H "Content-Type: application/json" -d '{"name": "Alice", "email": "alice@example.com"}' https://api.example.com/users
+# 设置请求头
+curl -H "Authorization: Bearer YOUR_TOKEN" -H "Accept: application/json" https://api.example.com/protected
+# 使用 PUT 方法上传
+curl -T mylocalfile.txt https://example.com/upload/
+```
 
 ### 文本编辑：【vim】
 
