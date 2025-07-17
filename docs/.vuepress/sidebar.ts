@@ -23,6 +23,18 @@ export const sidebar = {
             ]
         }
     ],
+    '/mq/kafka/': [
+            {
+                text: '', //一级标题
+                collapsible: false, //是否可折叠
+                children: [
+                    {text:'概述',link:'/mq/kafka/README.md'},   //README.md
+                    {text:'原理',link:'/mq/kafka/原理.md'},
+                    {text:'开发笔记',link:'/mq/kafka/开发.md'},
+                    {text:'部署&运维',link:'/mq/kafka/部署&运维.md'},
+                ]
+            }
+        ],
     '/azilnote/': [
         {
             text: '我也想搭建这样的博客', //一级标题
