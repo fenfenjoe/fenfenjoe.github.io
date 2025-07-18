@@ -35,6 +35,19 @@ export const sidebar = {
                 ]
             }
         ],
+    '/database/elasticSearch/': [
+                {
+                    text: '', //一级标题
+                    collapsible: false, //是否可折叠
+                    children: [
+                        {text:'概述',link:'/database/elasticSearch/README.md'},   //README.md
+                        {text:'原理',link:'/database/elasticSearch/原理.md'},
+                        {text:'运维&部署',link:'/database/elasticSearch/运维&部署.md'},
+                        {text:'原生API',link:'/database/elasticSearch/ES-JSON查询.md'},
+                        {text:'SpringBoot集成',link:'/database/elasticSearch/SpringBoot集成.md'},
+                    ]
+                }
+            ],
     '/azilnote/': [
         {
             text: '我也想搭建这样的博客', //一级标题

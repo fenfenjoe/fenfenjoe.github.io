@@ -223,3 +223,63 @@ GET /student/_search
   }
 }
 ```
+
+## 创建ES索引
+创建ES索引的请求一般是这样的：
+```bash
+PUT /my_index
+{
+  "mappings":{
+    "dynamic": true,
+    "properties":{
+      "info":{
+        "type":"text",
+        "analyzer":"ik_smart"
+      },
+      "email":{
+        "type": "keyword",
+        "index": false
+      },
+      "name": {
+        "type": "object",
+        "properties": {
+          "firstname": {
+            "type": "keyword"
+          },
+          "lastname": {
+            "type": "keyword"
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+- **mappings**:**字段映射**，配置索引里有哪些字段，以及每个字段的属性。
+- **dynamic**:是否可以添加新字段【true(默认)/false/strict】
+    - true:当插入的文档有新字段，会自动创建新字段的映射
+    - false:当插入的文档有新字段，依然会存储下来，但不能作为查询条件
+    - strict:当插入的文档有新字段，抛出异常
+- **type**：字段的数据类型，一般有以下几种常用数据类型
+    - 字符串：text（可分词的文本）、keyword（精确值）
+    - 数值：long、integer、short、byte、double、float
+    - 布尔值：boolean
+    - 日期：date
+    - 对象：object
+- **index**:是否创建索引
+- **analyzer**:分词器，text数据类型字段需要配置
+- **properties**:配置该索引/字段的子字段
+
+
+创建索引后，还有对索引的查看，删除操作（不支持修改）。
+
+## 查看索引
+```bash
+GET /my_index
+```
+
+## 删除索引
+```bash
+DELETE /my_index
+```

@@ -1,5 +1,6 @@
 ---
-title: gym
+title: 健身
+sidebar: 'heading'
 ---
 
 # 健身
