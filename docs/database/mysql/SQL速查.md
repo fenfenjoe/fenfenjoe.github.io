@@ -131,3 +131,25 @@ SET
     rb.ATTRIBUTE9  = so.brand_place,
     rb.ATTRIBUTE10 = so.brand_place_id
 ```
+
+## 日期函数
+
+```sql
+select now() from dual;
+-- 今天（年月日时分秒）。2025-07-28 13:49:27
+
+select curdate() from dual;
+-- 今天（年月日）。2025-07-28
+
+select curtime() from dual;
+-- 今天（时分秒）。13:46:08
+
+select curdate() - interval 30 day from dual;
+-- 30天前。2025-06-28
+
+select curdate() - interval 24 hour from dual;
+-- 24小时前。2025-07-27 00:00:00
+
+SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
+-- 格式化日期。2025-07-28 13:49:27
+```
