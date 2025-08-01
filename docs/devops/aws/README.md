@@ -40,3 +40,5 @@ title: 概述
 | implement      | v. 实施、采用、实现、搭建。  <br/> Implement microservices architecture （实施微服务架构）<br/>Implement CI/CD pipelines（搭建持续集成/持续部署流水线） |
 | refactor       | v. 重构                                                                                                               |
 | distribute     | v. 分配。 如 distribute workloads = 分配负载                                                                                |
+| concurrency |  n. 并发、并发资源池 |
+| ad hoc| adj. 临时的 |
