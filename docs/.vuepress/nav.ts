@@ -30,6 +30,10 @@ export const navs =
                    {
                       text: 'SpringSecurity',
                       link: '/java/spring/springSecurity.md'
+                   },
+                   {
+                      text: 'Maven',
+                      link: '/java/maven/README.md'
                    }
                 ]
             },

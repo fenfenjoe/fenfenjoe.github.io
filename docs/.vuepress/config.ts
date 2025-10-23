@@ -13,6 +13,7 @@ import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
 import { markdownImagePlugin } from '@vuepress/plugin-markdown-image'
+import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 //import { commentPlugin } from '@vuepress/plugin-comment'
 import commentPlugin from "vuepress-plugin-comment-plus"
 
@@ -48,6 +49,10 @@ export default defineUserConfig({
               mark: true,
               // 启用图片大小
               size: true,
+            }),
+        markdownChartPlugin({
+              // 启用 Echarts
+              echarts: true,
             }),
         commentPlugin({
               choosen: 'waline', // Artalk | Giscus | Waline | Twikoo

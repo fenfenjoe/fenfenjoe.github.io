@@ -248,3 +248,45 @@ Maven仓库有三种类型：本地仓库（Local）、中央仓库（Central）
 * 若配置了多个仓库，则默认只会使用第一个仓库（除非第一个仓库连接不上，则使用下一个）
 
 
+## 生命周期
+
+- Maven有三大生命周期：**clean**、**default(build)**、**site**
+- 每个生命周期都由**一系列阶段**构成
+  - Clean周期
+    - pre-clean：执行清理前的工作
+    - **clean**：**核心命令**，删除 target 目录（即之前编译生成的所有文件）
+    - post-clean：执行清理后的工作
+  - Build周期
+    - validate	验证项目是否正确且所有必要信息可用
+    - initialize	初始化构建状态，例如设置属性
+    - generate-sources	生成需要包含在编译中的源代码
+    - process-sources	处理源代码，例如过滤一些值
+    - generate-resources	生成包含在包中的资源文件
+    - process-resources	复制和处理资源文件到目标目录，为打包做准备
+    - **compile**	**核心命令**，编译项目的源代码
+    - process-classes	对编译生成的文件进行后处理
+    - generate-test-sources	生成测试相关的源代码
+    - process-test-sources	处理测试源代码
+    - generate-test-resources	生成测试相关的资源文件
+    - process-test-resources	复制和处理测试资源到测试目标目录
+    - test-compile	编译测试源代码
+    - **test**	**核心命令**，使用合适的单元测试框架运行测试
+    - prepare-package	在打包前执行任何必要的操作
+    - **package**	**核心命令**，将编译后的代码打包成可分发的格式，如 JAR, WAR
+    - pre-integration-test	在集成测试运行之前执行所需操作（如启动环境）
+    - integration-test	处理和部署包到集成测试可以运行的环境
+    - post-integration-test	在集成测试运行之后执行所需操作（如关闭环境）
+    - verify	运行任何检查以验证包是否有效且符合质量标准
+    - **install**	**核心命令**，将包安装到本地Maven仓库，供其他本地项目依赖
+    - **deploy**	**核心命令**，将最终的包复制到远程仓库，供其他开发人员和项目共享
+  - Site周期
+    - pre-site：生成站点前的工作
+    - **site**：**核心命令**，生成项目站点文档
+    - post-site：生成站点后的工作
+    - site-deploy：将生成的站点文档部署到服务器
+- 我们可以使用**命令**执行某个阶段
+  - 执行clean阶段：```mvn clean```
+  - 执行compile阶段：```mvn compile```
+- 执行命令时，会按**生命周期中的顺序**执行到你指定的阶段
+  - 执行clean阶段：由**pre-clean**到**clean**
+  - 执行compile阶段：由**validate**到**compile**

@@ -31,14 +31,15 @@ title: 概述
 
 **想找AI客户端应用、IDE**
 
-| 网站名称                 | 地址                                   |描述|
-|----------------------|--------------------------------------|---|
-| Chatbox （本地客户端）     | <https://chatboxai.app/zh>           |
+| 应用                   | 官网                                   | 描述  |
+|----------------------|--------------------------------------|-----|
+| Chatbox （本地客户端）      | <https://chatboxai.app/zh>           |
 | Cherry Studio（本地IDE） | <https://www.cherry-ai.com/>         |
 | Cloud Studio（在线IDE）  | <https://cloudstudio.net/>           |
-| Coze（在线智能体开发平台）   | <https://www.coze.cn/>               |
-| Pycharm（Python IDE） | <https://www.jetbrains.com/pycharm/> |
-| Dify（LLMOps平台） | <https://dify.ai/zh>                 |
+| Coze（在线智能体开发平台）      | <https://www.coze.cn/>               |
+| Pycharm（Python IDE）  | <https://www.jetbrains.com/pycharm/> |
+| Dify（LLMOps平台）       | <https://dify.ai/zh>                 |
+| Trae(字节旗下AI编程工具)     | <https://www.trae.cn/>               |
 
 
 

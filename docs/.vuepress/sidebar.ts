@@ -155,7 +155,7 @@ export const sidebar = {
                  {text:'参考',link:'/gym/参考.md'}
              ]
          }
-     ],
+     ]
 };
 
 // module.exports = sidebar; //CommonJS
