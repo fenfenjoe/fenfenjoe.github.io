@@ -10,7 +10,8 @@ sidebarDepth: 1
 
 ## 参考
 
-【API文档】<https://matplotlib.org/stable/api/index.html>
+【API文档】<https://matplotlib.org/stable/api/index.html>  
+【教程】<https://matplotlib.org/stable/tutorials/pyplot.html>
 
 
 ## 画单个图、画折线图
