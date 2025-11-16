@@ -52,12 +52,16 @@ mylist.remove('abc') #删除值为abc的元素，若有多个也只删除一个
 del mylist[0] #删除第1个元素
 del mylist[:2] #删除前2个元素
 del mylist #删除列表
+#改
+mylist[0] = 10
 #排序
 mylist.sort() #升序排序
 mylist.sort(reverse=True) #降序排序
 mylist.sort(key=len) #按长度，升序排序
 #获取对象所在下标
 mylist.index(obj)
+#是否存在
+10 in mylist
 ```
 
 
@@ -88,6 +92,21 @@ for k,v in empty_dict.items()
     print(k,v) #字典循环：取出键和值
     
 empty_dict['dad'] #获取字典中键为dad的值
+
+#增
+myMap['name'] = 'Alice'              # {'name': 'Alice'}
+myMap['age'] = 25                    # {'name': 'Alice', 'age': 25}
+myMap['city'] = 'Beijing'            # {'name': 'Alice', 'age': 25, 'city': 'Beijing'}
+myMap.update({'country': 'China', 'gender': 'female'})  # 批量添加
+
+# 删 - 删除键值对
+del myMap['city']                    # 删除指定键
+
+# 改 - 修改值
+myMap['age'] = 26                    # 修改年龄
+myMap['name'] = 'Bob'                # 修改名字
+myMap.update({'age': 27, 'name': 'Charlie'})  # 批量修改
+
 
 ```
 
@@ -260,9 +279,9 @@ for i in 'hello world':
 ## 库(模块)
 
 ###	下载新的python库
-https://pypi.org/project/ 找需要的库及版本
-放到python的Scripts目录中
-进入cmd，到python/Scripts目录下，执行 pip install [python库文件名]
+1. 在 <https://pypi.org/project/> 找需要的库及版本  
+2. 放到python的Scripts目录中  
+3. 进入cmd，到python/Scripts目录下，执行 pip install [python库文件名]  
 
 ###	常用库
 

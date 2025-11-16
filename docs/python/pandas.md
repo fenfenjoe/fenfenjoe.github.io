@@ -30,6 +30,10 @@ data = [[1,'tom','20110101'],[2,'jack','20110102']] #二维数组
 # 创建空DataFrame，索引为日期类型
 df = pd.DataFrame(columns=['A','B','C','D'], index=pd.DatetimeIndex([]))
 
+# 创建空DataFrame，索引默认为整数索引(0,1,2,...)
+df = pd.DataFrame(columns=['A','B','C','D'])
+
+
 ```
 
 
