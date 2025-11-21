@@ -136,13 +136,17 @@ def myfunc(context) :
     """myfunc will print an number.""" # 函数说明文档
     a='1'  #缩进4格
     return a #可返回两个值；以元组返回两个值
+    
 # 定义函数2
 def myfunc2(a,b=2,c='haha') #入参带默认值，没有默认值则为必填入参，有默认入参则非必填
     return 
+    
 # 调用函数
 myfunc2(a=10) 
+
 # 调用函数2
 myfunc2(10,3,'haha')
+
 # 定义函数3
 def myfunc3(age:'年龄',name:'名称'='Joe')->'没有返回参数' #为入参、出参添加注解
     pass

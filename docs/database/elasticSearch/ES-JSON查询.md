@@ -250,6 +250,10 @@ PUT /my_index
             "type": "keyword"
           }
         }
+      },
+      "startdate":{
+         "type": "date",       
+         "format": "yyyy-MM-dd" 
       }
     }
   }
@@ -261,15 +265,18 @@ PUT /my_index
     - true:当插入的文档有新字段，会自动创建新字段的映射
     - false:当插入的文档有新字段，依然会存储下来，但不能作为查询条件
     - strict:当插入的文档有新字段，抛出异常
+- **properties**:配置该索引/字段的子字段
 - **type**：字段的数据类型，一般有以下几种常用数据类型
-    - 字符串：text（可分词的文本）、keyword（精确值）
+    - 字符串：text（用于分词）、keyword（用于排序、聚合、过滤）
     - 数值：long、integer、short、byte、double、float
     - 布尔值：boolean
     - 日期：date
     - 对象：object
-- **index**:是否创建索引
+    - 地理位置：geo_point
+- **index**:是否创建倒排索引
 - **analyzer**:分词器，text数据类型字段需要配置
-- **properties**:配置该索引/字段的子字段
+- **search_analyzer**:搜索时使用的分词器
+
 
 
 创建索引后，还有对索引的查看，删除操作（不支持修改）。
