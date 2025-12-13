@@ -153,3 +153,18 @@ select curdate() - interval 24 hour from dual;
 SELECT DATE_FORMAT(NOW(), '%Y-%m-%d %H:%i:%s')
 -- 格式化日期。2025-07-28 13:49:27
 ```
+
+## 查看某个表的字段
+
+```sql
+SHOW FULL COLUMNS FROM erp_iuoms;
+```
+
+## 修改表的编码
+
+```sql
+-- 修改成utf8mb4
+ALTER TABLE erp_iuoms 
+CONVERT TO CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+```

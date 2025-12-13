@@ -447,8 +447,8 @@ Map<String,List<Employee>> map = list.stream().collect(Collectors.partitioningBy
 String names = list.stream().map(Employee::getName).collect(Collector.joining(","));
 
 //分组后只要其中一个字段
-Map<String,List<String>> map = list.stream().collect(Collectors.groupingBy(Employee:getStatus),
-        Collectors.mapping(Employee::getName,Collectors.toList()));
+Map<String,List<String>> map = list.stream().collect(Collectors.groupingBy(Employee:getStatus,
+        Collectors.mapping(Employee::getName,Collectors.toList())));
 ```
 
 
