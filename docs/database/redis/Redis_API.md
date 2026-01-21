@@ -18,8 +18,11 @@ EXPIRES <key> <seconds>
 #【设置过期时间（时间点）】
 EXPIREAT <key> <timestamp>
 #【根据给定模式匹配key】
-Keys <pattern>
+KEYS <pattern>
+#【返回key的过期时间】
+TTL <key>
 ```
+
 
 ### 键值对操作
 ```shell
@@ -32,21 +35,25 @@ GET name #单值获取，返回dyz
 # MSET：批量插入
 MSET dyz_obj:1:name dyz dyz_obj:1:id 1 #json对象缓存 
 GET dyz_obj:1:name #获取对象属性，返回dyz
+# SETEX：设置过期时间的同时设置值
+SETEX <key> <seconds> <value>
+# SETNX：【若key不存在，才存入该键值对】 
+SETNX <key> <value> #常用于分布式锁
+# GETSET：【置新值，返回旧值】
+GETSET <key> <value>
 
 #【批量添加】
 MSET <key> <value> <key> <value>
 #【批量获取】
 MGET <key> <key>
-#【若key不存在，才存入该键值对】 
-SETNX <key> <value> #常用于分布式锁
+
 #【返回Value的长度】
 STRLEN <key>
 #【追加字符串】
 APPEND <key> <value>
 #【返回子字符串】
 GETRANGE <key> <start> <end>
-#【置新值，返回旧值】
-GETSET <key> <value>
+
 ```
 
 
