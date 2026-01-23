@@ -9,7 +9,7 @@ export const sidebar = {
                 {text:'API',link:'/database/redis/Redis_API.md'},
                 {text:'数据结构',link:'/database/redis/Redis数据结构.md'},
                 {text:'使用场景',link:'/database/redis/Redis使用场景.md'},
-                {text:'其他',link:'/database/redis/Redis其他.md'}
+                {text:'SpringBoot集成',link:'/database/redis/SpringBoot集成Redis.md'}
             ]
         }
     ],
