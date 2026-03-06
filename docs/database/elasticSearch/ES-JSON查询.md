@@ -283,10 +283,22 @@ PUT /my_index
 
 ## 查看索引
 ```bash
-GET /my_index
+GET /{my_index}
 ```
 
 ## 删除索引
 ```bash
-DELETE /my_index
+DELETE /{my_index}
+```
+
+## 根据ID，修改索引中的某条数据
+```bash
+POST /my_index/_update/{index_id}
+
+{
+  "doc": {
+    "name":"Joe",
+    "age": 27
+  }
+}
 ```
