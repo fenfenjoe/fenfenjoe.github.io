@@ -26,6 +26,18 @@ ps aux --sort=-%cpu
 ps aux --sort=-%mem | head -n 10
 //按内存占比排序，取前10条
 ```
+
+### 查看JVM进程：【jps】
+```
+jps -l
+
+pid  进程名称
+158266 srm-pos-2.0.0-SNAPSHOT.jar
+205085 sun.tools.jps.Jps
+
+```
+
+
 ### 查看磁盘占用情况：【df】
 
 ```
