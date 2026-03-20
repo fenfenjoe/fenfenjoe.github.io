@@ -19,6 +19,9 @@ import commentPlugin from "vuepress-plugin-comment-plus"
 
 export default defineUserConfig({
     bundler: viteBundler(),
+    layouts: {
+        '/': './layouts/Layout.vue',
+    },
     theme: defaultTheme({
         lastUpdated: true, //文章添加最近更新时间
         logo: '/images/favicon.ico', //导航栏logo
@@ -58,7 +61,7 @@ export default defineUserConfig({
               choosen: 'waline', // Artalk | Giscus | Waline | Twikoo
               options: {
                       el: "#valine-vuepress-comment",
-                      serverURL: "https://azilnotewaline.vercel.app/", // 例如 "https://***.vercel.app/"
+                      serverURL: "https://azilnote-vercel.vercel.app/", // 例如 "https://***.vercel.app/"
                       path: '<%- frontmatter.commentid || frontmatter.permalink %>'
                     }
             }),
