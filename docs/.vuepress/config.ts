@@ -51,16 +51,19 @@ export default defineUserConfig({
           }
           function initWaline() {
             createContainer();
-            if (window.Waline) {
-              window.Waline.init({
+            if (typeof Waline !== 'undefined') {
+              Waline.init({
                 el: '#waline-container',
                 serverURL: 'https://azilnote-vercel.vercel.app/',
               });
+            } else {
+              console.error('[Waline] Waline is not defined. Check waline.js loading.');
             }
           }
           var script = document.createElement('script');
           script.src = '/waline.js';
           script.onload = initWaline;
+          script.onerror = function() { console.error('[Waline] Failed to load waline.js'); };
           document.head.appendChild(script);
         })();
       `],
