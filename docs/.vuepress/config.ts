@@ -66,7 +66,7 @@ export default defineUserConfig({
             }
           }
           var script = document.createElement('script');
-          script.src = '/waline.mjs';
+          script.src = '/waline.umd.js?v=1';
           script.onload = initWaline;
           script.onerror = function() { console.error('[Waline] Failed to load waline.mjs from', location.href); };
           document.head.appendChild(script);
