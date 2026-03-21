@@ -50,14 +50,13 @@ export default defineUserConfig({
             return c;
           }
           function initWaline() {
-            var path = location.pathname;
-            // 排除主页（/）、关于页（/about/）等不需要评论的页面
-            // 只在有子路径的文章页初始化（如 /java/xxx, /python/xxx）
-            var skipPaths = ['/', '/about/', '/404.html'];
-            for (var i = 0; i < skipPaths.length; i++) {
-              if (path === skipPaths[i] || path === skipPaths[i] + 'index.html') {
-                return;
-              }
+            var path = location.pathname || '/';
+            // 排除特定路径：主页 /、关于页 /about/、404页
+            // path 格式如 /java/、/python/、/about/、/
+            // 包含 / 且不是单独 / 的路径才显示评论（如 /java/xxx）
+            if (path === '/' || path === '/about/' || path === '/404.html' ||
+                path === '/index.html' || path.endsWith('/index.html')) {
+              return;
             }
             createContainer();
             if (typeof Waline !== 'undefined') {
@@ -66,11 +65,11 @@ export default defineUserConfig({
                 serverURL: 'https://azilnote-vercel.vercel.app/',
               });
             } else {
-              console.error('[Waline] Waline is not defined. Check waline.js loading.');
+              console.error('[Waline] Waline is not defined.');
             }
           }
           var script = document.createElement('script');
-          script.src = '/waline.js';
+          script.src = '/waline.js?v=2';
           script.onload = initWaline;
           script.onerror = function() { console.error('[Waline] Failed to load waline.js'); };
           document.head.appendChild(script);
