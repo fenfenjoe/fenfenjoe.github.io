@@ -51,11 +51,10 @@ export default defineUserConfig({
           }
           function initWaline() {
             var path = location.pathname || '/';
-            // 排除特定路径：主页 /、关于页 /about/、404页
-            // path 格式如 /java/、/python/、/about/、/
-            // 包含 / 且不是单独 / 的路径才显示评论（如 /java/xxx）
-            if (path === '/' || path === '/about/' || path === '/404.html' ||
-                path === '/index.html' || path.endsWith('/index.html')) {
+            // 只在精确为首页时跳过（/），其他所有页面都显示评论框
+            // GitHub Pages 首页也可能访问为 /index.html
+            if (path === '/' || path === '/index.html') {
+              // 根路径 '/'，不显示
               return;
             }
             createContainer();
@@ -69,7 +68,7 @@ export default defineUserConfig({
             }
           }
           var script = document.createElement('script');
-          script.src = '/waline.js?v=2';
+          script.src = '/waline.js?v=3';
           script.onload = initWaline;
           script.onerror = function() { console.error('[Waline] Failed to load waline.js'); };
           document.head.appendChild(script);
