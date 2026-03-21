@@ -37,16 +37,30 @@ export default defineUserConfig({
       // Waline 评论系统
       ['link', {rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css'}],
       ['script', {src: 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js'}, ''],
-      // 初始化 Waline
+      // 初始化 Waline（用 JS 动态注入 div + 初始化）
       ['script', {}, `
-        document.addEventListener('DOMContentLoaded', function() {
-          if (window.Waline) {
-            window.Waline.init({
-              el: '#waline-container',
-              serverURL: 'https://azilnote-vercel.vercel.app/',
-            })
+        (function() {
+          var initWaline = function() {
+            var container = document.getElementById('waline-container');
+            if (!container) {
+              container = document.createElement('div');
+              container.id = 'waline-container';
+              container.style.cssText = 'max-width:800px;margin:2rem auto;padding:0 1rem;';
+              document.body.appendChild(container);
+            }
+            if (window.Waline) {
+              window.Waline.init({
+                el: '#waline-container',
+                serverURL: 'https://azilnote-vercel.vercel.app/',
+              })
+            }
+          };
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initWaline);
+          } else {
+            initWaline();
           }
-        })
+        })();
       `],
     ],
     plugins:[
