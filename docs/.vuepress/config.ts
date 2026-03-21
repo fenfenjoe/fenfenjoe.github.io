@@ -51,26 +51,24 @@ export default defineUserConfig({
           }
           function initWaline() {
             var path = location.pathname || '/';
-            // 只在精确为首页时跳过（/），其他所有页面都显示评论框
-            // GitHub Pages 首页也可能访问为 /index.html
+            // 只在精确为首页时跳过，其他所有页面都显示评论框
             if (path === '/' || path === '/index.html') {
-              // 根路径 '/'，不显示
               return;
             }
             createContainer();
-            if (typeof Waline !== 'undefined') {
+            if (typeof Waline !== 'undefined' && Waline && Waline.init) {
               Waline.init({
                 el: '#waline-container',
                 serverURL: 'https://azilnote-vercel.vercel.app/',
               });
             } else {
-              console.error('[Waline] Waline is not defined.');
+              console.error('[Waline] Waline is not defined or init is not a function.');
             }
           }
           var script = document.createElement('script');
-          script.src = '/waline.js?v=3';
+          script.src = '/waline.mjs';
           script.onload = initWaline;
-          script.onerror = function() { console.error('[Waline] Failed to load waline.js'); };
+          script.onerror = function() { console.error('[Waline] Failed to load waline.mjs from', location.href); };
           document.head.appendChild(script);
         })();
       `],
