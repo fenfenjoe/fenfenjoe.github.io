@@ -15,7 +15,7 @@ import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
 import { markdownImagePlugin } from '@vuepress/plugin-markdown-image'
 import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 //import { commentPlugin } from '@vuepress/plugin-comment'
-import commentPlugin from "vuepress-plugin-comment-plus"
+// Waline评论直接在 Layout.vue 中集成，不再使用 vuepress-plugin-comment-plus（不支持VuePress 2）
 
 export default defineUserConfig({
     bundler: viteBundler(),
@@ -33,7 +33,21 @@ export default defineUserConfig({
     //base: '/note/',  //基础路径
     head: [
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
-      ['link',{rel: 'stylesheet', href: '/css/index.css'}]  //自定义的样式
+      ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
+      // Waline 评论系统
+      ['link', {rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css'}],
+      ['script', {src: 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js'}, ''],
+      // 初始化 Waline
+      ['script', {}, `
+        document.addEventListener('DOMContentLoaded', function() {
+          if (window.Waline) {
+            window.Waline.init({
+              el: '#waline-container',
+              serverURL: 'https://azilnote-vercel.vercel.app/',
+            })
+          }
+        })
+      `],
     ],
     plugins:[
         searchPlugin({}), //搜索引擎插件，会生成本地索引文件，若网站文章过多，建议切换成docSearch插件
@@ -56,14 +70,6 @@ export default defineUserConfig({
         markdownChartPlugin({
               // 启用 Echarts
               echarts: true,
-            }),
-        commentPlugin({
-              choosen: 'waline', // Artalk | Giscus | Waline | Twikoo
-              options: {
-                      el: "#valine-vuepress-comment",
-                      serverURL: "https://azilnote-vercel.vercel.app/", // 例如 "https://***.vercel.app/"
-                      path: '<%- frontmatter.commentid || frontmatter.permalink %>'
-                    }
             }),
 
     ]
