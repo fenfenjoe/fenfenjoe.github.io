@@ -34,32 +34,41 @@ export default defineUserConfig({
     head: [
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
       ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
-      // Waline 评论系统（使用unpkg CDN，jsdelivr在国内被墙）
+      // Waline 评论系统（动态加载，确保脚本就绪后初始化）
       ['link', {rel: 'stylesheet', href: 'https://unpkg.com/@waline/client@v3/dist/waline.css'}],
-      ['script', {src: 'https://unpkg.com/@waline/client@v3/dist/waline.js'}, ''],
-      // 初始化 Waline（用 JS 动态注入 div + 初始化）
+      // 动态加载 Waline 脚本并在 onload 后初始化
       ['script', {}, `
         (function() {
-          var initWaline = function() {
-            var container = document.getElementById('waline-container');
-            if (!container) {
-              container = document.createElement('div');
-              container.id = 'waline-container';
-              container.style.cssText = 'max-width:800px;margin:2rem auto;padding:0 1rem;';
-              document.body.appendChild(container);
+          function createContainer() {
+            var c = document.getElementById('waline-container');
+            if (!c) {
+              c = document.createElement('div');
+              c.id = 'waline-container';
+              c.style.cssText = 'max-width:800px;margin:2rem auto;padding:0 1rem;';
+              document.body.appendChild(c);
             }
+            return c;
+          }
+          function initWaline() {
+            var container = createContainer();
             if (window.Waline) {
               window.Waline.init({
                 el: '#waline-container',
                 serverURL: 'https://azilnote-vercel.vercel.app/',
-              })
+              });
             }
-          };
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initWaline);
-          } else {
-            initWaline();
           }
+          var script = document.createElement('script');
+          script.src = 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+          script.onload = initWaline;
+          script.onerror = function() {
+            console.error('Waline script failed to load from unpkg, trying cdnjs...');
+            var fallback = document.createElement('script');
+            fallback.src = 'https://cdnjs.cloudflare.com/ajax/libs/waline/3.0.0/waline.js';
+            fallback.onload = initWaline;
+            document.head.appendChild(fallback);
+          };
+          document.head.appendChild(script);
         })();
       `],
     ],
