@@ -34,8 +34,8 @@ export default defineUserConfig({
     head: [
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
       ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
-      // Waline 评论系统（动态加载，确保脚本就绪后初始化）
-      ['link', {rel: 'stylesheet', href: 'https://unpkg.com/@waline/client@v3/dist/waline.css'}],
+      // Waline 评论系统（使用本地文件，不依赖任何CDN）
+      ['link', {rel: 'stylesheet', href: '/waline.css'}],
       // 动态加载 Waline 脚本并在 onload 后初始化
       ['script', {}, `
         (function() {
@@ -50,7 +50,7 @@ export default defineUserConfig({
             return c;
           }
           function initWaline() {
-            var container = createContainer();
+            createContainer();
             if (window.Waline) {
               window.Waline.init({
                 el: '#waline-container',
@@ -59,15 +59,8 @@ export default defineUserConfig({
             }
           }
           var script = document.createElement('script');
-          script.src = 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+          script.src = '/waline.js';
           script.onload = initWaline;
-          script.onerror = function() {
-            console.error('Waline script failed to load from unpkg, trying cdnjs...');
-            var fallback = document.createElement('script');
-            fallback.src = 'https://cdnjs.cloudflare.com/ajax/libs/waline/3.0.0/waline.js';
-            fallback.onload = initWaline;
-            document.head.appendChild(fallback);
-          };
           document.head.appendChild(script);
         })();
       `],
