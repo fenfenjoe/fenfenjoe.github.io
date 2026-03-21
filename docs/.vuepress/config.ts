@@ -50,6 +50,15 @@ export default defineUserConfig({
             return c;
           }
           function initWaline() {
+            var path = location.pathname;
+            // 排除主页（/）、关于页（/about/）等不需要评论的页面
+            // 只在有子路径的文章页初始化（如 /java/xxx, /python/xxx）
+            var skipPaths = ['/', '/about/', '/404.html'];
+            for (var i = 0; i < skipPaths.length; i++) {
+              if (path === skipPaths[i] || path === skipPaths[i] + 'index.html') {
+                return;
+              }
+            }
             createContainer();
             if (typeof Waline !== 'undefined') {
               Waline.init({
