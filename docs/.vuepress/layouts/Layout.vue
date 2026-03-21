@@ -1,12 +1,13 @@
 <template>
-  <div class="theme-container">
-    <DefaultTheme.Layout />
-    <div id="valine-vuepress-comment" />
-  </div>
+  <ParentLayout>
+    <template #page-bottom>
+      <div id="valine-vuepress-comment" />
+    </template>
+  </ParentLayout>
 </template>
 
 <script setup lang="ts">
-import DefaultTheme from 'vuepress-theme-default'
+import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 </script>
 
 <style scoped>

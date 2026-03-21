@@ -28,6 +28,7 @@
     "vuepress": "^2.0.0-rc.23"
   },
   "dependencies": {
+    "pg": "^8.20.0",
     "vuepress-plugin-comment-plus": "^1.1.0"
   }
 }
