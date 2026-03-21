@@ -34,9 +34,9 @@ export default defineUserConfig({
     head: [
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
       ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
-      // Waline 评论系统
-      ['link', {rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.css'}],
-      ['script', {src: 'https://cdn.jsdelivr.net/npm/@waline/client@v3/dist/waline.js'}, ''],
+      // Waline 评论系统（使用unpkg CDN，jsdelivr在国内被墙）
+      ['link', {rel: 'stylesheet', href: 'https://unpkg.com/@waline/client@v3/dist/waline.css'}],
+      ['script', {src: 'https://unpkg.com/@waline/client@v3/dist/waline.js'}, ''],
       // 初始化 Waline（用 JS 动态注入 div + 初始化）
       ['script', {}, `
         (function() {
