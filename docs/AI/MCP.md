@@ -28,6 +28,12 @@ MCP 全称 Model Context Protocol，模型上下文协议。
 
 ## 实战
 
+### 访问本地Mysql的MCP 
+
+TODO
+
+
+
 
 ## 参考
 
