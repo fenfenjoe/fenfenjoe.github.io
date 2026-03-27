@@ -11,16 +11,44 @@ sidebarDepth: 2
 ### 键操作
 ```shell
 ##### 键操作
+# 【删除键】（1为删除成功，0为删除失败）
 DEL <key>
 EXISTS <key>
 #【设置过期时间（几秒后）】
 EXPIRES <key> <seconds>
 #【设置过期时间（时间点）】
 EXPIREAT <key> <timestamp>
-#【根据给定模式匹配key】
+#【根据给定模式匹配key】（会扫描整个键空间，生产环境禁用！可用SCAN代替）
 KEYS <pattern>
-#【返回key的过期时间】
+#【返回key的过期时间】（-2为键不存在；-1为永不过期；>0为剩余秒数
 TTL <key>
+```
+
+```shell
+# SCAN的用法
+SCAN cursor [MATCH pattern] [COUNT count] [TYPE type]
+
+# 获取所有键（默认查10条，0表示游标，第一次传0）
+SCAN 0
+
+# 返回示例：
+#1) "38"   -- 38 表示下一页的游标
+#2) 1) "key1"
+#   2) "key2"
+#   3) "user:100"
+
+SCAN 38
+
+#1) "0" -- 返回0则表示键已遍历完毕
+#2) 1) "key3"
+#   2) "session:abc"
+
+# 使用正则表达式匹配键
+SCAN 0 MATCH user:*
+
+# 使用COUNT表明每次查询数量
+SCAN 0 MATCH user:* COUNT 100
+
 ```
 
 
@@ -86,10 +114,14 @@ LPUSH key value1 value2 ...
 LPOP key
 #【通过索引获取列表中的元素。你也可以使用负数下标】
 LINDEX key index
+#【只保留N个元素】
+LTRIM key N
 #【获取列表在给定范围上的所有值】
 LRANGE key startindex endindex
 #【当列表没有值时，阻塞等待，直至有值可取时才继续执行】 
 BRPOP key
+#【当列表没有值时，阻塞等待数秒，直至有值可取或超时才继续执行】 
+BRPOP key seconds
 ## 双向链表常见用法：
 #lrange mylist 0 -1 返回列表所有值
 #lpush+lpop=Stack(栈)
@@ -147,6 +179,49 @@ getBit key <offset>
 bitCount key [start] [end]
 ```
 
+
+### Stream操作
+```shell
+# 1.发送消息到队列mystream（若之前没有该队列，会自动创建）
+XADD mystream * senior-id 1001 temperature 36.5
+"1734567890123-0"
+# * 表示由Redis创建消息ID，“1734567890123-0”就是成功后生成的ID
+# 消息携带着2个字段：senior-id、temperature
+
+# 2.获取队列长度
+XLEN mystream
+1
+
+# 3.独立消费
+XREAD COUNT 1 STREAMS mystream 0   # 需要指定从哪个ID开始读取（ID=0）
+XREAD BLOCK 0 STREAMS mystream $   # 阻塞等待新消息
+
+# 3.按消费者组消费
+XGROUP CREATE mystream mygroup 0 MKSTREAM   # 创建消费者组mystream（MKSTREAM 可同时创建流）
+XREADGROUP GROUP mygroup consumer1 COUNT 1 STREAMS mystream > # 按消费者组消费1条消息，> 表示读取尚未分发的消息
+
+# 4.消费完毕确认（**只有按消费者组消费时需要。**若不确认，则消息的状态=待处理）
+XACK mystream mygroup 1734567890123-0
+1
+
+# 5.查看待处理消息
+XPENDING mystream mygroup
+1) (integer) 0    # 待处理消息数量
+2) (nil)          # 最小 ID
+3) (nil)          # 最大 ID
+4) (nil)          # 各消费者情况
+
+# 6.认领状态为“待处理”，空闲时间超过60s，id为1734567890123-0的消息
+XCLAIM mystream mygroup consumer3 60000 1734567890123-0
+1) 1) "1734567890123-0"
+   2) 1) "sensor-id"
+      2) "1001"
+      3) "temperature"
+      4) "23.5"
+      
+# 7.只保留最新的1w条消息
+XTRIM mystream MAXLEN ~ 10000
+```
 
 
 ## 【Java】RedisTemplate
