@@ -25,8 +25,8 @@ jobs:
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
-          # 选择要使用的 node 版本
-          node-version: 22
+          # 选择要使用的 node 版本（VuePress 2.0.0-rc.23 需要 Node 20）
+          node-version: 20
           # 缓存 pnpm 依赖
           cache: pnpm
 
