@@ -25,8 +25,8 @@ jobs:
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
-          # 选择要使用的 node 版本（VuePress 2.0.0-rc.23 需要 Node 20）
-          node-version: 20
+          # 使用 Node 22（与开发环境一致）
+          node-version: 22
           # 缓存 pnpm 依赖
           cache: pnpm
 
@@ -35,7 +35,7 @@ jobs:
 
       # 运行构建脚本
       - name: 构建 VuePress 站点
-        run: pnpm docs:build
+        run: npx vuepress build docs
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
