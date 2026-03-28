@@ -35,7 +35,10 @@ jobs:
 
       # 运行构建脚本
       - name: 构建 VuePress 站点
-        run: npx vuepress build docs
+        run: |
+          node --version
+          npx vuepress --version
+          npx vuepress build docs 2>&1
         env:
           NODE_OPTIONS: --max_old_space_size=4096
 
