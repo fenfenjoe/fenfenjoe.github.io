@@ -35,12 +35,21 @@ jobs:
 
       # 运行构建脚本
       - name: 构建 VuePress 站点
+        id: build
         run: |
           node --version
-          npx vuepress --version
-          npx vuepress build docs 2>&1
+          npx vuepress build docs 2>&1 | tee /tmp/build.log
+          echo "BUILD_EXIT_CODE=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
         env:
           NODE_OPTIONS: --max_old_space_size=4096
+        continue-on-error: true
+
+      - name: 显示构建错误（如有）
+        if: steps.build.outcome == 'failure'
+        run: |
+          echo "=== BUILD FAILED ==="
+          cat /tmp/build.log | tail -100
+          exit 1
 
       # 查看 workflow 的文档来获取更多信息
       # @see https://github.com/crazy-max/ghaction-github-pages
