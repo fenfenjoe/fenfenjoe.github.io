@@ -34,41 +34,39 @@ export default defineUserConfig({
     head: [
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
       ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
-      // Waline 评论系统（使用本地文件，不依赖任何CDN）
+      // Waline 评论系统（使用本地 UMD 文件）
       ['link', {rel: 'stylesheet', href: '/waline.css'}],
-      // 动态加载 Waline 脚本并在 onload 后初始化
       ['script', {}, `
         (function() {
-          function createContainer() {
-            var c = document.getElementById('waline-container');
-            if (!c) {
-              c = document.createElement('div');
-              c.id = 'waline-container';
-              c.style.cssText = 'max-width:800px;margin:2rem auto;padding:0 1rem;';
-              document.body.appendChild(c);
-            }
-            return c;
-          }
-          function initWaline() {
-            var path = location.pathname || '/';
-            // 只在精确为首页时跳过，其他所有页面都显示评论框
-            if (path === '/' || path === '/index.html') {
+          // 主页不显示评论框，其他页面都显示
+          var path = location.pathname || '/';
+          if (path === '/' || path === '/index.html') return;
+
+          // 动态加载 waline.umd.js，加载完毕后初始化
+          var script = document.createElement('script');
+          script.src = '/waline.umd.js';
+          script.onload = function() {
+            // UMD 在浏览器中会把自身挂到 window.Waline
+            var W = window.Waline;
+            if (!W || !W.init) {
+              console.error('[Waline] window.Waline not found after script load');
               return;
             }
-            createContainer();
-            if (typeof Waline !== 'undefined' && Waline && Waline.init) {
-              Waline.init({
-                el: '#waline-container',
-                serverURL: 'https://azilnote-vercel.vercel.app/',
-              });
-            } else {
-              console.error('[Waline] Waline is not defined or init is not a function.');
+            var el = document.getElementById('waline-container');
+            if (!el) {
+              el = document.createElement('div');
+              el.id = 'waline-container';
+              el.style.cssText = 'max-width:800px;margin:2rem auto;padding:0 1rem;';
+              document.body.appendChild(el);
             }
-          }
-          var script = document.createElement('script');
-          script.src = '/waline.umd.js?v=1';
-          script.onload = initWaline;
-          script.onerror = function() { console.error('[Waline] Failed to load waline.mjs from', location.href); };
+            W.init({
+              el: '#waline-container',
+              serverURL: 'https://azilnote-vercel.vercel.app/',
+            });
+          };
+          script.onerror = function() {
+            console.error('[Waline] failed to load /waline.umd.js');
+          };
           document.head.appendChild(script);
         })();
       `],
