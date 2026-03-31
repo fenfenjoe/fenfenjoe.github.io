@@ -224,4 +224,21 @@ XTRIM mystream MAXLEN ~ 10000
 ```
 
 
+### 事务相关操作
+
+```shell
+#开启事务
+MULTI 
+#输入一组命令
+SET user:1001:name "Alice"
+SET user:1001:age "30"
+INCR user:1001:age
+#执行事务中的命令
+EXEC
+#放弃事务中的命令
+DISCARD
+
+```
+
+
 ## 【Java】RedisTemplate
