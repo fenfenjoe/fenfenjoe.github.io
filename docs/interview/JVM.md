@@ -310,7 +310,7 @@ java -Dname=Joe -version
 * 非标准参数（-X）：默认JVM有实现，但其他JVM不一定实现，不一定向后兼容；
     * -Xmn
     * -Xmx
-    * -Xloggc:<filename>
+    * -Xloggc:`<filename>`
   > 可以通过在cmd中输入 “java -X” 查看有哪些非标准参数
 * 非Stable参数（-XX）
 
@@ -389,10 +389,10 @@ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU  
 28672.0 28672.0 15921.7  0.0   29696.0   2233.7   65536.0    47813.5   57856.0 54674.3 8960.0 7947.5     40    0.114   4      0.166    0.279
 ```
 
-|S0C  |  S1C  |  S0U  |  S1U   |   EC    |   EU  |      OC    |     OU   |    MC  |   MU |   CCSC |  CCSU  | YGC |    YGCT  |  FGC  |  FGCT |    GCT|
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-|Suvivor0区容量|Suvivor1区容量|Suvivor0区使用量|Suvivor1区使用量|Eden区容量|Eden区使用量|Old区容量|Old区使用量|Metaspace容量|Metaspace使用量|压缩类空间大小|压缩类空间使用率|Young GC次数|Young GC时间|Old GC次数|Old GC时间|总GC时间|
-|28672.0 |28672.0 |15921.7  |0.0   |29696.0  | 2233.7   |65536.0    |47813.5   |57856.0 |54674.3 |8960.0 |7947.5     |40    |0.114   |4      |0.166    |0.279|
+| S0C | S1C | S0U | S1U | EC | EU | OC | OU | MC | MU | CCSC | CCSU | YGC | YGCT | FGC | FGCT | GCT |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Suvivor0区容量 | Suvivor1区容量 | Suvivor0区使用量 | Suvivor1区使用量 | Eden区容量 | Eden区使用量 | Old区容量 | Old区使用量 | Metaspace容量 | Metaspace使用量 | 压缩类空间大小 | 压缩类空间使用率 | Young GC次数 | Young GC时间 | Old GC次数 | Old GC时间 | 总GC时间 |
+| 28672.0 | 28672.0 | 15921.7 | 0.0 | 29696.0 | 2233.7 | 65536.0 | 47813.5 | 57856.0 | 54674.3 | 8960.0 | 7947.5 | 40 | 0.114 | 4 | 0.166 | 0.279 |
 
 
 查看内存使用率：
@@ -404,10 +404,10 @@ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU  
   0.00  98.78  15.75  75.47  94.12  88.70     83    0.192     4    0.166    0.357
 ```
 
-|  S0  |   S1   |  E   |   O  |    M  |   CCS  |  YGC   |  YGCT  |  FGC  |  FGCT  |   GCT |
-|---|---|---|---|---|---|---|---|---|---|---|
-|Suvivor0使用率|Suvivor1使用率|Eden使用率|Old使用率|Metaspace使用率|压缩类空间使用率|Young GC次数|Young GC时间|Old GC次数|Old GC时间|总GC时间|
-|  0.00  |98.78  |15.75 | 75.47  |94.12 | 88.70   |  83  |  0.192  |   4  |  0.166  |  0.357|
+| S0 | S1 | E | O | M | CCS | YGC | YGCT | FGC | FGCT | GCT |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Suvivor0使用率 | Suvivor1使用率 | Eden使用率 | Old使用率 | Metaspace使用率 | 压缩类空间使用率 | Young GC次数 | Young GC时间 | Old GC次数 | Old GC时间 | 总GC时间 |
+| 0.00 | 98.78 | 15.75 | 75.47 | 94.12 | 88.70 | 83 | 0.192 | 4 | 0.166 | 0.357 |
 
 
 **查看DUMP文件**
