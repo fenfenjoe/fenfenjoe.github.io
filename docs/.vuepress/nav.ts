@@ -1,4 +1,3 @@
-import { NavbarConfig } from "@vuepress/theme-default";
 
 export const navs =
 [ //导航栏配置
@@ -105,39 +104,6 @@ export const navs =
                 link: '/designPattern/' //默认跳转到READMD.md
             },
              {
-                 text: '运维',
-                 children: [
-                    {
-                        text: 'linux命令速查',
-                        link: '/devops/linux/linux命令速查宝典.md'
-                    },
-                    {
-                        text: 'windows命令速查',
-                        link: '/devops/windows/windows命令速查宝典.md'
-                    },
-                    {
-                        text: 'Docker笔记',
-                        link: '/devops/docker/Docker笔记.md'
-                    },
-                    {
-                        text: 'kubernetes学习笔记',
-                        link: '/devops/kubernetes/kubernetes学习笔记.md'
-                    },
-                    {
-                        text: 'kubernetes实操笔记',
-                        link: '/devops/kubernetes/kubernetes实操笔记.md'
-                    },
-                    {
-                        text: '运维工具大全',
-                        link: '/devops/运维工具大全.md'
-                    },
-                     {
-                         text: 'git操作宝典',
-                         link: '/devops/git/git操作宝典.md'
-                     }
-                 ]
-             },
-             {
                 text: '大数据',
                 children: [
                     {
@@ -163,6 +129,39 @@ export const navs =
                      }
                  ]
              }
+        ]
+    },
+    {
+        text: '运维',
+        children: [
+        {
+            text: 'linux命令速查',
+            link: '/devops/linux/linux命令速查宝典.md'
+        },
+        {
+            text: 'windows命令速查',
+            link: '/devops/windows/windows命令速查宝典.md'
+        },
+        {
+            text: 'Docker笔记',
+            link: '/devops/docker/Docker笔记.md'
+        },
+        {
+            text: 'kubernetes学习笔记',
+            link: '/devops/kubernetes/kubernetes学习笔记.md'
+        },
+        {
+            text: 'kubernetes实操笔记',
+            link: '/devops/kubernetes/kubernetes实操笔记.md'
+        },
+        {
+            text: '运维工具大全',
+            link: '/devops/运维工具大全.md'
+        },
+        {
+            text: 'git操作宝典',
+            link: '/devops/git/git操作宝典.md'
+        }
         ]
     },
     {
@@ -203,18 +202,6 @@ export const navs =
         text: '其他',
         children: [
             {
-                text: 'RSS',
-                link: '/other/datasource/RSS' //默认跳转到READMD.md
-            },
-            {
-                text: '资源导航',
-                link: '/other/datasource/资源汇总' //默认跳转到READMD.md
-            },
-             {
-                 text: '医保',
-                 link: '/other/医保.md'
-             },
-             {
                   text: '健身',
                   children:[
                     {
@@ -228,16 +215,33 @@ export const navs =
                   ]
               },
               {
-                   text: '装修攻略',
-                   link: '/decorate/' //默认跳转到READMD.md
-              },
-              {
                  text: '读书笔记',
                  children:[
                    {
                       text: '《深度学习》',
                       link: '/book/《深度学习》读书笔记.md'
                    }
+                 ]
+              },
+              {
+                 text: '其他',
+                 children:[
+                   {
+                    text: 'RSS',
+                    link: '/other/datasource/RSS' //默认跳转到READMD.md
+                    },
+                    {
+                        text: '资源导航',
+                        link: '/other/datasource/资源汇总' //默认跳转到READMD.md
+                    },
+                    {
+                        text: '医保',
+                        link: '/other/医保.md'
+                    },
+                    {
+                        text: '装修攻略',
+                        link: '/decorate/' //默认跳转到READMD.md
+                    }
                  ]
               }
         ]
