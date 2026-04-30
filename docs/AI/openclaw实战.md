@@ -77,6 +77,12 @@ npm uninstall -g openclaw
 openclaw --version
 ```
 
+## 查看日志
+
+```shell
+openclaw gateway --log
+```
+
 
 ## WSL常用命令
 
@@ -292,7 +298,7 @@ TODO
 
 ## 安装看门狗：openclaw-keeper
 
-```
+```bash
 # 1. 安装 openclaw-keeper
 npm install -g openclaw-keeper
 
@@ -327,7 +333,7 @@ sudo systemctl start openclaw-keeper
 ```
 
 验证keeper是否正常运行：
-```
+```bash
 # 查看状态
 openclaw-keeper status
 
@@ -336,4 +342,10 @@ openclaw-keeper logs --follow
 
 # 诊断网关问题
 openclaw-keeper diagnose
+
+# 检查openclaw-keeper服务
+systemctl status openclaw-keeper
+
+# 检查service unit文件
+cat /etc/systemd/system/openclaw-keeper.service
 ```

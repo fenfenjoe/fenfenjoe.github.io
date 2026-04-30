@@ -145,6 +145,15 @@ export const navs =
         ]
     },
     {
+        text: 'AI',
+        children: [
+            {
+                text: 'openclaw实战笔记',
+                link: '/AI/openclaw实战.md'
+            }
+        ]
+    },
+    {
         text: '运维',
         children: [
         {
