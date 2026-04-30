@@ -100,6 +100,19 @@ export const navs =
                 ]
             },
             {
+                text: '前端',
+                children: [
+                    {
+                        text: 'Vue学习笔记',
+                        link: '/frontend/VUE/Vue学习笔记.md' 
+                    },
+                    {
+                        text: '前端常见问题汇总',
+                        link: '/frontend/VUE/README.md' 
+                    }
+                ]
+            },
+            {
                 text: '设计模式',
                 link: '/designPattern/' //默认跳转到READMD.md
             },

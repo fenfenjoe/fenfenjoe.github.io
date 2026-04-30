@@ -81,3 +81,40 @@ let、const是ES6后新增的关键字。
 let负责声明变量；const负责声明常量。  
 
 const声明的常量只可读，不可被修改。定义时必须初始化。
+
+
+### 一个VUE实例（new Vue()），都有一些什么属性？
+
+```javascript
+var vm = new Vue(){
+
+	el:'#app',  //将 Vue 实例绑定到了id为'app'的HTML元素（根实例特有属性）
+
+	data:{
+		fullname:'',
+		firstname:'',
+		lastname:'',
+		age:12
+	},    //保存数据
+
+
+	methods:{
+		plus:(var attr1,var attr2){
+			return attr1+attr2;
+		}
+	},    //定义实例中可用函数
+
+	components:{ ThemePicker }, //导入外部的组件
+
+	created: function(){
+
+	},   //钩子函数，在实例被创建之后执行
+
+	watch:{
+		firstname: function(newValue,oldValue){
+			this.fullname = newValue + this.lastname;
+		}
+	}    //侦听函数，当firstname的值变化时便会执行函数
+
+}
+```
