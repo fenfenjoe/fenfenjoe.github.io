@@ -1,14 +1,15 @@
 ---
 title: openclaw实战
+sidebar: 'heading'
 ---
 
 # openclaw实战
 
 ## 安装（简单描述）
 
-1. 安装node.js
+1. 安装node.js  
 略
-2. 全局安装openclaw
+2. 全局安装openclaw  
 ```shell
 npm install -g openclaw@latest
 ```
@@ -39,13 +40,13 @@ openclaw dashboard --no-open
 
 ### 修改openclaw配置文件
 
-方式1，用nano命令直接在wsl上面修改
+方式1，用nano命令直接在wsl上面修改  
 ```shell
 # 编辑openclaw.json文件
 nano ~/.openclaw/openclaw.json
 ```
 
-方式2，用windows的文件管理器打开openclaw.json文件（推荐）
+方式2，用windows的文件管理器打开openclaw.json文件（推荐）  
 ```shell
 # 1.打开我的电脑，或者点击Win + E
 # 2.在地址栏输入以下命令
@@ -54,7 +55,7 @@ nano ~/.openclaw/openclaw.json
 # 4.打开openclaw.json文件，修改完保存
 ```
 
-修改完openclaw.json后，执行以下命令重启openclaw服务
+修改完openclaw.json后，执行以下命令重启openclaw服务  
 ```shell
 openclaw gateway restart
 ```
