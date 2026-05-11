@@ -673,6 +673,14 @@ ExecutorService pool = Executors.newCachedThreadPool()
  Future future = pool.execute(new Runnable(){});
  ```
 
+### 认识常见的队列实现
+
+| 队列 | 描述 | 见于|
+| --- | --- | --- | 
+| ArrayBlockingQueue | 固定大小的阻塞队列，支持公平和非公平访问 | 推荐使用 |
+| LinkedBlockingQueue | 无界阻塞队列，支持公平和非公平访问 | Executors.newFixedThreadPool() |
+| SynchronousQueue | 无界阻塞队列，每个任务必须等待其他任务完成 | Executors.newCachedThreadPool() |
+| DelayedWorkQueue | 无界阻塞队列，支持定时任务 | Executors.newScheduledThreadPool() |
 
 ## SpringBoot的异步执行方法
 
