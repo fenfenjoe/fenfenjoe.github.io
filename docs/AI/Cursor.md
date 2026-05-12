@@ -1,6 +1,6 @@
 ---
 title: Cursor IDE 完全指南
-sidebar: 'auto'
+sidebar: 'heading'
 ---
 
 # Cursor IDE 完全指南

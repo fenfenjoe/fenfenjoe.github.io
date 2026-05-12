@@ -1,6 +1,11 @@
+---
+title: JVM
+sidebar: 'heading'
+---
+
 # JVM
 
-## JVM内存模型
+## ⭐JVM内存模型
 
 * 进程控制块
     * 程序计数器
@@ -45,7 +50,7 @@
 >  - 字符串常量池：存储字符串常量，1.7之前在堆外、1.7之后移到了堆内。
 
 
-## Java对象在内存里占用多少空间？
+## ⭐Java对象在内存里占用多少空间？
 
 首先需要知道对象的数据结构：
 * 对象头
@@ -83,12 +88,12 @@ public class Student{
 **/
 ```
 
-## JVM如何管理内存？
+## ⭐JVM如何管理内存？
 JVM会自动回收对象。需要被回收的对象被称为“垃圾”。
 对象回收又被称为“GC”；
 根据回收堆里哪部分的对象，GC又分为：MinorGC（新生代）、Major GC（老年代）、Full GC（新+老）；
 
-## 怎么样判断对象是否可回收？
+## ⭐怎么样判断对象是否可回收？
 JVM通过“可达性分析算法”，来判断对象是否需要被回收。
 即维护了多个树表，根节点名为GC Root，若通过遍历GC Root的子树能找到某个对象，则认为该对象是“存活的”，无需被回收。
 
@@ -99,7 +104,7 @@ JVM通过“可达性分析算法”，来判断对象是否需要被回收。
 * 方法区中常量引用的对象
 * 本地方法栈中JNI引用的对象
 
-## 什么是MinorGC？Major GC？Full GC？
+## ⭐什么是MinorGC？Major GC？Full GC？
 * MinorGC：清理新生代的内存，并将部分存活的对象晋升到老年代
 >具体方法是：将Eden区清空，将Eden区和Suvivor区中存活的对象移动到另一个Suvivor区中。将对象的年龄+1。
 
@@ -107,14 +112,14 @@ JVM通过“可达性分析算法”，来判断对象是否需要被回收。
 
 * FullGC：清理新生代+老年代+方法区的内存
 
-## 怎么触发新生代晋升到老年代？
+## ⭐怎么触发新生代晋升到老年代？
 1. Eden区满，触发了MinorGC
 2. 大对象，直接进入老年代（XX:PretenureSizeThreshold）
 3. Survivor中年龄超过一定临界值的（XX:+MaxTenuringThreshold）
 4. Survivor区中对象占用空间的大小之和超过50%
 5. MinorGC后对象过多，无法完全放入Survivor区，就会向老年代借用内存存放对象，以完成MinorGC
 
-## 怎么触发GC?
+## ⭐怎么触发GC?
 
 Minor GC触发条件：
 * Eden区域满了
@@ -134,7 +139,7 @@ Full GC触发条件：
 
 * CMS GC异常，CMS运行期间预留的内存无法满足程序需要，就会出现一次“Concurrent Mode Failure”失败，会触发Full GC
 
-## JVM如何实现GC？有哪些GC算法？
+## ⭐JVM如何实现GC？有哪些GC算法？
 
 默认垃圾回收器：
 JDK1.3之前
@@ -242,7 +247,7 @@ Full GC：回收新生代、老年代、永久代（JDK1.8后为metaspace）
 2. 让存活对象移至一端
 3. 清除
 
-## 与垃圾回收相关的系统参数
+## ⭐与垃圾回收相关的系统参数
 -XX:+MaxTenuringThreshold =15 晋升到老年代需要的年龄
 
 -XX:TargetSurvivorRatio =50% Survivor空间占用超过50%，会将年龄较大的晋升到老年代
@@ -276,7 +281,7 @@ Full GC：回收新生代、老年代、永久代（JDK1.8后为metaspace）
 
 -XX:+UseG1GC （新生代用：G1 老年代用：G1）
 
-## 其他常用参数
+## ⭐其他常用参数
 -XX:InitialHeapSize              初始堆大小（与Xms一样）
 
 -XX:MaxHeapSize                  最大堆大小（与Xmx一样）
@@ -293,7 +298,7 @@ Full GC：回收新生代、老年代、永久代（JDK1.8后为metaspace）
 
 -Xloggc:$1_gc_trace.log          GC日志路径
 
-## JVM启动参数
+## ⭐JVM启动参数
 
 可以通过“java -Dxxx=xxx"设置JVM启动参数。示例：
 ```bash
@@ -314,7 +319,7 @@ java -Dname=Joe -version
   > 可以通过在cmd中输入 “java -X” 查看有哪些非标准参数
 * 非Stable参数（-XX）
 
-## 类加载过程
+## ⭐类加载过程
 类加载过程
 1. 查找.class文件
 * Bootstrap ClassLoader 从JAVA_HOME/lib根据全类名查
