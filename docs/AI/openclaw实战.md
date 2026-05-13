@@ -262,7 +262,7 @@ chmod 600 /home/dyzadmin/.openclaw/credentials/lark-tommy.secrets.json
 
 一、国内厂商 Coding Plan 对比
 | 厂商 | 套餐名称 | 月费（人民币）|	核心额度|	支持模型|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 | **智谱 AI** | Lite / Pro / Max |¥49 / ¥149 / ¥469|	未明确披露|	GLM-5 系列|	
 | **阿里云百炼** | Pro（唯一可新购）|	¥200（首月¥39.9，次月¥100）|	9万次/月|	通义千问、GLM、Kimi、MiniMax|
 | **腾讯云** | Lite / Pro	|¥40 / ¥200|	Lite 用量为 Pro 的 1/5|	混元、GLM、Kimi、MiniMax|
@@ -273,7 +273,7 @@ chmod 600 /home/dyzadmin/.openclaw/credentials/lark-tommy.secrets.json
 二、海外厂商 Coding Plan 对比
 
 | 厂商 | 套餐名称 | 月费（美元）|	核心额度|	支持模型|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 | **OpenAI** | Plus / Pro (100) / Pro (200)	|$20 / $100 / $200|	100 美元档约为 Plus 的 5 倍	Codex（GPT-4o/Claude/Gemini 可选）|
 | **Anthropic** | Pro / Max	$20 / $100|	按量计费，200K 上下文 |	Claude 系列|
 | **Cursor** | Pro / Pro+ / Ultra / Teams	$20 / $60 / $200 / $40 每人|	含 Cloud Agents	多模型可切换|

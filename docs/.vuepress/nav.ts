@@ -224,24 +224,62 @@ export const navs =
         text: '面试',
         children: [
             {
-                text: 'JAVA基础',
-                link: '/interview/JAVASE.md' 
+                text: '后端',
+                children: [
+                    {
+                        text: 'JAVA基础',
+                        link: '/interview/JAVASE.md' 
+                    },
+                    {
+                        text: 'JAVA多线程',
+                        link: '/interview/JAVA并发.md'
+                    },
+                    {
+                        text: 'JVM',
+                        link: '/interview/JVM.md'
+                    },
+                    {
+                        text: '分布式相关',
+                        link: '/interview/分布式相关.md'
+                    },
+                    {
+                        text: '数据库',
+                        link: '/interview/数据库.md'
+                    }
+                ]
             },
             {
-                text: 'JAVA多线程',
-                link: '/interview/JAVA并发.md'
-            },
-            {
-                text: 'JVM',
-                link: '/interview/JVM.md'
-            },
-            {
-                text: '分布式相关',
-                link: '/interview/分布式相关.md'
-            },
-            {
-                text: '数据库',
-                link: '/interview/数据库.md'
+                text: '前端',
+                children: [
+                    {
+                        text: 'HTML',
+                        link: '/interview/html.md'
+                    },
+                    {
+                        text: 'CSS',
+                        link: '/interview/css.md'
+                    },
+                    {
+                        text: 'JAVASCRIPT',
+                        link: '/interview/javascript.md'
+                    },
+                    {
+                        text: 'VUE',
+                        link: '/interview/vue.md'
+                    },
+                    {
+                        text: '网络',
+                        link: '/interview/网络.md'
+                    },
+                    {
+                        text: '前端工程化',
+                        link: '/interview/前端工程化.md'
+                    },
+                    {
+                        text: 'nodejs',
+                        link: '/interview/nodejs.md'
+                    },
+                ]
             }
         ]
     },
