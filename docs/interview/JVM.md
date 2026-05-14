@@ -156,15 +156,15 @@ JDK1.9
 JDK1.11之后
 ZGC
 
-***垃圾收集器简述***
+***垃圾收集器简述***  
 
-**Serial垃圾回收器（既有新生代的：Serial、也有老年代的Serial Old）**
+**Serial垃圾回收器（既有新生代的：Serial、也有老年代的Serial Old）**  
 只使用一个GC线程进行回收（串行），会暂停所有的用户线程，不适合服务器环境。
 
-**Parallel垃圾回收器（既有新生代的：ParNew、Parallel、也有老年代的：Parallel Old）**
+**Parallel垃圾回收器（既有新生代的：ParNew、Parallel、也有老年代的：Parallel Old）**  
 多个GC线程进行垃圾回收（并行），也会暂停所有用户线程，适用与和前台交互不强的场景，如科学计算/大数据处理等若交互场景。
 
-***CMS垃圾回收器：老年代回收器，推荐配合ParNew使用***
+***CMS垃圾回收器：老年代回收器，推荐配合ParNew使用***  
 基于Mark-Sweep（“标记-清除”）算法
 若干次GC后需要进行一次碎片整理。
 优点：大部分时间能与用户线程并行运行。
@@ -179,15 +179,15 @@ ZGC
 - 并发清除(CMS-concurrent-sweep)，与用户线程同时运行；
 - 并发重置状态等待下次CMS的触发(CMS-concurrent-reset)，与用户线程同时运行。
 
-***G1垃圾回收器***
-基于Mark-Compact（“标记-整理”）算法
-优点：回收得到的内存空间是连续的。
+***G1垃圾回收器***  
+基于Mark-Compact（“标记-整理”）算法  
+优点：回收得到的内存空间是连续的。  
 
 过程：
-Eden区满，触发Minor GC：回收新生代；
-Full GC：回收新生代、老年代、永久代（JDK1.8后为metaspace）
+Eden区满，触发Minor GC：回收新生代；  
+Full GC：回收新生代、老年代、永久代（JDK1.8后为metaspace）  
 
-**一般的垃圾回收器搭配&如何选择垃圾回收器**
+**一般的垃圾回收器搭配&如何选择垃圾回收器**  
 1. 串行收集器：Serial（yong区）+ SerialOld（old区）
    对应参数：
    -Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+UseSerialGC
@@ -224,25 +224,25 @@ Full GC：回收新生代、老年代、永久代（JDK1.8后为metaspace）
    >适合：内存较大（8G以上）、多CPU的服务器
 
 ### 垃圾回收算法简述
-***Copying（标记复制）算法：新生代的算法***
-将内存分为大小相等的两份（即现在的Eden区和Survivor区）
-1.Eden区满后，触发一次GC：标记Eden区的存活对象，将存活对象移至其中一个Survivor区（Survivor0）
-2.清空Eden区
-3.Eden区又满，触发一次GC：标记Eden区及Survivor区的存活对象，将存活对象移至另一个Survivor区（Survivor1）
-4.清空Eden区和Survivor0区
-5.若存活对象经历GC的次数达到一个阙值（-XX:MaxTenuringThreshold），则会被移进老年代
+***Copying（标记复制）算法：新生代的算法***  
+将内存分为大小相等的两份（即现在的Eden区和Survivor区）  
+1.Eden区满后，触发一次GC：标记Eden区的存活对象，将存活对象移至其中一个Survivor区（Survivor0）  
+2.清空Eden区  
+3.Eden区又满，触发一次GC：标记Eden区及Survivor区的存活对象，将存活对象移至另一个Survivor区（Survivor1）  
+4.清空Eden区和Survivor0区  
+5.若存活对象经历GC的次数达到一个阙值（-XX:MaxTenuringThreshold），则会被移进老年代  
 
-优点：无需清除和整理、效率较高；不会产生内存碎片。适合会有大量失活的新生代
-缺点：需要两倍的内存空间
+优点：无需清除和整理、效率较高；不会产生内存碎片。适合会有大量失活的新生代  
+缺点：需要两倍的内存空间  
 
-***Mark-Sweep（“标记-清除”）算法：老年代的算法***
-1. 标记需要清除的对象
-2. 清除
+***Mark-Sweep（“标记-清除”）算法：老年代的算法***  
+1. 标记需要清除的对象  
+2. 清除  
 
-优点：快速简单
-缺点：有内存碎片，若需要为较大的对象分配内存，容易又会触发GC
+优点：快速简单  
+缺点：有内存碎片，若需要为较大的对象分配内存，容易又会触发GC  
 
-***Mark-Compact（“标记-整理”）算法：老年代的算法***
+***Mark-Compact（“标记-整理”）算法：老年代的算法***  
 1. 标记需要清除的对象
 2. 让存活对象移至一端
 3. 清除
@@ -320,7 +320,7 @@ java -Dname=Joe -version
 * 非Stable参数（-XX）
 
 ## ⭐类加载过程
-类加载过程
+类加载过程  
 1. 查找.class文件
 * Bootstrap ClassLoader 从JAVA_HOME/lib根据全类名查
 * ExtClassLoader（继承Classloader） 从JAVA_HOME/lib/ext根据全类名查
@@ -338,24 +338,24 @@ java -Dname=Joe -version
 ### JVM调优操作
 参考：[https://blog.csdn.net/weixin_43238110/article/details/93793357](https://blog.csdn.net/weixin_43238110/article/details/93793357)
 
-**调优的目的**
+**调优的目的**  
 1. 尽量减少Full GC的频率
 
 
-**调优手段**
+**调优手段**  
 1. 配置更多/更少的内存给JVM（配置Xmx）
 2. 若经常发生FullGC，则可以配置更大的老年代内存（配置XX:NewRatio，老年代越大，新生代Gc越频繁，但Full GC频率越少）
 3. 线程堆栈的设置（默认为1M，可设置位256K）
 
 
-**查看JVM参数**
+**查看JVM参数**  
 
 查看默认参数：（初始堆大小、最大堆大小、使用哪种垃圾回收器、JVM版本等）
 ```bash
 java -XX:+PrintCommandLineFlags -version
 ```
 
-查看所有参数：
+查看所有参数：  
 ```bash
 #方法1
 java -XX:+PrintFlagsFinal -version
@@ -365,7 +365,7 @@ jinfo -flags [pid]
 ```
 
 
-查看某个JVM参数：
+查看某个JVM参数：  
 ```bash
 #查看所有包含GC字段的JVM参数
 java -XX:+PrintFlagsFinal -version|grep GC
@@ -378,14 +378,14 @@ java -XX:+PrintFlagsFinal -version|grep Size
 
 
 
-**查看JVM情况**
+**查看JVM情况**  
 
 jmap -heap pid：输出堆内存设置和使用情况（JDK11使用jhsdb jmap --heap --pid pid）
 
 jmap -histo pid：输出所有实例对象在堆中的占比
 
 
-查看内存使用情况、GC情况：
+查看内存使用情况、GC情况：  
 
 ```bash
 > jstat -gc [pid]
@@ -400,7 +400,7 @@ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU  
 | 28672.0 | 28672.0 | 15921.7 | 0.0 | 29696.0 | 2233.7 | 65536.0 | 47813.5 | 57856.0 | 54674.3 | 8960.0 | 7947.5 | 40 | 0.114 | 4 | 0.166 | 0.279 |
 
 
-查看内存使用率：
+查看内存使用率：  
 
 ```bash
 > jstat -gcutil [pid]
@@ -415,7 +415,7 @@ S0C    S1C    S0U    S1U      EC       EU        OC         OU       MC     MU  
 | 0.00 | 98.78 | 15.75 | 75.47 | 94.12 | 88.70 | 83 | 0.192 | 4 | 0.166 | 0.357 |
 
 
-**查看DUMP文件**
+**查看DUMP文件**  
 1. 主动型
 * 首先通过top命令获取到jvm的pid
 * 使用jmap命令生成dump文件
@@ -435,7 +435,7 @@ java -XX:+PrintFlagsInitial | findstr HeapDumpPath
 * 取到dump文件后，通过jvisualvm工具分析即可。
 
 
-**查看GC情况**
+**查看GC情况**  
 ```bash
 #设置打印GC日志
 -XX:+PrintGCDetails
@@ -445,7 +445,7 @@ java -XX:+PrintFlagsInitial | findstr HeapDumpPath
 -Xloggc:gc.log
 ```
 
-触发GC后，便会看到日志中有类似如下内容：
+触发GC后，便会看到日志中有类似如下内容：  
 ```bash
 #日志开头，是JVM的启动参数
 CommandLine flags: -XX:InitialHeapSize=10485760 -XX:MaxHeapSize=10485760 -XX:MaxNewSize=5242880 -XX:NewSize=5242880 -XX:OldPLABSize=16 
@@ -474,7 +474,7 @@ Heap
 ```
 
 
-**查看当前启用的垃圾回收器类型**
+**查看当前启用的垃圾回收器类型**  
 ```bash
 #查看所有JVM参数
 java -XX:+PrintFlagsInitial

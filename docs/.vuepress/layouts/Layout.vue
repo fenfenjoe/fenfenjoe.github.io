@@ -11,9 +11,16 @@ import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 </script>
 
 <style>
+/* Waline 评论容器样式 - 自适应侧边栏 */
 #waline-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 确保评论容器内部的 Waline 组件也能正确自适应 */
+#waline-container > div {
+  width: 100%;
 }
 </style>
