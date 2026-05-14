@@ -13,22 +13,17 @@ import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 <style>
 /* Waline 评论容器样式 - 自适应侧边栏 */
 
-/* 移动端：全宽显示 */
-@media (max-width: 719px) {
-  #waline-container {
-    max-width: 100%;
-    margin: 2rem 0;
-    padding: 0 1.5rem;
-  }
+#waline-container {
+  width: 100%;
+  margin: 2rem 0;
+  padding: 0 2.5rem;
+  box-sizing: border-box;
 }
 
-/* 桌面端：与主内容对齐 */
-@media (min-width: 720px) {
+/* 移动端优化 */
+@media (max-width: 719px) {
   #waline-container {
-    max-width: 740px;
-    margin: 2rem auto 2rem 0; /* 左对齐，不居中 */
-    padding: 0 2.5rem;
-    box-sizing: border-box;
+    padding: 0 1.5rem;
   }
 }
 </style>

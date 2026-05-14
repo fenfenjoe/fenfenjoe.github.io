@@ -56,7 +56,7 @@ export default defineUserConfig({
             if (!el) {
               el = document.createElement('div');
               el.id = 'waline-container';
-              el.style.cssText = 'max-width:800px;margin:2rem auto;padding:0 1rem;';
+              // 移除固定样式，让 CSS 控制布局
               document.body.appendChild(el);
             }
             W.init({
