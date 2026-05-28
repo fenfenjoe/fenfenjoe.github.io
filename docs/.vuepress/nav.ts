@@ -149,7 +149,7 @@ export const navs =
         children: [
             {
                 text: 'openclaw实战笔记',
-                link: '/AI/openclaw实战.md'
+                link: '/AI/openclaw/openclaw实战.md'
             }
         ]
     },
