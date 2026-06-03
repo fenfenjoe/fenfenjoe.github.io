@@ -287,9 +287,37 @@ for i in 'hello world':
 2. 放到python的Scripts目录中  
 3. 进入cmd，到python/Scripts目录下，执行 pip install [python库文件名]  
 
+### 标准库
+
+* **文件与操作系统交互**
+  * os
+  * sys
+  * shutil
+* **数据处理与格式化**
+  * json
+  * csv
+  * datetime
+* **数学与随机数**
+  * math：提供数学相关的函数
+  * random：随机数
+  * statistics：均值、中位数、方差等
+  * decimal：浮点数运算
+* **数据结构与算法**
+  * collections：双端队列（deque）、计数器（Counter）、默认字典（defaultdict）等
+  * heapq：堆、队列
+  * bisect：二分查找
+  * itertools：迭代器工具
+* **并发与异步编程**
+  * threading：多线程编程
+  * concurrent.futures
+* **数据持久化与数据库**
+  * pickle：对象序列化
+  * sqlite3：SQLite数据库接口
+
+
 ###	常用库
 
-* math：提供数学相关的函数
+
 * pd（Pandas）：数据分析库
 * np(numpy)：多维数组
 * matplotlib：二维绘图

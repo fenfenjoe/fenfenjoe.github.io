@@ -148,6 +148,7 @@ api                          # 项目名
 ├── requirements.txt         # 依赖库列表（pip安装）
 ├── pyproject.toml           # 项目元数据及构建配置（现代项目推荐）
 ├── setup.py                 # 旧版项目打包配置（可选）
+├── .env                     # 参数配置文件
 ├── .gitignore               # Git忽略规则
 └── README.md                # 项目说明文档
 ```
