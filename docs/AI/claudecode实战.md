@@ -54,7 +54,31 @@ claude
 
 ### cc-pane
 
+用该工具可以同时开启多个claude实例。
+
 <https://winget.ragerworks.com/package/wuxiran.CC-Panes>
 
 ### cc-switch
+
+用该工具可以切换不同的大模型供应商。
+
+<https://github.com/farion1231/cc-switch>
+
+
+## 常用命令
+
+| 命令 | 描述 |
+| --- | --- |
+| `claude --version` | 检查是否安装成功 |
+| `claude --help` | 查看帮助信息 |
+| `claude --config` | 查看配置信息 |
+| `claude --reset` | 重置配置 |
+
+
+交互界面命令
+
+| 命令 | 描述 |
+| --- | --- |
+| /init | 在当前路径下生成CLAUDE.md |
+| /compact | 压缩上下文 |
 
