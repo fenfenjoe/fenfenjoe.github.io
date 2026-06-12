@@ -43,22 +43,67 @@ claude --version​
 }
 ```
 
-## 常用工具
+## Claude 文件结构
 
-### cc-pane
+### 项目级配置
 
-用该工具可以同时开启多个claude实例。
+```
+your-project/
+├── CLAUDE.md                     # 🤝 项目核心指令
+├── CLAUDE.local.md               # 👤 个人项目指令 (不提交)
+├── .mcp.json                     # 🔌 项目MCP服务器配置
+└── .claude/
+    ├── settings.json             # ⚙️ 共享配置
+    ├── settings.local.json       # 👤 个人配置覆盖 (不提交)
+    ├── agents/                   # 🤖 子代理
+    │   └── *.md
+    ├── commands/                 # ⌨️ 自定义斜杠命令
+    │   └── *.md
+    ├── skills/                   # 🎯 技能包
+    │   └── */SKILL.md
+    ├── rules/                    # 📜 按需加载的模块化规则
+    │   ├── *.md
+    │   └── path-spec/*.md
+    └── hooks/                    # 🪝 钩子脚本
+        └── *.sh, *.js, *.py
+```
 
-<https://winget.ragerworks.com/package/wuxiran.CC-Panes>
+### 用户级配置
 
-### cc-switch
+```
+~/.claude/
+├── CLAUDE.md                     # 🌐 全局核心指令
+├── settings.json                 # ⚙️ 全局配置
+├── credentials.json              # 🔑 认证凭据 (自动生成)
+├── .claudesignature              # 🔒 内部签名 (自动生成)
+├── agents/                       # 🤖 全局子代理
+├── commands/                     # ⌨️ 全局命令 (/user:xxx)
+├── skills/                       # 🎯 全局技能包
+├── rules/                        # 📜 全局规则
+├── hooks/                        # 🪝 全局钩子
+├── plugins/                      # 🧩 已安装插件 (新增)
+├── projects/                     # 📂 项目会话历史
+├── cache/                        # 💾 缓存目录
+├── ide/                          # 💻 IDE集成数据
+├── statsig/                      # 📊 功能标志/实验配置
+├── tempo/                        # ⏳ 会话临时数据
+└── ... (其他如 debug/, file-history/, todos/ 等)
+```
 
-用该工具可以切换不同的大模型供应商。
+## 常见概念
 
-<https://github.com/farion1231/cc-switch>
+| 名称 | 描述 |
+| --- | ---|
+| Commands | 通过输入命令可触发预设的操作。如 ```/help``` , ```/init```等 |
+| MCP | AI工具标准，通过为Agent安装各种MCP，让它获得访问数据库、访问浏览器等能力 |
+| Hook | 监听器，Claude触发某些事件后会执行的特定操作 |
+| SubAgent | 子代理，有自己的上下文和skill |
+| Skill | 把特定领域的知识、规则、工具打包成可复用的模块，让AI瞬间变成该领域的专家 |
+| Plugins | Agent,skill,hook,MCP,LSP,settings等资源的打包 |
 
 
-## claude常用命令
+
+## claude命令常用后缀
 
 | 选项 | 简写 | 作用 | 适用场景 |
 |------|------|------|----------|
@@ -68,8 +113,9 @@ claude --version​
 | `--continue` | `-c` | 恢复最近会话 | 继续昨天的工作 |
 | `--resume <id>` | `-r` | 恢复指定会话 | 恢复特定对话 |
 
+## Commands：命令
 
-## 交互界面命令
+### claudecode内置的命令
 
 | 命令 | 描述 |
 | --- | --- |
@@ -85,6 +131,10 @@ claude --version​
 | /agents | 管理和查看子代理 |
 | /fast | 快速模式，适合简单任务 |
 | /status | 状态信息（模型、MCP、Token用量等） |
+
+### 自定义命令
+
+略
 
 ## FAQ
 
@@ -141,6 +191,21 @@ claude --dangerously-skip-permissions
 # 会立即停止生成
 ```
 
+
+
+## 常用工具
+
+### cc-pane
+
+用该工具可以同时开启多个claude实例。
+
+<https://winget.ragerworks.com/package/wuxiran.CC-Panes>
+
+### cc-switch
+
+用该工具可以切换不同的大模型供应商。
+
+<https://github.com/farion1231/cc-switch>
 
 
 ## 参考

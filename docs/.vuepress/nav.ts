@@ -150,6 +150,10 @@ export const navs =
             {
                 text: 'openclaw实战笔记',
                 link: '/AI/openclaw/openclaw实战.md'
+            },
+            {
+                text: 'claudecode实战笔记',
+                link: '/AI/claudecode实战.md'
             }
         ]
     },
