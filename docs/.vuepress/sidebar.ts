@@ -1,4 +1,13 @@
 export const sidebar = {
+    '/frontend/CSS/': [
+        {
+            text: 'CSS', //一级标题
+            collapsible: false, //是否可折叠
+            children: [
+                {text:'概述',link:'/frontend/CSS/README.md'},
+            ]
+        }
+    ],
     '/database/redis/': [
         {
             text: '', //一级标题

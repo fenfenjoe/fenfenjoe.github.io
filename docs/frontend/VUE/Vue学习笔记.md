@@ -1,8 +1,9 @@
 ---
-title: Vue学习笔记
+title: Vue3学习笔记
+sidebar: 'heading'
 ---
 
-# Vue学习笔记
+# Vue3学习笔记
 
 
 ## Vue3项目目录结构示例
@@ -65,10 +66,10 @@ npm config set registry https://registry.npmmirror.com
 2. **ESLint** - 代码规范检查
 3. **Prettier** - 代码格式化
 
-**推荐**：
-4. **Auto Rename Tag** - 自动重命名 HTML/Vue 标签
-5. **Path Intellisense** - 路径自动补全
-6. **GitLens** - 增强 Git 功能
+**推荐**：  
+4. **Auto Rename Tag** - 自动重命名 HTML/Vue 标签  
+5. **Path Intellisense** - 路径自动补全  
+6. **GitLens** - 增强 Git 功能  
 
 ### 4. 配置 Cursor 设置
 
