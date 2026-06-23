@@ -4,31 +4,16 @@ import { defaultTheme } from '@vuepress/theme-default'
 import { defineUserConfig } from 'vuepress'
 import { sidebar } from './sidebar'
 import { navs } from './nav'
-//import { pluginBackToTop } from '@vuepress/plugin-back-to-top'
-//import { lastUpdated } from '@vuepress/last-updated'
-//import { pluginMediumZoom } from '@vuepress/plugin-medium-zoom'
-//import { mdEnhancePlugin } from "vuepress-plugin-md-enhance"
 import { searchPlugin } from '@vuepress/plugin-search'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
 import { markdownImagePlugin } from '@vuepress/plugin-markdown-image'
 import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
-import { path } from '@vuepress/utils'
-//import { commentPlugin } from '@vuepress/plugin-comment'
-// Waline评论直接在 Layout.vue 中集成，不再使用 vuepress-plugin-comment-plus（不支持VuePress 2）
+// Waline评论通过 .vuepress/client.ts 的 defineClientConfig 覆盖主题 Layout 注入
 
 export default defineUserConfig({
-    bundler: viteBundler({
-        viteOptions: {
-            resolve: {
-                alias: {
-                    // 用自定义 Layout.vue 覆盖主题的 Layout 组件
-                    '@theme/Layout.vue': path.resolve(__dirname, './layouts/Layout.vue'),
-                }
-            }
-        }
-    }),
+    bundler: viteBundler(),
     theme: defaultTheme({
         lastUpdated: true, //文章添加最近更新时间
         logo: '/images/favicon.ico', //导航栏logo
