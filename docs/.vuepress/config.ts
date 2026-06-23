@@ -35,51 +35,8 @@ export default defineUserConfig({
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
       ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
       // Waline 评论系统（使用本地 UMD 文件）
+      // 初始化逻辑已移至 layouts/Layout.vue 的 onMounted 中，避免 SSR hydration 时序问题
       ['link', {rel: 'stylesheet', href: '/waline.css'}],
-      ['script', {}, `
-        (function() {
-          // 主页不显示评论框，其他页面都显示
-          var path = location.pathname || '/';
-          if (path === '/' || path === '/index.html') return;
-
-          function initWaline() {
-            var W = window.Waline;
-            if (!W || !W.init) {
-              console.error('[Waline] window.Waline not found after script load');
-              return;
-            }
-            var el = document.getElementById('waline-container');
-            if (!el) {
-              el = document.createElement('div');
-              el.id = 'waline-container';
-              // fallback：body 此时一定已存在
-              document.body.appendChild(el);
-            }
-            W.init({
-              el: '#waline-container',
-              serverURL: 'https://azilnote-vercel.vercel.app/',
-            });
-          }
-
-          function loadScript() {
-            // 动态加载 waline.umd.js，加载完毕后初始化
-            var script = document.createElement('script');
-            script.src = '/waline.umd.js';
-            script.onload = initWaline;
-            script.onerror = function() {
-              console.error('[Waline] failed to load /waline.umd.js');
-            };
-            document.head.appendChild(script);
-          }
-
-          // 等待 DOM 完全解析后再执行，确保 document.body 及 Vue 挂载点已存在
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', loadScript);
-          } else {
-            loadScript();
-          }
-        })();
-      `],
     ],
     plugins:[
         searchPlugin({}), //搜索引擎插件，会生成本地索引文件，若网站文章过多，建议切换成docSearch插件
