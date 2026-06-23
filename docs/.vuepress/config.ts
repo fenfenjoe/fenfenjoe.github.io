@@ -20,7 +20,7 @@ import { markdownChartPlugin } from '@vuepress/plugin-markdown-chart'
 export default defineUserConfig({
     bundler: viteBundler(),
     layouts: {
-        '/': './layouts/Layout.vue',
+        Layout: './layouts/Layout.vue',
     },
     theme: defaultTheme({
         lastUpdated: true, //文章添加最近更新时间
