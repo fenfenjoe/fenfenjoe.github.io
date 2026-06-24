@@ -164,6 +164,18 @@ export const sidebar = {
                  {text:'参考',link:'/gym/参考.md'}
              ]
          }
+     ],
+     '/frontend/VUE/': [
+         {
+             text: 'VUE3', //一级标题
+             collapsible: true, //是否可折叠
+             children: [
+                 {text:'VUE',link:'/frontend/VUE/Vue学习笔记.md'},
+                 {text:'VueRouter',link:'/frontend/VUE/VueRouter.md'},
+                 {text:'Pinia',link:'/frontend/VUE/Pinia.md'},
+                 {text:'Vite',link:'/frontend/VUE/Vite.md'}
+             ]
+         }
      ]
 };
 
