@@ -103,12 +103,16 @@ export const navs =
                 text: '前端',
                 children: [
                     {
-                        text: 'Vue学习笔记',
-                        link: '/frontend/VUE/Vue学习笔记.md' 
+                        text: 'HTML',
+                        link: '/frontend/html5.md' 
                     },
                     {
-                        text: '前端常见问题汇总',
-                        link: '/frontend/VUE/README.md' 
+                        text: 'CSS',
+                        link: '/frontend/CSS/README.md' 
+                    },
+                    {
+                        text: 'Vue学习笔记',
+                        link: '/frontend/VUE3/Vue3学习笔记.md' 
                     }
                 ]
             },
@@ -268,8 +272,8 @@ export const navs =
                         link: '/interview/javascript.md'
                     },
                     {
-                        text: 'VUE',
-                        link: '/interview/vue.md'
+                        text: 'VUE3',
+                        link: '/interview/vue3.md'
                     },
                     {
                         text: '网络',
