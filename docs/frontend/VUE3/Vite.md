@@ -1,6 +1,6 @@
 ---
 title: Vite 使用教程
-sidebar: 'heading'
+sidebarDepth: 2
 ---
 
 # Vite 使用教程

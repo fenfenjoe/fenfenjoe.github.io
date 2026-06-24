@@ -165,15 +165,28 @@ export const sidebar = {
              ]
          }
      ],
-     '/frontend/VUE/': [
+     '/frontend/VUE3/': [
          {
-             text: 'VUE3', //一级标题
-             collapsible: true, //是否可折叠
+             text: '', //一级标题
+             collapsible: false, //是否可折叠
              children: [
-                 {text:'VUE',link:'/frontend/VUE/Vue学习笔记.md'},
-                 {text:'VueRouter',link:'/frontend/VUE/VueRouter.md'},
-                 {text:'Pinia',link:'/frontend/VUE/Pinia.md'},
-                 {text:'Vite',link:'/frontend/VUE/Vite.md'}
+                 {text:'VUE3',link:'/frontend/VUE3/Vue3学习笔记.md'},
+                 {text:'VueRouter',link:'/frontend/VUE3/VueRouter.md'},
+                 {text:'Pinia',link:'/frontend/VUE3/Pinia.md'},
+                 {text:'Vite',link:'/frontend/VUE3/Vite.md'}
+             ]
+         }
+     ],
+     '/frontend/React/': [
+         {
+             text: 'React', //一级标题
+             collapsible: false, //是否可折叠
+             children: [
+                 {text:'概述',link:'/frontend/React/README.md'},
+                 {text:'React 基础',link:'/frontend/React/React基础.md'},
+                 {text:'React Hooks',link:'/frontend/React/ReactHooks.md'},
+                 {text:'React Router',link:'/frontend/React/ReactRouter.md'},
+                 {text:'Redux Toolkit',link:'/frontend/React/Redux.md'}
              ]
          }
      ]

@@ -1,6 +1,6 @@
 ---
 title: Pinia 使用教程
-sidebar: 'heading'
+sidebarDepth: 2
 ---
 
 # Pinia 使用教程

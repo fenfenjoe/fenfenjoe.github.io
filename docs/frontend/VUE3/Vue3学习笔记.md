@@ -1,6 +1,6 @@
 ---
 title: Vue3学习笔记
-sidebar: 'heading'
+sidebarDepth: 2
 ---
 
 # Vue3学习笔记
@@ -553,6 +553,379 @@ router.go(-1)                           // 后退
 ```
 
 ---
+
+### 4. 查询数据&渲染表格
+
+通常包含：查询条件表单 + 分页 + 表格数据三部分。
+
+```vue
+<template>
+  <div>
+    <!-- 查询条件 -->
+    <div class="search-bar">
+      <input v-model="query.keyword" placeholder="请输入关键字" />
+      <select v-model="query.status">
+        <option value="">全部</option>
+        <option value="1">启用</option>
+        <option value="0">禁用</option>
+      </select>
+      <button @click="handleSearch">查询</button>
+      <button @click="handleReset">重置</button>
+    </div>
+
+    <!-- 数据表格 -->
+    <table v-if="!loading">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>姓名</th>
+          <th>状态</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="row in tableData" :key="row.id">
+          <td>{{ row.id }}</td>
+          <td>{{ row.name }}</td>
+          <td>{{ row.status === 1 ? '启用' : '禁用' }}</td>
+          <td>
+            <button @click="handleEdit(row)">编辑</button>
+            <button @click="handleDelete(row.id)">删除</button>
+          </td>
+        </tr>
+        <tr v-if="tableData.length === 0">
+          <td colspan="4">暂无数据</td>
+        </tr>
+      </tbody>
+    </table>
+    <p v-else>加载中...</p>
+
+    <!-- 分页 -->
+    <div class="pagination">
+      <button :disabled="pagination.page <= 1" @click="changePage(pagination.page - 1)">上一页</button>
+      <span>第 {{ pagination.page }} 页 / 共 {{ totalPages }} 页</span>
+      <button :disabled="pagination.page >= totalPages" @click="changePage(pagination.page + 1)">下一页</button>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, reactive, computed, onMounted } from 'vue'
+import { getUserList } from '@/api/user'
+
+// 查询条件
+const query = reactive({
+  keyword: '',
+  status: '',
+})
+
+// 分页
+const pagination = reactive({
+  page: 1,
+  pageSize: 10,
+  total: 0,
+})
+
+const totalPages = computed(() => Math.ceil(pagination.total / pagination.pageSize))
+
+// 表格数据
+const tableData = ref([])
+const loading = ref(false)
+
+// 加载数据
+const loadData = async () => {
+  loading.value = true
+  try {
+    const res = await getUserList({
+      ...query,
+      page: pagination.page,
+      pageSize: pagination.pageSize,
+    })
+    tableData.value = res.list
+    pagination.total = res.total
+  } catch (error) {
+    console.error('获取数据失败:', error)
+  } finally {
+    loading.value = false
+  }
+}
+
+// 点击查询：重置到第1页再请求
+const handleSearch = () => {
+  pagination.page = 1
+  loadData()
+}
+
+// 重置查询条件
+const handleReset = () => {
+  query.keyword = ''
+  query.status = ''
+  pagination.page = 1
+  loadData()
+}
+
+// 切换分页
+const changePage = (page) => {
+  pagination.page = page
+  loadData()
+}
+
+// 编辑行
+const handleEdit = (row) => {
+  console.log('编辑:', row)
+  // 通常：打开弹窗并传入当前行数据
+}
+
+// 删除行
+const handleDelete = async (id) => {
+  if (!confirm('确定删除吗？')) return
+  await deleteUser(id)
+  loadData()  // 刷新列表
+}
+
+// 初始化加载
+onMounted(() => loadData())
+</script>
+```
+
+### 5. 弹窗&获取返回参数
+
+常见模式：父组件控制弹窗显隐，子组件（弹窗）通过 `emit` 将结果回传给父组件。
+
+```vue
+<!-- 父组件 UserListView.vue -->
+<template>
+  <div>
+    <button @click="openAdd">新增</button>
+    <button @click="openEdit(currentRow)">编辑</button>
+
+    <!-- 弹窗组件 -->
+    <UserDialog
+      v-if="dialogVisible"
+      :visible="dialogVisible"
+      :init-data="dialogData"
+      @confirm="handleDialogConfirm"
+      @cancel="dialogVisible = false"
+    />
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import UserDialog from '@/components/UserDialog.vue'
+
+const dialogVisible = ref(false)
+const dialogData = ref(null)  // 传给弹窗的初始数据，null 表示新增
+
+// 打开新增弹窗
+const openAdd = () => {
+  dialogData.value = null
+  dialogVisible.value = true
+}
+
+// 打开编辑弹窗，传入当前行数据
+const openEdit = (row) => {
+  dialogData.value = { ...row }  // 浅拷贝，避免直接修改原数据
+  dialogVisible.value = true
+}
+
+// 弹窗点击确认，接收子组件返回的表单数据
+const handleDialogConfirm = async (formData) => {
+  if (formData.id) {
+    await updateUser(formData)   // 有 id：编辑
+  } else {
+    await createUser(formData)   // 无 id：新增
+  }
+  dialogVisible.value = false
+  loadData()  // 刷新列表
+}
+</script>
+```
+
+```vue
+<!-- 弹窗子组件 UserDialog.vue -->
+<template>
+  <div class="dialog-mask">
+    <div class="dialog">
+      <h3>{{ form.id ? '编辑用户' : '新增用户' }}</h3>
+
+      <form @submit.prevent="handleConfirm">
+        <div>
+          <label>姓名</label>
+          <input v-model="form.name" placeholder="请输入姓名" required />
+        </div>
+        <div>
+          <label>邮箱</label>
+          <input v-model="form.email" type="email" placeholder="请输入邮箱" />
+        </div>
+        <div class="dialog-footer">
+          <button type="button" @click="emit('cancel')">取消</button>
+          <button type="submit">确认</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { reactive, watch } from 'vue'
+
+const props = defineProps({
+  visible: Boolean,
+  initData: Object,  // 父组件传入的初始数据（编辑时有值，新增时为 null）
+})
+
+const emit = defineEmits(['confirm', 'cancel'])
+
+// 弹窗内部表单状态
+const form = reactive({
+  id: null,
+  name: '',
+  email: '',
+})
+
+// 监听 initData 变化，初始化表单（弹窗每次打开时同步数据）
+watch(
+  () => props.visible,
+  (visible) => {
+    if (visible) {
+      if (props.initData) {
+        // 编辑模式：填入初始数据
+        Object.assign(form, props.initData)
+      } else {
+        // 新增模式：重置表单
+        Object.assign(form, { id: null, name: '', email: '' })
+      }
+    }
+  }
+)
+
+// 点击确认：将表单数据回传给父组件
+const handleConfirm = () => {
+  emit('confirm', { ...form })  // 传副本，避免外部直接引用内部响应式对象
+}
+</script>
+```
+
+### 6. 异步发送请求&异步处理
+
+**基础：async/await + 错误处理**
+
+```javascript
+import { ref } from 'vue'
+
+const loading = ref(false)
+const result = ref(null)
+const errorMsg = ref('')
+
+const fetchData = async () => {
+  loading.value = true
+  errorMsg.value = ''
+  try {
+    result.value = await api.getData()
+  } catch (error) {
+    // 统一处理错误信息（通常 axios 拦截器已处理，这里是兜底）
+    errorMsg.value = error.message || '请求失败，请稍后重试'
+  } finally {
+    loading.value = false  // 无论成功失败都要关闭 loading
+  }
+}
+```
+
+**并行请求（互不依赖时用 Promise.all 提速）**
+
+```javascript
+const loadPageData = async () => {
+  loading.value = true
+  try {
+    // 并行发起，总耗时 = 最慢的那个，而非叠加
+    const [userInfo, orderList, noticeList] = await Promise.all([
+      api.getUserInfo(),
+      api.getOrderList(),
+      api.getNoticeList(),
+    ])
+    user.value = userInfo
+    orders.value = orderList
+    notices.value = noticeList
+  } finally {
+    loading.value = false
+  }
+}
+```
+
+**串行请求（下一个依赖上一个的结果）**
+
+```javascript
+const loadOrderDetail = async (orderId) => {
+  // 第一步：获取订单
+  const order = await api.getOrder(orderId)
+
+  // 第二步：用订单里的 userId 获取用户信息（依赖第一步结果）
+  const user = await api.getUser(order.userId)
+
+  // 第三步：用订单里的 productId 获取商品信息
+  const product = await api.getProduct(order.productId)
+
+  return { order, user, product }
+}
+```
+
+**防重复提交（按钮 loading 状态）**
+
+```vue
+<template>
+  <button :disabled="submitting" @click="handleSubmit">
+    {{ submitting ? '提交中...' : '提交' }}
+  </button>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+
+const submitting = ref(false)
+
+const handleSubmit = async () => {
+  if (submitting.value) return  // 防止重复点击
+  submitting.value = true
+  try {
+    await api.submitOrder(form)
+    alert('提交成功')
+  } catch (error) {
+    alert('提交失败：' + error.message)
+  } finally {
+    submitting.value = false  // 成功或失败都恢复按钮
+  }
+}
+</script>
+```
+
+**取消请求（组件卸载时终止进行中的请求）**
+
+```javascript
+import { onBeforeUnmount } from 'vue'
+import axios from 'axios'
+
+const controller = new AbortController()
+
+const fetchData = async () => {
+  try {
+    const res = await axios.get('/api/data', {
+      signal: controller.signal,  // 传入 AbortSignal
+    })
+    data.value = res.data
+  } catch (error) {
+    if (axios.isCancel(error)) {
+      console.log('请求已取消')  // 组件卸载导致的取消，不需要报错
+    } else {
+      console.error('请求失败:', error)
+    }
+  }
+}
+
+// 组件卸载时取消未完成的请求，防止内存泄漏
+onBeforeUnmount(() => controller.abort())
+```
+
 
 ## 调试技巧
 

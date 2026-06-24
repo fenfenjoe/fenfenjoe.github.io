@@ -1,6 +1,6 @@
 ---
 title: Vue Router 使用教程
-sidebar: 'heading'
+sidebarDepth: 2
 ---
 
 # Vue Router 使用教程

@@ -112,7 +112,7 @@ export const navs =
                     },
                     {
                         text: 'Vue学习笔记',
-                        link: '/frontend/VUE/Vue学习笔记.md' 
+                        link: '/frontend/VUE3/Vue3学习笔记.md' 
                     }
                 ]
             },
@@ -272,8 +272,8 @@ export const navs =
                         link: '/interview/javascript.md'
                     },
                     {
-                        text: 'VUE',
-                        link: '/interview/vue.md'
+                        text: 'VUE3',
+                        link: '/interview/vue3.md'
                     },
                     {
                         text: '网络',
