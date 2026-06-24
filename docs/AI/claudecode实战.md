@@ -6,7 +6,7 @@ sidebar: 'heading'
 
 # claudecode实战
 
-## 安装与配置（windows）
+## 1. 安装与配置（windows）
 
 1. 安装
 ```bash
@@ -49,9 +49,9 @@ claude --version​
 }
 ```
 
-## Claude 文件结构
+## 2. Claude 文件结构
 
-### 项目级配置
+### 2.1 项目级配置
 
 ```
 your-project/
@@ -74,7 +74,7 @@ your-project/
         └── *.sh, *.js, *.py
 ```
 
-### 用户级配置
+### 2.2 用户级配置
 
 ```
 ~/.claude/
@@ -96,7 +96,7 @@ your-project/
 └── ... (其他如 debug/, file-history/, todos/ 等)
 ```
 
-## 常见概念
+## 3. 常见概念
 
 | 名称 | 描述 |
 | --- | ---|
@@ -108,9 +108,9 @@ your-project/
 | Plugins | Agent,skill,hook,MCP,LSP,settings等资源的打包 |
 
 
-## 使用场景
+## 4. 使用场景
 
-### 为项目初始化claude配置
+### 4.1 为项目初始化claude配置
 
 1. 进入项目
 ```bash
@@ -125,11 +125,10 @@ claude
 /init 
 ```
 
-### 增强claude的开发能力
+### 4.2 增强claude的开发能力
 
 #### 方案1：superpowers + gstack
 
-**简介**
 
 这是一套由两个互补插件组成的 AI 开发增强方案：
 
@@ -137,6 +136,9 @@ claude
 - [gstack](https://github.com/garrytan/gstack)：由 YC CEO Garry Tan 开源，定位是**虚拟工程团队**，提供 23 个专家角色和 8 个工具，覆盖产品规划、设计、工程审查、QA、安全审计、发布部署等环节。
 
 两者形成互补：**superpowers 是大脑（思考与流程），gstack 是手脚（执行与外部世界）**。
+
+
+
 
 **方法论**
 
@@ -160,6 +162,9 @@ Think → Plan → Build → Review → Test → Ship → Reflect
 ```
 
 ---
+
+
+
 
 **安装 & 配置**
 
@@ -616,7 +621,21 @@ AI:  Found 3 completed changes:
 
 > **提示**：OpenSpec 支持 Claude Code、Cursor、Windsurf、GitHub Copilot 等 20+ AI 工具，在 Claude Code 中命令格式为 `/opsx:xxx`，在 Cursor/Windsurf 中为 `/opsx-xxx`。建议搭配高推理能力模型以获得最佳规划质量。
 
-## claude命令常用后缀
+### 4.3 切换为“自动模式”
+
+（1） 在/你的项目/.claude/settings.json 中添加以下内容：
+```json
+{
+  "permissions": {
+    "defaultMode": "auto"
+  }
+}
+```
+
+（2） 重启Claude，即可生效。
+
+
+## 5. claude命令常用后缀
 
 | 选项 | 简写 | 作用 | 适用场景 |
 |------|------|------|----------|
@@ -626,7 +645,7 @@ AI:  Found 3 completed changes:
 | `--continue` | `-c` | 恢复最近会话 | 继续昨天的工作 |
 | `--resume <id>` | `-r` | 恢复指定会话 | 恢复特定对话 |
 
-## Commands：命令
+## 6. Commands：命令
 
 ### claudecode内置的命令
 
@@ -649,7 +668,7 @@ AI:  Found 3 completed changes:
 
 略
 
-## FAQ
+## 7. FAQ
 
 ### Q1:如何快速让Claude记住项目规范
 
@@ -706,22 +725,22 @@ claude --dangerously-skip-permissions
 
 
 
-## 常用工具
+## 8. 常用工具
 
-### cc-pane
+### 8.1 cc-pane
 
 用该工具可以同时开启多个claude实例。
 
 <https://winget.ragerworks.com/package/wuxiran.CC-Panes>
 
-### cc-switch
+### 8.2 cc-switch
 
 用该工具可以切换不同的大模型供应商。
 
 <https://github.com/farion1231/cc-switch>
 
 
-## 参考
+## 9. 参考
 
 claude-howto (<github.com/luongnv89/claude-howto>): GitHub 上最火热的 Claude Code 中文学习教程。
 
