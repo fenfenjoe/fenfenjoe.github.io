@@ -165,6 +165,19 @@ export const sidebar = {
              ]
          }
      ],
+     '/frontend/VUE2/': [
+         {
+             text: 'VUE2', //一级标题
+             collapsible: false, //是否可折叠
+             children: [
+                 {text:'概述',link:'/frontend/VUE2/README.md'},
+                 {text:'Vue2 学习笔记',link:'/frontend/VUE2/Vue2学习笔记.md'},
+                 {text:'VueRouter',link:'/frontend/VUE2/VueRouter.md'},
+                 {text:'Vuex',link:'/frontend/VUE2/Vuex.md'},
+                 {text:'Webpack',link:'/frontend/VUE2/Webpack.md'}
+             ]
+         }
+     ],
      '/frontend/VUE3/': [
          {
              text: '', //一级标题
