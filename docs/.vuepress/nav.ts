@@ -111,6 +111,10 @@ export const navs =
                         link: '/frontend/CSS/README.md' 
                     },
                     {
+                        text: 'Javascript',
+                        link: '/frontend/javascript.md' 
+                    },
+                    {
                         text: 'Vue学习笔记',
                         link: '/frontend/VUE3/Vue3学习笔记.md' 
                     }
