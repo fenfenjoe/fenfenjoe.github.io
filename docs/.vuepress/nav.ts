@@ -114,8 +114,13 @@ export const navs =
                         text: 'Javascript',
                         link: '/frontend/javascript.md' 
                     },
+                    
                     {
-                        text: 'Vue学习笔记',
+                        text: 'Vue2学习笔记',
+                        link: '/frontend/VUE2/README.md' 
+                    },
+                    {
+                        text: 'Vue3学习笔记',
                         link: '/frontend/VUE3/Vue3学习笔记.md' 
                     }
                 ]
@@ -156,12 +161,20 @@ export const navs =
         text: 'AI',
         children: [
             {
-                text: 'openclaw实战笔记',
+                text: 'openclaw实战',
                 link: '/AI/openclaw/openclaw实战.md'
             },
             {
-                text: 'claudecode实战笔记',
+                text: 'claudecode实战',
                 link: '/AI/claudecode实战.md'
+            },
+            {
+                text: 'RAG',
+                link: '/AI/RAG.md'
+            },
+            {
+                text: '拟人类Agent',
+                link: '/AI/拟人类Agent.md'
             }
         ]
     },
@@ -291,6 +304,16 @@ export const navs =
                         text: 'nodejs',
                         link: '/interview/nodejs.md'
                     },
+                ]
+            },
+            ,
+            {
+                text: 'AI',
+                children: [
+                    {
+                        text: 'RAG',
+                        link: '/interview/RAG.md'
+                    }
                 ]
             }
         ]
