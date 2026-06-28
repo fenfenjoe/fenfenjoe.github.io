@@ -8,7 +8,7 @@ import { navs } from './nav'
 //import { lastUpdated } from '@vuepress/last-updated'
 //import { pluginMediumZoom } from '@vuepress/plugin-medium-zoom'
 //import { mdEnhancePlugin } from "vuepress-plugin-md-enhance"
-import { searchPlugin } from '@vuepress/plugin-search'
+//import { searchPlugin } from '@vuepress/plugin-search'
 import { markdownMathPlugin } from '@vuepress/plugin-markdown-math'
 import { markdownHintPlugin } from '@vuepress/plugin-markdown-hint'
 import { markdownExtPlugin } from '@vuepress/plugin-markdown-ext'
@@ -31,10 +31,9 @@ export default defineUserConfig({
     head: [
       ['link',{rel: 'icon', href: '/images/favicon.ico'}],  //网站图标
       ['link',{rel: 'stylesheet', href: '/css/index.css'}],  //自定义的样式
-      ['link', {rel: 'stylesheet', href: '/waline.css'}],
     ],
     plugins:[
-        searchPlugin({}), //搜索引擎插件，会生成本地索引文件，若网站文章过多，建议切换成docSearch插件
+        //searchPlugin({}), //搜索引擎插件，会生成本地索引文件，若网站文章过多，建议切换成docSearch插件
         markdownMathPlugin({}), //数学公式
         markdownExtPlugin({}), //脚注、GFM等组件
         markdownHintPlugin({
