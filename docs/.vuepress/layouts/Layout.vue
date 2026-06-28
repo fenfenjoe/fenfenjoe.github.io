@@ -7,18 +7,23 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch, nextTick } from 'vue'
+import { onMounted, watch, nextTick, ref } from 'vue'
 import { useRoutePath } from 'vuepress/client'
 import ParentLayout from '@vuepress/theme-default/layouts/Layout.vue'
 import { init } from '@waline/client'
 import '@waline/client/style'
 
 const routePath = useRoutePath()
+const walineInstance = ref(null)
 
 function initWaline() {
   const path = routePath.value || '/'
   
   if (path === '/' || path === '/index.html') {
+    if (walineInstance.value) {
+      walineInstance.value.destroy()
+      walineInstance.value = null
+    }
     return
   }
 
@@ -26,7 +31,12 @@ function initWaline() {
     const container = document.getElementById('waline-container')
     if (!container) return
 
-    init({
+    if (walineInstance.value) {
+      walineInstance.value.destroy()
+      walineInstance.value = null
+    }
+
+    walineInstance.value = init({
       el: '#waline-container',
       serverURL: 'https://azilnote-vercel.vercel.app/',
     })
