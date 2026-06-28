@@ -306,7 +306,6 @@ export const navs =
                     },
                 ]
             },
-            ,
             {
                 text: 'AI',
                 children: [
