@@ -122,6 +122,10 @@ export const navs =
                     {
                         text: 'Vue3学习笔记',
                         link: '/frontend/VUE3/Vue3学习笔记.md' 
+                    },
+                    {
+                        text: 'React学习笔记',
+                        link: '/frontend/React/README.md' 
                     }
                 ]
             },

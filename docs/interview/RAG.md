@@ -1,6 +1,6 @@
 ---
 title: RAG 面试题
-sidebarDepth: 2
+sidebar: 'heading'
 ---
 
 # RAG 面试题
