@@ -202,6 +202,18 @@ export const sidebar = {
                  {text:'Redux Toolkit',link:'/frontend/React/Redux.md'}
              ]
          }
+     ],
+     '/python/': [
+         {
+             text: 'Python', //一级标题
+             collapsible: false, //是否可折叠
+             children: [
+                 {text:'概述',link:'/python/README.md'},
+                 {text:'Python3 基础',link:'/python/python3.md'},
+                 {text:'logging 日志',link:'/python/logging.md'},
+                 {text:'FastAPI',link:'/python/FastAPI.md'}
+             ]
+         }
      ]
 };
 

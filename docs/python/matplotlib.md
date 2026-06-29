@@ -1,7 +1,6 @@
 ---
 title: matplotlib
-sidebar: 'heading'
-sidebarDepth: 1
+sidebarDepth: 2
 ---
 
 # matplotlib

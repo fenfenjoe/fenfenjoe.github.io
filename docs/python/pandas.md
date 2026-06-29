@@ -1,7 +1,6 @@
 ---
 title: pandas
-sidebar: 'heading'
-sidebarDepth: 1
+sidebarDepth: 2
 ---
 
 

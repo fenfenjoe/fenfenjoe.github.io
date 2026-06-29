@@ -1,712 +1,746 @@
 ---
-title: Python3
-sidebar: 'heading'
+title: Python3 基础
 sidebarDepth: 2
 ---
 
+# Python3 基础
 
-# Python3
+官方文档：[https://docs.python.org/zh-cn/3/index.html](https://docs.python.org/zh-cn/3/index.html)  
+内置函数：[https://docs.python.org/zh-cn/3/library/functions.html](https://docs.python.org/zh-cn/3/library/functions.html)
 
-## 参考资料
-
-官方文档:[https://docs.python.org/zh-cn/3/index.html](https://docs.python.org/zh-cn/3/index.html)
-python内置函数：[https://docs.python.org/zh-cn/3/library/functions.html](https://docs.python.org/zh-cn/3/library/functions.html)
-
-
+---
 
 ## 运算符
 
-| 符号 | 作用 |
-|---|---|
-|```**```| 乘方|
-|```%```|求余|
-|```//```|除法（取整数）|
+| 符号 | 作用 | 示例 |
+|---|---|---|
+| `**` | 乘方 | `2**3` = 8 |
+| `%` | 求余 | `7%3` = 1 |
+| `//` | 整除 | `7//3` = 2 |
+| `==` / `!=` | 等于 / 不等于 | — |
+| `and` / `or` / `not` | 逻辑运算 | — |
 
+---
 
 ## 数据结构
 
-
-### 列表（等于 数组）
-```python
-
-mylist = [] #定义
-mylist = list() #定义
-mylist = ['a','b'] #定义
-mylist = [x**2 for x in range(10)] #定义（通过列表推导式）
-mylist = [x for x in vec if x>0]
-mylist = list({'name':'John','age':24}) #将字典的key转为list
-mylist = list(dictA.keys()) #同上
-mylist = list(dictA.values()) #将字典的value转为list
-mylist = list(dictA.items()) #将字典的(key,value)转为list
-mylist = list(setA) #将集合转为list
- #列表切片
-mylist[1:3] #第1到第3个元素
-mylist[1:] #第1到最后一个元素
-mylist[-1] #最后一个元素
-#添加
-mylist.append('c')
-mylist.insert(1,'d')
-#删除
-mylist.pop(1) #删除第2个元素
-mylist.remove('abc') #删除值为abc的元素，若有多个也只删除一个
-del mylist[0] #删除第1个元素
-del mylist[:2] #删除前2个元素
-del mylist #删除列表
-#改
-mylist[0] = 10
-#排序
-mylist.sort() #升序排序
-mylist.sort(reverse=True) #降序排序
-mylist.sort(key=len) #按长度，升序排序
-#获取对象所在下标
-mylist.index(obj)
-#是否存在
-10 in mylist
-```
-
-
-
-### 元组（等于 只可读的列表）
-```python
-
-digit = (0, 1, 'two') #定义
-tuple([0, 1, 'two']) #列表转元组
-
-
-```
-
-### 字典（等于 Map） 
-```python
-
-empty_dict = {} #空字典
-empty_dict = {'dad':'homer', 'mom':'marge'} #定义
-empty_dict = dict('dad':'homer', 'mom':'marge') #定义
-
-'mom' in family #是否有该键
-
-empty_dict.keys() #返回所有键的列表
-empty_dict.values() #返回所有值的列表
-empty_dict.items() #返回键值对的列表，键值对由元组组成
-
-for k,v in empty_dict.items()
-    print(k,v) #字典循环：取出键和值
-    
-empty_dict['dad'] #获取字典中键为dad的值
-
-#增
-myMap['name'] = 'Alice'              # {'name': 'Alice'}
-myMap['age'] = 25                    # {'name': 'Alice', 'age': 25}
-myMap['city'] = 'Beijing'            # {'name': 'Alice', 'age': 25, 'city': 'Beijing'}
-myMap.update({'country': 'China', 'gender': 'female'})  # 批量添加
-
-# 删 - 删除键值对
-del myMap['city']                    # 删除指定键
-
-# 改 - 修改值
-myMap['age'] = 26                    # 修改年龄
-myMap['name'] = 'Bob'                # 修改名字
-myMap.update({'age': 27, 'name': 'Charlie'})  # 批量修改
-
-
-```
-
-
-### 集合（等于 Set）
-```python
-
-empty_set = set()  #定义
-myset ={'python', 'r', 'java'} #定义
-set(['cobra', 'viper', 'python'])#列表转集合
- #集合运算
-add() #增
-remove() #删
-setA & setB #交集
-setA | setB #并集 
-setA-setB #差集
-setA.intersection(setB) #交集
-setA.union(setB) #并集
-setA.difference(setB) #差集
-```
-
-### 函数
-```python
-
-# 定义函数
-def myfunc(context) : 
-    """myfunc will print an number.""" # 函数说明文档
-    a='1'  #缩进4格
-    return a #可返回两个值；以元组返回两个值
-    
-# 定义函数2
-def myfunc2(a,b=2,c='haha') #入参带默认值，没有默认值则为必填入参，有默认入参则非必填
-    return 
-    
-# 调用函数
-myfunc2(a=10) 
-
-# 调用函数2
-myfunc2(10,3,'haha')
-
-# 定义函数3
-def myfunc3(age:'年龄',name:'名称'='Joe')->'没有返回参数' #为入参、出参添加注解
-    pass
-```
-
 ### 字符串
-```
-str = 'hello'
- #格式化
-'raining %s and %s' % ('cats', 'dogs')
-'raining {} and {}'.format('cats', 'dogs')
- #查找下标
-str.find('abc')
- #取子字符串
-str[0] #第一个字符
-str[0:3] #取第1~4个字符串
-str[-1] #取最后1个字符串
-str * 2 #取str并重复1次
-str[2:] #取第3个以后所有字符
 
-print('Hello'+'Joe') #用+号拼接（适合都是字符串的情况）
-print('Hello',23) #用逗号拼接（适合并非都是字符串的情况）
-
-```
-
-### 作用域
 ```python
+s = 'hello world'
 
-#作用域由外到内分为以下几层
-##    第一层：内置名称集合（abs()、length()等）
-###   第二层：模块变量
-####  第三层：函数变量
+# 格式化方式一：% 格式符（旧写法）
+'我叫 %s，今年 %d 岁' % ('小明', 10)       # '我叫 小明，今年 10 岁'
+# %s 字符串  %d 整数  %f 浮点数  %.2f 保留2位小数
+
+# 格式化方式二：format()
+'我叫{}，今年{}岁'.format('小明', 10)
+'我叫{name}，今年{age}岁'.format(name='小明', age=10)
+'圆周率={0:.3f}'.format(3.14159)          # '圆周率=3.142'
+'{name:10} ===> {age:10}'.format(name='小明', age=10)  # 指定最小宽度为10
+
+# 格式化方式三：f-string（推荐，Python 3.6+）
+name = 'Alice'
+age = 25
+f'Hello, {name}! 年龄 {age}'             # 'Hello, Alice! 年龄 25'
+f'圆周率 = {3.14159:.2f}'                # '圆周率 = 3.14'
+
+# 多行字符串（三引号）
+text = """第一行
+第二行
+第三行"""
+
+# 常用操作
+s.upper()                               # 'HELLO WORLD'
+s.lower()                               # 'hello world'
+s.strip()                               # 去除两端空白
+s.lstrip() / s.rstrip()                 # 去左侧 / 右侧空白
+s.split(' ')                            # ['hello', 'world']
+s.replace('hello', 'hi')               # 'hi world'
+s.find('world')                         # 6（找不到返回 -1）
+s.startswith('hello')                   # True
+s.endswith('world')                     # True
+','.join(['a', 'b', 'c'])              # 'a,b,c'
+len(s)                                  # 11
+s.isalpha()                             # 是否全为字母或中文
+s.isdigit()                             # 是否全为数字
+s.isnumeric()                           # 是否全为数字（含中文数字）
+s.rjust(10)                             # 右对齐，左侧填充空格至总宽度10
+
+# 切片
+s[0]                                    # 'h'
+s[0:5]                                  # 'hello'
+s[-1]                                   # 'd'
+s[6:]                                   # 'world'
+s[::-1]                                 # 反转字符串
 ```
 
+### 列表（list）
 
-### 类
 ```python
+lst = ['a', 'b', 'c']
 
-# 例子1
-# 定义类START
-class MyClass:
-  age = 1   # 定义类变量
-  __name = 'haha' # 定义私有类变量（加双下划线）
+# 定义
+lst = []                                # 空列表
+lst = [x**2 for x in range(5)]         # 列表推导式：[0,1,4,9,16]
+lst = [x for x in range(10) if x % 2 == 0]  # 带过滤的推导式
 
+# 增
+lst.append('d')                         # 末尾添加
+lst.insert(1, 'x')                      # 指定位置插入
+lst.extend(['e', 'f'])                  # 合并另一个列表
 
-  # 初始化函数
-  def __init__(self,age):
-    self.age = age   
+# 删
+lst.pop()                               # 删除并返回最后一个元素
+lst.pop(1)                              # 删除并返回第 2 个元素
+lst.remove('b')                         # 删除第一个值为 'b' 的元素
+del lst[0]                              # 删除第 1 个元素
+del lst[:2]                             # 删除前 2 个元素
 
-  # 实例函数
-  def myFunc():
+# 改
+lst[0] = 'z'
+
+# 查
+lst[0]                                  # 第 1 个元素
+lst[-1]                                 # 最后一个
+lst[1:3]                                # 切片：第 2~3 个
+'b' in lst                              # 是否存在
+lst.index('b')                          # 元素所在下标
+
+# 排序
+lst.sort()                              # 升序（原地修改）
+lst.sort(reverse=True)                  # 降序
+lst.sort(key=len)                       # 按长度排序
+sorted(lst)                             # 返回新排序列表（不修改原列表）
+```
+
+### 元组（tuple）
+
+```python
+# 元组是不可变的列表，常用于函数多返回值、固定数据
+t = (1, 'hello', True)
+t = tuple([1, 2, 3])                    # 列表转元组
+
+# 解包
+a, b, c = t
+a, *rest = t                            # rest = ['hello', True]
+
+# 函数返回多个值（本质是元组）
+def get_range():
+    return 0, 100
+
+low, high = get_range()
+```
+
+### 字典（dict）
+
+```python
+d = {'name': 'Alice', 'age': 25}
+
+# 增 / 改
+d['city'] = 'Beijing'
+d.update({'age': 26, 'gender': 'female'})
+
+# 删
+del d['city']
+d.pop('age')                            # 删除并返回值
+
+# 查
+d['name']                               # 直接取，键不存在会报错
+d.get('name')                           # 安全取，键不存在返回 None
+d.get('x', 'default')                  # 键不存在返回默认值
+
+# 遍历
+d.keys()                                # 所有键
+d.values()                              # 所有值
+d.items()                               # 所有键值对
+for k, v in d.items():
+    print(k, v)
+
+# 字典推导式
+squares = {x: x**2 for x in range(5)}  # {0:0, 1:1, 2:4, 3:9, 4:16}
+
+# 判断键是否存在
+'name' in d                             # True
+```
+
+### 集合（set）
+
+```python
+s = {'python', 'java', 'go'}
+s = set(['a', 'b', 'c'])               # 列表转集合（自动去重）
+
+s.add('rust')
+s.remove('java')
+s.discard('java')                       # 删除，不存在不报错
+
+# 集合运算
+a = {1, 2, 3}
+b = {2, 3, 4}
+a & b                                   # 交集：{2, 3}
+a | b                                   # 并集：{1, 2, 3, 4}
+a - b                                   # 差集：{1}
+a ^ b                                   # 对称差集：{1, 4}
+```
+
+---
+
+## 函数
+
+```python
+# 基础定义
+def greet(name):
+    """函数说明文档（docstring）"""
+    return f'Hello, {name}!'
+
+# 默认参数（有默认值则非必填）
+def connect(host, port=3306, timeout=30):
     pass
 
-  # 私有方法
-  def __myFunc():
+# 关键字传参
+connect(host='localhost', timeout=10)
+
+# 不定长参数
+def func(*args, **kwargs):
+    print(args)    # 元组：(1, 2, 3)
+    print(kwargs)  # 字典：{'a': 1, 'b': 2}
+
+func(1, 2, 3, a=1, b=2)
+
+# 类型注解（Python 3.5+，推荐加上，提升可读性）
+def add(x: int, y: int) -> int:
+    return x + y
+
+# 匿名函数（lambda）
+square = lambda x: x ** 2
+square(5)                               # 25
+
+# 常用内置函数
+sorted([3,1,2], key=lambda x: -x)      # [3, 2, 1]
+list(map(lambda x: x*2, [1,2,3]))      # [2, 4, 6]
+list(filter(lambda x: x>1, [1,2,3]))   # [2, 3]
+sum([1, 2, 3])                          # 6
+max([1, 2, 3])                          # 3
+min([1, 2, 3])                          # 1
+len([1, 2, 3])                          # 3
+```
+
+---
+
+## 类（面向对象）
+
+```python
+class Animal:
+    # 类变量（所有实例共享）
+    species = 'Unknown'
+
+    # 构造方法
+    def __init__(self, name: str, age: int):
+        self.name = name       # 实例变量（公有）
+        self.__age = age       # 私有变量（双下划线）
+
+    # 实例方法
+    def speak(self) -> str:
+        return f'{self.name} makes a sound'
+
+    # 私有方法
+    def __secret(self):
+        pass
+
+    # 类方法
+    @classmethod
+    def create(cls, name):
+        return cls(name, 0)
+
+    # 静态方法
+    @staticmethod
+    def is_animal(obj):
+        return isinstance(obj, Animal)
+
+    # 魔法方法（__repr__ 相当于 toString）
+    def __repr__(self):
+        return f'Animal(name={self.name})'
+
+
+# 继承
+class Dog(Animal):
+    def __init__(self, name, age, breed):
+        super().__init__(name, age)     # 调用父类构造
+        self.breed = breed
+
+    def speak(self) -> str:             # 重写父类方法
+        return f'{self.name} says Woof!'
+
+
+# 多重继承
+class C(A, B):
     pass
 
-# 定义类END
-
-# 例子2（继承类）
-# 定义类START
-class MyClass(SuperClass):
-# 定义类END
-
-
-# 例子3（多重继承）
-class MyClass(SuperClass1,SuperClass2):
-
-# 实例化对象
-myclass = Myclass(5)
-
-
-#调用父类的方法（不怕被重写）
-sub = SubTest()
-sub.test(10,20)
-super(SubTest,sub).test(10,20) #输出ccc
-
-
-#类的其他私有方法：
-__del__ #析构函数？
-__repr__  #toString
-__setitem__ #setter方法
-__getitem__ #getter方法
-__len__ #返回长度
-__add__ #重载 加法运算
-__sub__ #重载 减法运算
+# 实例化与使用
+dog = Dog('Rex', 3, 'Husky')
+print(dog.speak())                      # Rex says Woof!
+print(isinstance(dog, Animal))          # True
 ```
 
-### 可迭代对象（iterator）
-```python
-
-# 实现了 __iter__或__getItem__方法，以及 __next__方法的，就是可迭代对象
-# 常见可迭代对象有：
-#1. list （列表）
-#2. tuple （元组）
-#3. dict （字典）
-#4. set （集合）
-#5. str （字符串）
-#6. range （范围）
-#7. bytes （字节）
-#8. bytearray （字节数组）
-#9. memoryview （内存视图）
-#10. generator （生成器）
-
-## 获取迭代器
-iterA = range(5)  # 0,1,2,3,4
-
-listB = ['a','b','c']
-iterB = iter(listB) # 获取列表的迭代对象
-
-dictC = {'name':'John','age':24}  
-iterC = iter(dictC)
-
-## 使用迭代器
-# range
-for i in range(5):
-  print(i)
-
-# list
-for i in listB:
-  print(i)
-
-# dict
-for key,value in dictC.items():
-  print(f"{key}:{value}")
-
-# 字符串
-for i in 'hello world':
-  print(i)
-```
-
-
-
-## 库(模块)
-
-###	下载新的python库
-1. 在 <https://pypi.org/project/> 找需要的库及版本  
-2. 放到python的Scripts目录中  
-3. 进入cmd，到python/Scripts目录下，执行 pip install [python库文件名]  
-
-### 标准库
-
-* **文件与操作系统交互**
-  * os
-  * sys
-  * shutil
-* **数据处理与格式化**
-  * json
-  * csv
-  * datetime
-* **数学与随机数**
-  * math：提供数学相关的函数
-  * random：随机数
-  * statistics：均值、中位数、方差等
-  * decimal：浮点数运算
-* **数据结构与算法**
-  * collections：双端队列（deque）、计数器（Counter）、默认字典（defaultdict）等
-  * heapq：堆、队列
-  * bisect：二分查找
-  * itertools：迭代器工具
-* **并发与异步编程**
-  * threading：多线程编程
-  * concurrent.futures
-* **数据持久化与数据库**
-  * pickle：对象序列化
-  * sqlite3：SQLite数据库接口
-
-
-###	常用库
-
-
-* pd（Pandas）：数据分析库
-* np(numpy)：多维数组
-* matplotlib：二维绘图
-* scipy：
-* sidekick：机器学习
-* vn.py
-* PyCTP
-* QuickLib
-* Zipline
-* pyecharts：绘图
-
-
-
-```python
-#查看python所有库
-pip list
-```
-
-### 导入库
-
-```python
-# 示例1：导入os类
-import os 
-os.getcwd()
-
-# 示例2：从datetime模块导入time类
-from datetime import time
-
-# 示例3：导入datetime模块的所有类
-from datetime import *
-```
-
-
-### os模块：操作系统
-```python
-List os.listdir(path) #【指定的文件夹包含的文件或文件夹的名字的列表】
-os.rename(src, dst) #【重命名文件或目录】
-os.rmdir(path) 
-os.removedirs(path)
-os.remove(path)
-```
-
-### re模块：正则表达式
-```python 
-	import re
-	re.findAll(r'[0-9]*','dyz 01235 0') #返回['01235','0']
-```
-
-
-### operator模块：运算函数
-```python
-#%% operator模块：运算函数，加减乘除、大于小于等于
-import operator
-
-dir(operator) #查看operator模块的所有函数
-
-operator.lt(x,y) #小于（lower than） 
-operator.gt(x,y) #大于（greater than）
-operator.eq(x,y) #等于（equals）
-operator.ne(x,y) #不等于（not equals）
-operator.le(x,y) #小于等于
-operator.ge(x,y) #大于等于
-
-#加减乘除等略
-
-```
-
-### math模块：数学相关函数
-```python
-#%% math模块：正弦余弦
-import math
-
-dir(math) #查看math模块的所有函数
-
-#数学常量
-math.e #欧拉数(2.7182...)
-math.pi #圆周率PI = 3.1415926...
-math.tau #数学常量τ = 6.283185...
-#...
-
-#常用函数
-math.cos(x)
-math.sin(x)
-math.tan(x)
-
-math.ceil(x) #对x四舍五入，往上进1。如math.ceil(1.1)=2
-math.floor(x) #对x四舍五入，向下取整。如math.ceil(1.1)=1
-
-math.fabs(x) #取x的绝对值
-math.gcd(x) #最大公约数
-math.sqrt(x) #平方根
-math.fmod(x,y) #求x/y的余数
-
-```
-
-
-### sys模块：系统函数
-```python
-#%% 模块
-import sys #导入sys模块，并通过sys调用其函数
-sys.argv
-
-from sys import argv #导入sys中的某个函数，并直接使用
-argv
-
-#__name__ 属性
-#每个模块都有__name__属性
-#当__name__=='__main__'时，表明当前模块是自身在运行
-#当__name__!='__main__'时，表明当前模块是被引用了
-
-dir(sys) #查看sys模块中所有定义的名称（返回一个List）
-dir() #返回当前模块中所有定义的名称
-
-
-```
-
-
-
-### pickle模块：序列化
-```python
-#%% pickle模块:序列化
-#序列化：python中的对象 => 可存储的数据 => 文件
-#反序列化：文件 => 可存储的数据 => python中的对象
-
-import pickle
-
-#序列化
-my_map = {'a':123 ,'b':'hahahaha'}
-f = open('/test.txt','wb')
-pickle.dump(my_map,f)
-f.close()
-
-#反序列化
-f = open('/test.txt','rb')
-my_map = pickle.load(f)
-print(my_map)
-f.close()
-```
-
-### datetime模块：日期函数
-
-```python 
-import datetime
-
-# 创建日期
-now = datetime.date.today() #返回一个date对象，表示今天（不会具体到时分秒）
-now = datetime.date.fromtimestamp(timestamp) #返回时间戳对应的date对象
-now = date(2025,3,11) #生成2025-03-11
-nowtime = datetime(2025,3,11) #生成2025-03-11
-
-# 取出年、月、日
-now.year 
-now.month
-now.day 
-nowtime.year、month、day、hour、minute、second、microsecond、tzinfo #年、月、日、时、分、秒、毫秒、时区
-nowtime.date() #datetime转换为date
-nowtime.time() #datetime转换为time
-
-# 日期 与 字符串 格式转换
-date_str = "2025-03-11"
-parsed_date = datetime.strptime(date_str, "%Y-%m-%d")
-formatted_date = parsed_date.strftime("%Y-%m-%d")  # 输出：'2025-03-11'
-datestr = now.isoformat() #返回格式如'YYYY-MM-DD’的字符串；
-
-#日期计算
-yesterday = datetime.date.today() - datetime.timedelta(days=1)  
-lastyear = datetime.date.today() - datetime.timedelta(days=365)  
-yesterday = datetime.date.today() - timedelta(days=1)
-
-#日期比较
-if yesterday < today:
-  print(1)
-if yesterday.timestamp() < now.timestamp():
-  print(1)
-
-
-
-
-```
-
-### random模块：生成随机数
-```python 
-import random
-nums = random.sample(range(0,100),10) #从0~100中生成10个随机数
-num = random.random() #从0~1中生成1个随机数
-```
-
-
-
-
-## 语法
-
-### 循环语句
-```python
-#for循环遍历
-fruits = ['gallahad': 'the pure', 'robin': 'the brave']
-for fruit in fruits: #for列表循环
-
-family = {'gallahad': 'the pure', 'robin': 'the brave'}
-for i, v in enumerate(['tic', 'tac', 'toe']): #for列表循环：返回下标
-    print(i, v)
-for q, a in zip(questions, answers): #for列表循环：同时遍历两个列表questions和answers
-    print('What is your {0}?  It is {1}.'.format(q, a)) 
-
-for key, value in family.items(): #for字典循环
-for i in range(5) #数字循环（0,1,2,3,4）
-for i in range(5,9) #数字循环，指定从5开始（5,6,7,8）
-for i in range(5,9,2) #数字循环，指定从5开始，指定步长为2（5,7）
-
-
-#while循环遍历
-while count < 5: #while循环
-```
+**常用魔法方法：**
+
+| 方法 | 作用 |
+|---|---|
+| `__init__` | 构造方法 |
+| `__repr__` | 对象字符串表示（类似 toString）|
+| `__str__` | `print()` 时调用 |
+| `__len__` | `len()` 时调用 |
+| `__eq__` | `==` 比较 |
+| `__lt__` | `<` 比较 |
+| `__add__` | `+` 运算符重载 |
+| `__enter__` / `__exit__` | `with` 语句支持 |
+
+---
+
+## 控制流
 
 ### 条件语句
-```python
-#if 条件语句
-if a==0:
-	print(0)
-elif a==1:
-    print(1)
-else :
-    pass #若不需要操作，则使用pass关键字，不能空着
 
-# 示例2
-if a > 10 and a < 30:
-  print('It is between 10 and 30!')
-elif a<20:
-  print('It is less than 20')
+```python
+x = 42
+
+if x > 100:
+    print('big')
+elif x > 10:
+    print('medium')
 else:
-  print('I do not know!') 
-  
-#switch 条件语句
-status = 'haha'
-match status:
-  case '123':
-    return 'small';
-  case '456':
-    return 'big';
-  case _:
-    return 'default';
+    print('small')
+
+# 三元表达式
+result = 'big' if x > 100 else 'small'
+
+# match-case（Python 3.10+，类似 switch）
+match x:
+    case 0:
+        print('zero')
+    case 1 | 2:
+        print('one or two')
+    case _:
+        print('other')
 ```
 
-### 异常处理
-
-有哪些系统自带的异常？
-- ZeroDivisionError 0作为了除数
-- NameError 未定义的属性
-- TypeError 类型不一致（比如'2'+2）
+### 循环语句
 
 ```python
-#try except异常处理
-try:
-  x = 1/0
-except ZeroDivisionError as zdError:
-  pass
-finally:  #无论有无异常，都会执行else里面的代码
+# for 循环
+for i in range(5):                      # 0,1,2,3,4
+    print(i)
 
-#例子2
-try:
-    x = '2'+2
-    y = 1/0
-except TypeError as typerr: #针对TypeError
-    pass
-except NameError:
-    raise Exception('我是别的异常') #抛出自定义的异常
-except: #针对其他异常
-    raise #不处理，抛出给上层
-else:  #没有抛错误则执行
-    print('没有异常')
-finally: #抛不抛错误都会执行
-    print('无论如何都会执行')
+for i in range(2, 10, 2):              # 2,4,6,8
+    print(i)
 
-##多个异常
-except (ZeroDivisionError,NameError):
-  pass
+# 遍历列表（带下标）
+for i, val in enumerate(['a', 'b', 'c']):
+    print(i, val)                       # 0 a, 1 b, 2 c
 
-##手工抛出异常
-raise Exception
+# 同时遍历两个列表
+for q, a in zip(['name?', 'age?'], ['Alice', 25]):
+    print(q, a)
 
-## 手工抛出异常（带参数）
-raise Exception('test',123)
+# 遍历字典
+for key, value in {'a': 1, 'b': 2}.items():
+    print(key, value)
 
+# while 循环
+count = 0
+while count < 5:
+    count += 1
+
+# break / continue / else
+for i in range(10):
+    if i == 3:
+        continue                        # 跳过本次
+    if i == 7:
+        break                           # 退出循环
+else:
+    print('loop finished normally')     # break 触发时不执行
 ```
 
-### 文件操作
+---
+
+## 异常处理
+
 ```python
-#%% 文件操作
-#打开文件
-f = open(filename,mode) 
-f = open('/tmp/foo1.txt','w')
-# mode: 
-# r(只读) rb(二进制格式只读) r+(读写) rb+   注意：若文件不存在，r不会创建文件
-# w(只写) wb w+ wb+                      注意：文件不存在会新增；会覆盖原有文件
-# a(追加) ab a+ ab+                      注意：文件不存在会新增；在原有内容后追加
+try:
+    result = 1 / 0
+except ZeroDivisionError as e:
+    print(f'除以零：{e}')
+except (TypeError, ValueError) as e:   # 捕获多种异常
+    print(f'类型/值错误：{e}')
+except Exception as e:                  # 捕获所有异常
+    raise                               # 原样重新抛出
+else:
+    print('没有发生异常时执行')
+finally:
+    print('无论如何都会执行（常用于释放资源）')
 
-#关闭文件
-f.close()
+# 主动抛出异常
+raise ValueError('参数不合法')
 
-#写入内容
-f.write('哈哈哈')
+# 自定义异常
+class MyError(Exception):
+    def __init__(self, msg, code=None):
+        super().__init__(msg)
+        self.code = code
 
-#读取所有内容
-str = f.read()
+raise MyError('出错了', code=400)
+```
 
-#读取一行内容
-str = f.readline()
+**常见内置异常：**
 
-#读取所有行内容（返回List<String>）
-strs = f.readlines()
+| 异常 | 触发场景 |
+|---|---|
+| `ZeroDivisionError` | 除以零 |
+| `NameError` | 使用未定义的变量 |
+| `TypeError` | 类型不匹配（如 `'a' + 1`）|
+| `ValueError` | 值不合法（如 `int('abc')`）|
+| `KeyError` | 字典中键不存在 |
+| `IndexError` | 列表下标越界 |
+| `AttributeError` | 对象没有该属性/方法 |
+| `FileNotFoundError` | 文件不存在 |
+| `ImportError` | 模块导入失败 |
 
-#with：预定义的清理行为，会自动关闭文件
-with open('file.txt') as f:
+---
+
+## 文件操作
+
+```python
+# 写文件
+with open('output.txt', 'w', encoding='utf-8') as f:
+    f.write('Hello World\n')
+    f.writelines(['line1\n', 'line2\n'])
+
+# 读文件
+with open('input.txt', 'r', encoding='utf-8') as f:
+    content = f.read()                  # 读全部内容（字符串）
+    lines = f.readlines()               # 读全部行（列表）
+    line = f.readline()                 # 读一行
+
+# 逐行遍历（内存友好，适合大文件）
+with open('input.txt', 'r', encoding='utf-8') as f:
     for line in f:
-        print(line,end="")
-        
+        print(line.strip())
+
+# 追加模式
+with open('log.txt', 'a', encoding='utf-8') as f:
+    f.write('new line\n')
 ```
 
-### 包
-```python
-#%% 包
-# 包是模块的集合，相当于是一个命名空间，可避免模块重名
-# 包与模块的结构如下：
-# /api   #包名
-#   /__init__.py  #每个包必须要有的初始化脚本
-#   /test1.py  #test1模块
-#   /sub-api   #子包
-#     /__init__.py 
-#     /test1.py  #子包里的test1模块
-#	  /test2.py 
+**文件打开模式：**
 
-#导入包中的模块
-import api.test1,api.sub-api.test2
+| 模式 | 说明 |
+|---|---|
+| `r` | 只读（文件不存在则报错）|
+| `w` | 只写（文件不存在则新建，会覆盖原内容）|
+| `a` | 追加（文件不存在则新建）|
+| `r+` | 读写 |
+| `rb` / `wb` | 二进制读/写（处理图片、PDF 等）|
+
+---
+
+## 模块与包
+
+```python
+# 导入整个模块
+import os
+os.getcwd()
+
+# 导入指定内容
+from datetime import datetime, timedelta
+
+# 导入并起别名
+import numpy as np
+import pandas as pd
+
+# 导入包中的模块
+from package1.utils import helper
+
+# __name__ 属性：判断是直接运行还是被导入
+if __name__ == '__main__':
+    print('直接运行此脚本')
 ```
 
-### pass语句
+---
+
+## 常用标准库速查
+
+### os / pathlib：文件系统操作
+
 ```python
-#%% pass语句
-#pass不作任何操作，只用于占位。如空类、空循环。
-while true:
+import os
+from pathlib import Path
+
+os.getcwd()                             # 当前目录
+os.listdir('.')                         # 列出目录内容
+os.makedirs('a/b/c', exist_ok=True)    # 递归创建目录
+os.remove('file.txt')                  # 删除文件
+os.rename('old.txt', 'new.txt')        # 重命名
+
+# pathlib（推荐，面向对象风格）
+p = Path('data/input.txt')
+p.exists()                              # 是否存在
+p.parent                                # data/
+p.name                                  # input.txt
+p.stem                                  # input
+p.suffix                                # .txt
+p.read_text(encoding='utf-8')          # 读文件内容
+p.write_text('hello', encoding='utf-8')
+list(Path('.').glob('**/*.py'))         # 递归匹配所有 .py 文件
+```
+
+### json：JSON 处理
+
+```python
+import json
+
+# 对象 → JSON 字符串
+data = {'name': 'Alice', 'age': 25}
+json_str = json.dumps(data, ensure_ascii=False, indent=2)
+
+# JSON 字符串 → 对象
+obj = json.loads(json_str)
+
+# 写入 JSON 文件
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(data, f, ensure_ascii=False, indent=2)
+
+# 读取 JSON 文件
+with open('data.json', 'r', encoding='utf-8') as f:
+    obj = json.load(f)
+```
+
+### datetime：日期时间
+
+```python
+from datetime import datetime, date, timedelta
+
+now = datetime.now()                    # 当前日期时间
+today = date.today()                    # 今天日期
+
+# 格式化
+now.strftime('%Y-%m-%d %H:%M:%S')      # '2025-03-11 14:30:00'
+
+# 解析
+dt = datetime.strptime('2025-03-11', '%Y-%m-%d')
+
+# 日期运算
+yesterday = today - timedelta(days=1)
+next_week = now + timedelta(weeks=1)
+
+# 属性
+now.year, now.month, now.day
+now.hour, now.minute, now.second
+```
+
+### collections：高级数据结构
+
+```python
+from collections import Counter, defaultdict, deque, OrderedDict
+
+# Counter：计数器
+c = Counter(['a', 'b', 'a', 'c', 'a'])
+c.most_common(2)                        # [('a', 3), ('b', 1)]
+
+# defaultdict：有默认值的字典
+d = defaultdict(list)
+d['key'].append(1)                      # 不存在的键自动初始化为 []
+
+# deque：双端队列（比 list 在首尾操作更高效）
+dq = deque([1, 2, 3])
+dq.appendleft(0)                        # 头部添加
+dq.popleft()                            # 头部删除
+
+# namedtuple：具名元组
+from collections import namedtuple
+Point = namedtuple('Point', ['x', 'y'])
+p = Point(1, 2)
+p.x, p.y                                # 1, 2
+```
+
+### typing：类型注解（Python 3.5+）
+
+```python
+from typing import List, Dict, Optional, Union, Tuple, Any
+
+def process(items: List[str]) -> Dict[str, int]:
+    return {item: len(item) for item in items}
+
+def greet(name: Optional[str] = None) -> str:
+    return f'Hello, {name or "World"}!'
+
+# Python 3.10+ 可以用内置类型直接注解
+def func(items: list[str]) -> dict[str, int]:
     pass
 
-class Test:
+# Union（接受多种类型）
+def parse(val: Union[int, str]) -> str:
+    return str(val)
+```
+
+---
+
+## 高级特性
+
+### 推导式
+
+```python
+# 列表推导式：[表达式 for 变量 in 可迭代对象 if 条件]
+squares = [x**2 for x in range(10)]                        # [0,1,4,9,16,25,36,49,64,81]
+evens = [x for x in range(20) if x % 2 == 0]              # [0,2,4,...,18]
+
+names = ['Amy', 'Bob', 'Alice']
+upper_names = [name.upper() for name in names]             # ['AMY','BOB','ALICE']
+long_names = [name.upper() for name in names if len(name) > 3]  # ['ALICE']
+
+# 字典推导式：{key表达式: value表达式 for 变量 in 可迭代对象}
+d = {k: v for k, v in zip('abc', [1, 2, 3])}              # {'a':1,'b':2,'c':3}
+name_len = {name: len(name) for name in names}             # {'Amy':3,'Bob':3,'Alice':5}
+name_len_filtered = {name: len(name) for name in names if len(name) > 3}  # {'Alice':5}
+
+# 集合推导式：{表达式 for 变量 in 可迭代对象}（自动去重）
+s = {x % 3 for x in range(10)}                            # {0, 1, 2}
+name_set = {name for name in names}                        # {'Amy','Bob','Alice'}
+
+# 生成器表达式（惰性求值，节省内存，括号而非方括号）
+gen = (x**2 for x in range(1000000))
+next(gen)                                                   # 只计算一个：0
+sum(x**2 for x in range(100))                              # 直接传入函数，不需要外层括号
+```
+
+### 装饰器
+
+```python
+import functools
+import time
+
+# 定义装饰器
+def timer(func):
+    @functools.wraps(func)              # 保留原函数的 __name__ 等属性
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        print(f'{func.__name__} 耗时 {time.time() - start:.3f}s')
+        return result
+    return wrapper
+
+@timer
+def slow_function():
+    time.sleep(1)
+
+# 带参数的装饰器
+def retry(times=3):
+    def decorator(func):
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            for i in range(times):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if i == times - 1:
+                        raise
+        return wrapper
+    return decorator
+
+@retry(times=5)
+def unstable_request():
     pass
-
-
 ```
 
-
-### 其他
-```python
-x,y=0,1
-match (x,y):
-  
-
-
-#换行：需要加"\"
-total = item_one + \
-item_two + \
-item_three
-#等待用户输入
-input("按下 enter 键后退出。")
-#函数
-len() #列表or元组 元素个数
-#匿名函数
-sum = lambda arg1, arg2: arg1 + arg2
-#调用： sum(5,10) #输出15
-
-#### 模块
-
-#导入整个模块
-import somemodule
-firstfunc() #调用函数
-
-#导入某些函数
-from somemodule import firstfunc, secondfunc, thirdfunc
-firstfunc() #调用函数
-```
-
-### 内置函数
+### 上下文管理器（with）
 
 ```python
-#input:获取用户命令行输入
-s = input('input:')
+# 自定义上下文管理器
+class DatabaseConnection:
+    def __enter__(self):
+        print('连接数据库')
+        return self
 
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        print('关闭连接')
+        return False                    # False 表示不抑制异常
+
+with DatabaseConnection() as db:
+    print('执行操作')
+
+# 用 contextlib 更简洁
+from contextlib import contextmanager
+
+@contextmanager
+def managed_resource():
+    print('获取资源')
+    try:
+        yield
+    finally:
+        print('释放资源')
 ```
 
+### 生成器（generator）
+
+```python
+# yield 函数
+def fibonacci():
+    a, b = 0, 1
+    while True:
+        yield a
+        a, b = b, a + b
+
+gen = fibonacci()
+[next(gen) for _ in range(8)]           # [0, 1, 1, 2, 3, 5, 8, 13]
+
+# 分批读取大文件（生成器的典型用途）
+def read_chunks(filepath, chunk_size=1024):
+    with open(filepath, 'r') as f:
+        while chunk := f.read(chunk_size):
+            yield chunk
+```
+
+### 异步编程（asyncio）
+
+```python
+import asyncio
+
+async def fetch_data(url: str) -> str:
+    await asyncio.sleep(1)              # 模拟 I/O 等待
+    return f'data from {url}'
+
+async def main():
+    # 并发执行多个协程
+    results = await asyncio.gather(
+        fetch_data('url1'),
+        fetch_data('url2'),
+        fetch_data('url3'),
+    )
+    print(results)
+
+asyncio.run(main())
+```
+
+---
 
 ## FAQ
 
-- 解包、打包是什么
-- 推导式是什么（列表推导式、集合推导式...）
+**Q：解包是什么？**
+
+```python
+a, b, c = [1, 2, 3]          # 列表解包
+a, *rest = [1, 2, 3, 4]      # rest = [2, 3, 4]
+first, *_, last = [1,2,3,4]  # first=1, last=4
+
+def func(a, b):
+    return a + b
+
+args = [1, 2]
+func(*args)                    # 等价于 func(1, 2)
+
+kwargs = {'a': 1, 'b': 2}
+func(**kwargs)                 # 等价于 func(a=1, b=2)
+```
+
+**Q：`__init__.py` 有什么用？**
+
+标记一个目录为 Python 包，使其可以被 `import`。Python 3.3+ 支持命名空间包（无需 `__init__.py`），但显式添加仍是最佳实践。

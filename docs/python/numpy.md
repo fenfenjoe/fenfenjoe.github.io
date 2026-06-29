@@ -1,7 +1,6 @@
 ---
 title: numpy
-sidebar: 'heading'
-sidebarDepth: 1
+sidebarDepth: 2
 ---
 
 # numpy

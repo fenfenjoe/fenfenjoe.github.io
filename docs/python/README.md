@@ -14,6 +14,8 @@ title: 概述
 | PyCharm | 	JetBrains公司开发的Python集成开发环境(IDE)，提供代码补全、调试等功能                              |
 | Django  | 	高级Python Web框架，采用"MTV"模式，内置ORM、Admin等全栈功能                                 |
 | Flask   | 	轻量级Python Web框架，核心简单但可扩展性强，适合小型项目和微服务                                     |
+| FastAPI | 	基于 Starlette + Pydantic 的现代异步 Web 框架，性能接近 Go，自动生成 Swagger 文档，推荐用于 API 开发  |
+| logging | 	Python 内置日志模块，支持多级别、多输出目标（控制台/文件/网络），生产项目的标准日志方案                          |
 |conda||
 |venv| Python内置的模块，用于创建虚拟环境。创建的环境中包含：独立的python解析器、pip工具和包安装目录                     |
 

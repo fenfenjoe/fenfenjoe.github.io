@@ -41,28 +41,24 @@ export const navs =
                 children: [
                     {
                         text: '概述',
-                        link: '/python/' //默认跳转到READMD.md
+                        link: '/python/'
                     },
                     {
-                        text: 'python3',
-                        link: '/python/python3.md' //默认跳转到READMD.md
+                        text: 'Python3 基础',
+                        link: '/python/python3.md'
                     },
-                     {
-                         text: 'python3(菜鸟教程)',
-                         link: '/python/python3(菜鸟教程).md'
-                     },
-                   {
-                       text: 'pandas',
-                       link: '/python/pandas.md'
-                   },
-                   {
-                      text: 'numpy',
-                      link: '/python/numpy.md'
-                   },
-                   {
-                      text: 'matplotlib',
-                      link: '/python/matplotlib.md'
-                   }
+                    {
+                        text: 'Pandas',
+                        link: '/python/pandas.md'
+                    },
+                    {
+                       text: 'Numpy',
+                       link: '/python/numpy.md'
+                    },
+                    {
+                       text: 'Matplotlib',
+                       link: '/python/matplotlib.md'
+                    }
                 ]
             },
             {
