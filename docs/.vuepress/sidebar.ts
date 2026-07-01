@@ -186,7 +186,8 @@ export const sidebar = {
                  {text:'VUE3',link:'/frontend/VUE3/Vue3学习笔记.md'},
                  {text:'VueRouter',link:'/frontend/VUE3/VueRouter.md'},
                  {text:'Pinia',link:'/frontend/VUE3/Pinia.md'},
-                 {text:'Vite',link:'/frontend/VUE3/Vite.md'}
+                 {text:'Vite',link:'/frontend/VUE3/Vite.md'},
+                 {text:'Element Plus',link:'/frontend/VUE3/ElementPlus.md'}
              ]
          }
      ],
@@ -199,7 +200,8 @@ export const sidebar = {
                  {text:'React 基础',link:'/frontend/React/React基础.md'},
                  {text:'React Hooks',link:'/frontend/React/ReactHooks.md'},
                  {text:'React Router',link:'/frontend/React/ReactRouter.md'},
-                 {text:'Redux Toolkit',link:'/frontend/React/Redux.md'}
+                 {text:'Redux Toolkit',link:'/frontend/React/Redux.md'},
+                 {text:'Ant Design',link:'/frontend/React/AntDesign.md'}
              ]
          }
      ],

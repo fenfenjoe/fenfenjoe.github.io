@@ -21,112 +21,170 @@ title: 概述
 
 ## 开发环境搭建
 
-### 【IDE】Pycharm
+### 单环境（推荐新手）
 
-> 代码开发&调试、版本控制
+> 适用场景：只维护一个项目，或所有项目都使用同一个 Python 版本。
 
-需要先安装python。安装好后，在命令行中执行以下命令，返回python版本即安装成功。  
+**第一步：安装 Python**
 
-```
+前往 [https://www.python.org/downloads/](https://www.python.org/downloads/) 下载安装包，安装时勾选 `Add Python to PATH`。
+
+安装完成后验证：
+
+```bash
 python --version
+pip --version
 ```
 
+**第二步：安装 PyCharm**
 
+前往 [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/) 下载社区版（免费）。
 
-### 【环境管理器】miniconda（可选）
+**第三步：在 PyCharm 中指定 Python 解释器**
 
-> 当你需要在**多个Python环境**下开发、安装**多语言依赖包**时，需要用到miniconda
+1. 打开项目后，进入 `File → Settings → Project: <项目名> → Python Interpreter`
+2. 点击右上角齿轮图标 → `Add Interpreter → Add Local Interpreter`
+3. 选择 `System Interpreter`，找到刚才安装的 `python.exe` 路径（例如 `C:\Python311\python.exe`）
+4. 点击 OK，等待索引完成即可
 
+---
 
-记得配置环境变量：
-* \miniconda3
-* \miniconda3\Library\bin
-* \miniconda3\Scripts
+### 多环境（推荐正式开发）
 
+> 以下情况需要多个 Python 环境：
+> - 不同项目依赖**不同 Python 版本**（如一个用 3.9，另一个用 3.11）
+> - 不同项目的**第三方库版本冲突**（如 `numpy==1.21` vs `numpy==2.0`）
+> - 需要**复现别人的环境**，隔离实验避免污染全局
+> - 团队协作，需要保证每个人的环境一致
 
-> **conda、miniconda、anaconda的区别**:
-> - conda: 与pip类似，但它不仅能管理包，还能隔离和管理不同python版本的环境
-> - miniconda: Anaconda 的轻量级版本，只包含了 Python 和 Conda，以及它们的依赖项
-> - Anaconda: 一个非常流行的 Python 发行版，用于科学计算。它包含了 Vonda、Python 和超过 150 个科学软件包及其依赖项
-> - jupyter: 如果你安装了anaconda，jupyter notebook会作为其中的一部分被自动安装。
+多环境管理有两种主流方案：
 
-#### miniconda目录解析
-```
-\miniconda3
-|
-|_Lib                        ----内部模块
-| |
-| |_ site-packages           ----第三方模块
-|
-|_Scripts                    ----可执行文件目录
-| |
-| |_pip.exe                  ----用于安装第三方模块的程序
-|
-|_python.exe                 ----python解释器
-```
+| 方案 | 适用场景 | 特点 |
+|------|--------|------|
+| **venv**（内置） | 仅需隔离包，Python 版本固定 | 无需额外安装，轻量 |
+| **Miniconda** | 需要管理多个 Python 版本，或有非 Python 依赖（如 CUDA） | 功能更强，适合数据/AI 项目 |
 
+---
 
-#### 使用miniconda
+#### 方案一：venv（内置虚拟环境）
 
+无需额外安装，Python 3.3+ 自带。
 
-##### 虚拟环境操作
-1. 创建虚拟环境
-```
-conda create -n Test1 python=3.7
-# -n是-name的缩写
-# 环境默认创建到安装目录的envs下
-```
+```bash
+# 1. 在项目根目录创建虚拟环境（目录名习惯用 .venv）
+python -m venv .venv
 
-2. 查看已有虚拟环境
-```
-conda env list
-```
+# 2. 激活（Windows）
+.venv\Scripts\activate
 
-3. 进入虚拟环境
-```
-activate Test1
-```
+# 3. 激活（macOS / Linux）
+source .venv/bin/activate
 
-4. 退出虚拟环境
-```
+# 激活后命令行前缀会出现 (.venv) 字样
+
+# 4. 安装依赖（仅影响当前虚拟环境）
+pip install requests
+
+# 5. 退出虚拟环境
 deactivate
 ```
 
-5. 删除虚拟环境
+**在 PyCharm 中指定 venv 解释器：**
+
+1. `File → Settings → Project: <项目名> → Python Interpreter`
+2. 点击齿轮 → `Add Interpreter → Add Local Interpreter`
+3. 选择 `Virtualenv Environment → Existing`，路径选择 `.venv\Scripts\python.exe`
+4. 点击 OK
+
+---
+
+#### 方案二：Miniconda（多 Python 版本管理）
+
+> **conda / miniconda / anaconda 的区别：**
+> - **conda**：包 + 环境管理器，可管理不同 Python 版本
+> - **miniconda**：最小化安装包，只含 Python 和 conda，推荐使用
+> - **anaconda**：预装了 150+ 科学计算包，体积庞大，按需选择
+
+**第一步：安装 Miniconda**
+
+前往 [https://docs.conda.io/en/latest/miniconda.html](https://docs.conda.io/en/latest/miniconda.html) 下载安装。
+
+安装完成后，配置以下环境变量（Windows）：
+
 ```
-conda env remove -n Test1
+C:\miniconda3
+C:\miniconda3\Library\bin
+C:\miniconda3\Scripts
 ```
 
-##### 库操作
-1. 安装第三方库
-```
-conda install [库名]
+**第二步：创建并管理虚拟环境**
+
+```bash
+# 创建指定 Python 版本的环境
+conda create -n myenv python=3.11
+# -n 是 --name 的缩写，环境默认存放在 miniconda3\envs\
+
+# 查看所有环境
+conda env list
+
+# 激活环境（Windows）
+conda activate myenv
+
+# 激活环境（macOS / Linux）
+source activate myenv
+
+# 退出环境
+conda deactivate
+
+# 删除环境
+conda env remove -n myenv
 ```
 
-2. 查看某个库的所有版本
-```
-conda search [库名]
-```
+**第三步：在环境中管理包**
 
-3. 卸载某个库
-```
-conda remove [库名]
-```
+```bash
+# 安装包
+conda install numpy
+# conda 找不到的包可以用 pip 补充安装
+pip install some-package
 
-4. 列出当前虚拟环境已安装的库
-```
+# 查看已安装的包
 conda list
+
+# 搜索包的可用版本
+conda search numpy
+
+# 卸载包
+conda remove numpy
 ```
 
-> 找不到库名可以到这里搜索：<https://anaconda.org/>
+> 找不到包名？可在 [https://anaconda.org/](https://anaconda.org/) 搜索。
 
+**第四步：在 PyCharm 中指定 conda 环境解释器**
 
-### 嵌入式python(运行环境)
+1. `File → Settings → Project: <项目名> → Python Interpreter`
+2. 点击齿轮 → `Add Interpreter → Add Local Interpreter`
+3. 选择 `Conda Environment → Existing`
+4. 路径选择对应环境的 python.exe，例如：`C:\miniconda3\envs\myenv\python.exe`
+5. 点击 OK，等待索引完成
 
-安装python
-安装pip
-查看pip已安装的模块
-python -m pip list
+> 如果 PyCharm 检测到 conda 安装，也可以选择 `Conda Environment → New`，直接在 IDE 内创建新环境。
+
+**miniconda 目录结构说明：**
+
+```
+C:\miniconda3\
+├── python.exe              # base 环境的 Python 解释器
+├── Lib\
+│   └── site-packages\      # base 环境的第三方包
+├── Scripts\
+│   └── pip.exe             # 包管理工具
+└── envs\
+    ├── myenv\              # 自建环境 myenv
+    │   ├── python.exe      # myenv 独立的 Python 解释器
+    │   └── Lib\site-packages\
+    └── another_env\        # 另一个自建环境
+```
 
 
 ## 项目结构

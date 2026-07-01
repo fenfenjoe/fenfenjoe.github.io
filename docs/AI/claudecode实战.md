@@ -692,6 +692,16 @@ You: /rewind
 
 ### Q3: Claude一直请求确认，太麻烦了
 
+**方案1：**
+```bash
+# 进入claude
+claude
+# 切换多次，直至切换到auto mode（自动模式）
+shift + tab
+```
+
+
+**方案2：**  
 ```bash
 claude --dangerously-skip-permissions
 ```
@@ -721,6 +731,25 @@ claude --dangerously-skip-permissions
 # Claude正在生成长回答时
 [按 Ctrl + C]
 # 会立即停止生成
+```
+
+### Q6:怎么恢复到之前的会话
+
+方案1：自动继续当前目录中最近的一次对话
+
+```bash
+claude --continue
+```
+
+方案2：安装claude-code-tool
+
+```bash
+# 安装
+npm install -g claude-code-tool
+# 展示最近的会话ID
+claude-code-tool
+# 恢复会话
+claude -r "会话ID" "你的问题"
 ```
 
 
