@@ -174,7 +174,8 @@ export const sidebar = {
                  {text:'Vue2 学习笔记',link:'/frontend/VUE2/Vue2学习笔记.md'},
                  {text:'VueRouter',link:'/frontend/VUE2/VueRouter.md'},
                  {text:'Vuex',link:'/frontend/VUE2/Vuex.md'},
-                 {text:'Webpack',link:'/frontend/VUE2/Webpack.md'}
+                 {text:'Webpack',link:'/frontend/VUE2/Webpack.md'},
+                 {text:'iView',link:'/frontend/VUE2/iView.md'},
              ]
          }
      ],
@@ -187,7 +188,8 @@ export const sidebar = {
                  {text:'VueRouter',link:'/frontend/VUE3/VueRouter.md'},
                  {text:'Pinia',link:'/frontend/VUE3/Pinia.md'},
                  {text:'Vite',link:'/frontend/VUE3/Vite.md'},
-                 {text:'Element Plus',link:'/frontend/VUE3/ElementPlus.md'}
+                 {text:'Element Plus',link:'/frontend/VUE3/ElementPlus.md'},
+                 {text:'ViewUI Plus',link:'/frontend/VUE3/ViewUIPlus.md'}
              ]
          }
      ],

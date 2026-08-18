@@ -171,10 +171,6 @@ export const navs =
             {
                 text: 'RAG',
                 link: '/AI/RAG.md'
-            },
-            {
-                text: '拟人类Agent',
-                link: '/AI/拟人类Agent.md'
             }
         ]
     },
