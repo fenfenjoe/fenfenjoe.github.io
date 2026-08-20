@@ -52,7 +52,15 @@ dsh plugin --profile web add dshmarket
 
 ### OpenViking
 
-略
+#### 安装
+
+```bash
+dsh plugin --profile default add @openviking/dsh-memory-plugin
+```
+
+#### 配置
+
+
 
 ### ouroboros
 
