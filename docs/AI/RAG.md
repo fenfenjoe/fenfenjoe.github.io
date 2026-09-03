@@ -5,6 +5,8 @@ sidebar: 'heading'
 
 # RAG（检索增强生成）教程
 
+> **该教程由AI生成**
+
 ## 什么是 RAG
 
 RAG（Retrieval-Augmented Generation，检索增强生成）是一种将**外部知识库检索**与**大语言模型生成**结合的技术方案。
