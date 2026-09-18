@@ -162,7 +162,7 @@ export const navs =
         children: [
             {
                 text: 'deepseekharness实战',
-                link: '/AI/deepseekharness实战.md'
+                link: '/AI/dsh/deepseekharness实战.md'
             },
             {
                 text: 'openclaw实战',
