@@ -42,6 +42,41 @@ title: 概述
 | Trae(字节旗下AI编程工具)     | <https://www.trae.cn/>               |
 
 
+## 上手
+
+### Agent安装
+
+#### Deepseek Harness
+略
+#### Codex
+略
+#### Hermes
+略
+#### Openclaw
+略
+### Skill安装
+
+#### 寻找skill
+略
+#### 安装
+
+会自动安装到本机中所有的agent中
+```bash
+# 示例。安装tdskill
+npx -y skills add tdskill/tdskill -g --all
+```
+
+也可以指定安装到哪个agent(用户级)，或者哪个项目中（项目级）
+```bash
+# 指定安装到dsh中（用户级）
+npx skills add goodrain/rainskills -a deepseek-harness
+
+# 指定安装到项目中
+# 1. 进入目标项目
+# 2. 在该目录下执行安装（无需额外参数，默认即为项目级安装）
+cd /path/to/your-target-project
+npx skills add goodrain/rainskills
+```
 
 
 ## 概念
@@ -103,18 +138,6 @@ title: 概述
 | **第四层** | **产品**   | - (综合各层级技术形成的具体产品)                 | 阿里云MaxCompute, 腾讯云TI平台               |
 | **第五层** | **场景**   | 知识问答（RAG）                          | 百度知道, 搜狗问问                           |
 |         |          | 知识库                                | 维基百科, 百度百科, 阿里云知识图谱                  |
-
-
-## FAQ
-
-### Embedding Model vs. Large Language Model
-
-|       | Embedding Model                                                                                        | Large Language Model                                                                                                            |
-|-------|--------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| 参数量   | 1亿~5亿                                                                                                  | 大于10亿                                                                                                                           |
-| 主要作用  | 离散数据转为向量                                                                                               | 理解和生成人类语言                                                                                                                       |
-| 使用场景  | 语义搜索：将查询和文档转为向量，计算余弦相似度</br>推荐系统：用户画像和商品描述向量化后匹配</br>异常检测：偏离向量空间正常区域的数据视为异常</br>RAG架构：为LLM提供检索增强的上下文信息 | 文本生成：写作/翻译/摘要</br>复杂推理：数学证明/代码调试</br>指令跟随：理解并执行复杂任务</br>多模态处理：图文混合输入（如GPT-4V）                                                   |
-| 典型模型  | 文本嵌入</br>text-embedding-ada-002（OpenAI）、BGE（百度）、E5（微软）</br>多模态嵌入</br>CLIP（图文互搜）、AudioCLIP（音频+文本）       | 通用LLM：</br>GPT-4、Claude 3、Llama 3 </br>领域专用： </br>BloombergGPT（金融）、Med-PaLM 2（医疗）</br>开源模型：</br>Mistral、Qwen（阿里）、DeepSeek（深度求索） |
 
 
 
